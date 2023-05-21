@@ -1,0 +1,51 @@
+:root{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+a{
+  color:#030300d6;
+    font-size: 110%;
+
+  text-decoration: none;
+}
+*{
+  font-family: Calibri,Verdana;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+  @media (max-width:650px){
+    *{
+      font-size:95%;
+    }
+    img{
+      width: 100%;
+    }
+    .navbar{
+      height:10vh;
+      font-size: 100%;
+    }
+    .main{
+        background-size:100vh;
+
+      height: 50vh;
+/*      font-size: 120%;*/
+    }
+    .home-1{
+      font-size: 110%;
+    }
+    .home-2{
+      font-size: 350%;
+    }
+    .home-3 button{
+        width: 20%;
+        font-size: 120%;
+
+    }
+  
+  }
+
+
+

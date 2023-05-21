@@ -1,0 +1,49 @@
+.main{
+	background: url('../../assets/1.jpg') no-repeat  ;	
+	background-size:100vw;
+	display: flex;
+	height: 75vh;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	&>div{
+		text-align: center;
+		width: 100vw;
+	}
+}
+.home-1{
+	font-size: 120%;
+}
+.home-2{
+	font-size: 200%;
+
+}
+.home-1 h3 , .home-2 h1{
+	color: #ddd;
+		&:hover{
+			color: #fff;
+		}
+	}
+
+.home-3{
+	&>button{
+		cursor: pointer;
+	    background-image: linear-gradient(to right, #F00000 0%, #DC281E  51%, #F00000  100%);
+		font-size: 125%;
+		border:2px solid transparent;  
+		height:150%;
+		width: 15vw;
+		&>a{
+			color: #ddd;
+			&:hover{
+				color:#fff;
+			}
+		}
+	}
+}
+
+         
+         
+         
+

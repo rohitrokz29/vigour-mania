@@ -1,36 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import {Outlet, NavLink,Link } from 'react-router-dom';
 
 import './styles/navbar.css';
 
 const Navbar = () => {
 	return (
+		<>
 		<nav className="navbar">
 
-				<a href='/' className="brand">
+				<Link to='/' className="brand">
 					{/*<img  src={Logo}   alt="LOGO"/>*/}
 					<h2 >Vigour</h2> <h2 >Mania</h2>
-				</a>
+				</Link>
 				<ul className="nav-list">
 
 					<li className="list-item">
-					<a href="/">Home</a>
+					<NavLink to="/">Home</NavLink>
 					 </li>
 					<li className="list-item">
-						<a href="/explore">Explore</a>
+						<NavLink to="/explore">Explore</NavLink>
 					</li>
 					<li className="list-item">
-						<a href="/features">Features</a>
+						<NavLink to="/features">Features</NavLink>
 
 					</li>
 					<li className="list-item">
-						<a href="/contsct">Contacts</a>
+						<NavLink to="/contacts">Contacts</NavLink>
 					</li>
 					<li className="list-item">
-						<a href="/signin" className="signin">Signin</a>
+						<NavLink to="/signin" className="signin">Signin</NavLink>
 					</li>
 				</ul>
 		</nav>
+		<Outlet/>
+		</>
 	)
 }
 

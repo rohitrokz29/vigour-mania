@@ -1,27 +1,29 @@
 :root{
   margin: 0;
   padding: 0;
-  width: 100%;
+/*  width: 100%;*/
 }
-a{
-  color:#030300d6;
-    font-size: 110%;
 
-  text-decoration: none;
-}
 *{
   font-family: Calibri,Verdana;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   }
+a{
+  color:#030300d6;
+    font-size: 110%;
+
+  text-decoration: none;
+}
+.active{
+    border-bottom:  2px solid red;
+  color: #020000;
+}
 
   @media (max-width:650px){
     *{
       font-size:95%;
-    }
-    img{
-      width: 100%;
     }
     .navbar{
       height:10vh;
@@ -29,8 +31,7 @@ a{
     }
     .main{
         background-size:100vh;
-
-      height: 50vh;
+      height: 43vh;
 /*      font-size: 120%;*/
     }
     .home-1{
@@ -42,7 +43,10 @@ a{
     .home-3 button{
         width: 20%;
         font-size: 120%;
-
+    }
+    .box-1 .info{
+      margin-block: 0;
+      font-size:125% ;
     }
   
   }

@@ -1,5 +1,9 @@
 import React from 'react'
+
+import Heads from '../cards/Heads'
 import blogs  from '../../assets/blogs.jpg'
+
+
 import tutorial from "../../assets/tutorial.jpg";
 import diets from "../../assets/diets.jpg"
 import advices from "../../assets/advices.jpg"
@@ -45,21 +49,7 @@ const Features = () => {
 
 	return (
 		<>
-		<div className="head">
-			<div className="dash">
-				<div className="dots">
-					<div className="dot"></div>
-					<div className="dot"></div>	
-				</div>		
-				<div className="line"></div>
-				<div className="dots">
-					<div className="dot"></div>
-					<div className="dot"></div>	
-				</div>		
-			</div>
-			<h2 className="heading">Features</h2>
-		</div>
-
+	<Heads heading={"Features"} />
 		<div className="box">
 			{cards.map((ele,index)=>{
 					return (

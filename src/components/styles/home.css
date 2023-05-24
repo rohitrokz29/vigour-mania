@@ -49,6 +49,7 @@
          
 /* Features Styles */
 
+
 .head{
 	margin-block:3% ;
 	margin-inline: 2%;
@@ -71,7 +72,7 @@ margin-inline-end: 10px;
 
   background: -webkit-linear-gradient(#090808, #f50303);
   -webkit-background-clip: border;
-  -webkit-text-fill-color: transparent;transform: skewX(-20deg);
+  -webkit-text-fill-color: transparent;
 
 
 }
@@ -88,7 +89,6 @@ margin-inline-end: 10px;
 
 
 .dot{
-	transform: skewX(-20deg);
 	width: 5px;
 		border:2px solid #000000;
 		border-radius: 100%;
@@ -97,11 +97,10 @@ margin-inline-end: 10px;
 .heading{
 	font-size: -webkit-xxx-large;
 font-variant-caps: all-petite-caps;
-
-  background: -webkit-linear-gradient(#090808 40%, #f50303 67%);
+font-style: oblique;
+ background: -webkit-linear-gradient(#090808 40%, #f50303 67%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transform: skewX(-20deg)
 
 }
 
@@ -187,6 +186,7 @@ font-variant-caps: all-petite-caps;
 	margin-inline: 8%;
 	padding-block: 2%;
 	padding-inline: 2%;
+    border-radius: 10px;
 	display: grid;
 	    margin-block-end: 2%;
 	grid-template-columns: 1fr 1fr;
@@ -196,6 +196,7 @@ font-variant-caps: all-petite-caps;
 
 	display: flex;
 	flex-direction: column;
+
 	justify-content: center;
 	align-items: center;
 		&>h2{
@@ -248,9 +249,10 @@ font-variant-caps: all-petite-caps;
 
 .input-container {
   display: flex;
-  width: 60%;
+  width: 80%;
   margin-bottom: 15px;
-}
+
+	}
 
 /* Style the form icons */
 .icon {
@@ -270,6 +272,7 @@ font-variant-caps: all-petite-caps;
   outline: none;
   font-size: 110%;
      font-family: ui-serif;
+     
 
 }
 
@@ -288,11 +291,88 @@ font-variant-caps: all-petite-caps;
   cursor: pointer;
   width: 40%;
   opacity: 0.9;
-			  background: -webkit-linear-gradient(#f3eeee, #ff4d4d);
+	background: -webkit-linear-gradient(#f3eeee, #ff4d4d);
   font-size: 120%;
   font-weight: bolder;
 }
 
 .btn:hover {
   opacity: 1;
+}
+
+
+
+/* Lower Box */
+
+.lower{
+	background-color: #000;
+	color: #fff;
+	padding: 1%;
+	padding-block-end: 3%;
+	display: grid;
+	grid-template-areas: 
+							"lBrand lBrand lBrand form"    	
+							"Linfo Linfo Linfo form"
+							"contact contact contact form"
+
+}
+
+.lower-brand{
+	margin-inline: 1%;
+	grid-area: lBrand;
+margin-block-end: 1%;
+	&>p{
+		width:30%;
+	}
+}
+.lower-brand-item{
+	display: flex;
+	color: white;
+	&>h2{
+			font-family: cursive;
+	}
+}
+.Linfo{
+	grid-area: Linfo;
+	border-top: 0.5px solid #fff;
+	padding-block: 2%;
+	display: flex;
+	justify-content:space-around ;
+}
+.services{
+	grid-area: services;
+	width: 30%;
+}
+.lower-contact{
+	grid-area: contact;
+	&>ul{
+		display: flex;
+	flex-shrink: 2;
+		&>li{
+			width: 5%;
+    margin-inline: 1%;
+    align-items: center;
+}
+		
+	}
+}
+
+.grid-fill{
+	width: 30%;
+	grid-area: third;
+}
+.lower-contact img{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.app-features{
+	grid-area: features;
+	width: 30%;
+
+}
+.Lform{
+	grid-area:form ;
+	margin-block: 0%;
 }

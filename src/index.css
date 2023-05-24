@@ -13,11 +13,10 @@
 a{
   color:#030300d6;
     font-size: 110%;
-
   text-decoration: none;
 }
 .active{
-    border-bottom:  2px solid red;
+  border-bottom:  2px solid red;
   color: #020000;
 }
 

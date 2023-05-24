@@ -83,8 +83,6 @@ const Contacts = () => {
 						  <button type="submit" className="btn">Send Request</button>
 
 
-						{/*<input type="Submit" value="Send Request"/>*/}
-
 					</form>
 				</div>
 		</>

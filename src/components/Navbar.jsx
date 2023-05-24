@@ -11,7 +11,7 @@ const Navbar = () => {
 
 				<Link to='/' className="brand">
 					{/*<img  src={Logo}   alt="LOGO"/>*/}
-					<h2 >Vigour</h2> <h2 >Mania</h2>
+					<h2 className="brand-h2 brand-h2-first-child">Vigour</h2> <h2 className="brand-h2" >Mania</h2>
 				</Link>
 				<ul className="nav-list">
 

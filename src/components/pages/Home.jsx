@@ -4,7 +4,7 @@ import '../styles/home.css';
 
 import Features from './Features';
 import Contacts from './Contacts';
-
+import Lower from './Lower';
 
 const Home = () => {
 	return (
@@ -27,6 +27,7 @@ const Home = () => {
 
 			<Contacts/>
 
+			<Lower/>
 		</>
 	)
 }

@@ -6,7 +6,7 @@
 .navbar{
 	position: sticky;
 	top:0;
-	background-color:white ;
+	background-color:#fff ;
 	height:10vh;
 	padding-inline: 2%;
 	border-bottom:1px solid #ddd;
@@ -17,18 +17,20 @@
 
 .brand{
 	align-items: center;
-	font-family:;
 	width: 30vw;
+	background-color:#fff ;
+
 }
 
-.brand h2{
+.brand-h2{
+	    font-family: cursive;
 	color: #000;
 	align-items: center;
 	padding: 0;
 	margin: 0;
 display: inline;
 }
-.brand > h2:first-child{
+.brand-h2-first-child{
 	color: #fc0505e3;
 }
 
@@ -41,7 +43,7 @@ ul{
 	align-items: center;
 }
 .list-item a{
-	color:#4b4040;
+	color:#090000c2;
 	    font-size: 102%;
 transition: border-bottom 0.5 ease-in;
 	width: 6vw;

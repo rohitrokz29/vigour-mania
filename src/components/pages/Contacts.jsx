@@ -26,7 +26,7 @@ const Contacts = () => {
 		<>
 		
 
-		<Heads heading={"Contacts"} />
+		<Heads heading={"Contacts"} id={"contact"} />
 
 				<div className="contact-box">
 					<div className="contacts">

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Explore = () => {
 	return (
-		<div>
+		<div id="explore">
 		<h1>EXPLORE</h1>
 		</div>
 	)

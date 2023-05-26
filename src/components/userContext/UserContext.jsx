@@ -5,10 +5,10 @@ const UserContext = () => {
 	const [user, setUser] = useState({email:""})
 	const signIn=(e)=>{
 		e.preventDefault()
-		console.log(userData);
+		console.log(e);
 	}
 	return (
-		<userContext.Provider>
+		<userContext.Provider values={signIn}>
 		<Lower signIn={signIn} />
 		</userContext.Provider>
 	)

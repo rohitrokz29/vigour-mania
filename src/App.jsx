@@ -7,8 +7,7 @@ import Home from './components/pages/Home';
 import Explore from './components/pages/Explore'
 import Features from './components/pages/Features';
 import Contacts from './components/pages/Contacts';
-import Signin from './components/pages/Signin';
-
+import Accounts from './components/pages/Accounts';
 /* Components */
 import Navbar from './components/Navbar';
 
@@ -18,10 +17,14 @@ import Navbar from './components/Navbar';
 const router=createBrowserRouter(
 createRoutesFromElements(
   <Route path="/" element={<Navbar/>}>
-    <Route index element={<Home/>}/>
+    <Route >
+      <Route path="/" element={<Home/>} />
+      <Route path="/features" element={<Features/>} />
+      <Route path="/contacts" element={<Contacts/>}/>
+    </Route>    
     <Route path="/explore" element={<Explore/>} />
-    <Route path="/signin" element={<Signin/>}/>
-
+    <Route path="/signin" element={<Accounts/>}/>
+    <Route path="/signup" element={<Accounts/>}/>
     
   </Route>
   )

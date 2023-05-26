@@ -22,6 +22,7 @@
 
 }
 
+
 .brand-h2{
 	    font-family: cursive;
 	color: #000;
@@ -33,7 +34,9 @@ display: inline;
 .brand-h2-first-child{
 	color: #fc0505e3;
 }
-
+.br-active{
+  border-bottom:  2px solid transparent;
+}
 ul{
 	list-style: none;
 }
@@ -43,6 +46,8 @@ ul{
 	align-items: center;
 }
 .list-item a{
+			cursor: pointer;
+
 	color:#090000c2;
 	    font-size: 102%;
 transition: border-bottom 0.5 ease-in;

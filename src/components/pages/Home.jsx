@@ -9,7 +9,7 @@ import Lower from './Lower';
 const Home = () => {
 	return (
 		<>
-			<main className="main">
+			<main className="main" id="home" >
 				<div className="home-1">
 					<h3>Work Harder Get Stronger</h3>
 				</div>
@@ -23,9 +23,9 @@ const Home = () => {
 				</div>
 			</main>
 			
-			<Features/>
+			<Features />
 
-			<Contacts/>
+			<Contacts />
 
 			<Lower/>
 		</>

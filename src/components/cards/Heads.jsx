@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Heads = ({heading}) => {
+const Heads = ({heading,id}) => {
 	return (
-		<div className="head">
+		<div className="head" id={id}>
 			<div className="dash">
 				<div className="dots">
 					<div className="dot"></div>

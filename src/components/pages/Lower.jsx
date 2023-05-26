@@ -1,4 +1,5 @@
 import React,{useContext} from 'react';
+import { Link, animateScroll as scroll } from "react-scroll";
 import UserContext from '../userContext/UserContext'
 import insta from '../../assets/instagram.png';
 import whatsapp from '../../assets/whatsapp.png';
@@ -7,20 +8,25 @@ import location from '../../assets/location.png';
 
 const Lower = () => {
 
-	// const signIn = useContext(UserContext);
-	const signIn=(e)=>{
-		e.preventDefault();
-		console.log(e);
-	}
+	const signIn = useContext(UserContext);
+	
 
 
 	return (
 		<>
 			<div className="lower">
 					<div className="lower-brand">
-						<a href="/" className="lower-brand-item">
+						<Link   className="lower-brand-item"
+							activeClass="br-active"
+    				to="home"
+				    spy={true}
+				    smooth={true}
+				    offset={-70}
+				    duration={500}
+			
+						>
 							<h2  className="brand-h2-first-child" >Vigour&nbsp;</h2><h2 className="lbh2" >Mania</h2>
-						</a>
+						</Link>
 						<p>
 							Vigour Mania,134 Fitness Park,near City Mall, Dummy City, 443412
 						</p>
@@ -59,10 +65,10 @@ const Lower = () => {
 							<li>
 							<a href="/"><img src={gmail} alt=""/></a>
 							</li>
-							<li><a href="/"><img src={whatsapp} alt=""/></a></li>
-							<li><a href="/"><img src={location} alt=""/></a></li>
-							<li><a href="/"><img src={insta} alt=""/></a></li>
-							<li>< a href="" > <i className="fa fa-github" style={{color:"#fff",fontSize:"215%"}}/></a></li>
+							<li><a href="/" target="_blank"><img src={whatsapp} alt=""/></a></li>
+							<li><a href="/"  target="_blank"><img src={location} alt=""/></a></li>
+							<li><a href="/"  target="_blank"><img src={insta} alt=""/></a></li>
+							<li>< a href=""  target="_blank"> <i className="fa fa-github" style={{color:"#fff",fontSize:"215%",paddingBock:"10%"}}/></a></li>
 						</ul>
 					</div>
 <form onSubmit={signIn} className="contact-form Lform">

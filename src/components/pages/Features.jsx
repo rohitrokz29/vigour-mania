@@ -49,7 +49,7 @@ const Features = () => {
 
 	return (
 		<>
-	<Heads heading={"Features"} />
+	<Heads heading={"Features"} id={"features"}  />
 		<div className="box">
 			{cards.map((ele,index)=>{
 					return (

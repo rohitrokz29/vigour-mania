@@ -1,11 +1,10 @@
 import React,{useState} from 'react';
 
-import Heads from '../cards/Heads';
-
-import whatsapp from '../../assets/whatsapp.png';
-import insta from '../../assets/instagram.png';
-import gmail from '../../assets/gmail.png';
-import location from '../../assets/location.png';
+import Heads from '../../cards/Heads';
+import whatsapp from '../../../assets/whatsapp.png';
+import insta from '../../../assets/instagram.png';
+import gmail from '../../../assets/gmail.png';
+import location from '../../../assets/location.png';
 
 const Contacts = () => {
 

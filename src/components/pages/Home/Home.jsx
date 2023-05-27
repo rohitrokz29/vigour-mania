@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import '../styles/home.css';
+import '../../styles/home.css';
 
 import Features from './Features';
 import Contacts from './Contacts';
-import Lower from './Lower';
+import Lower from '../Lower';
 
 const Home = () => {
 	return (

@@ -8,19 +8,16 @@ const Accounts = () => {
 
 const {pathname}=useLocation();
 
-	const toggle=()=>{
-		document.querySelector("#flipper").classList.toggle("flip");
-	}
 
 	return (
 		<>
 
 			<div className="accounts">
 				
-<div className="signin-box">
+<div className="signin-box " id='flipper'>
 				
 				{
-					pathname==="/signin"?<Signin/>:<Signup/>
+					pathname==="/signin"?<Signin />:<Signup/>
 
 
 				}

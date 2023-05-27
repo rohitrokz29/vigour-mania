@@ -1,6 +1,6 @@
 import React,{useContext} from 'react';
 import { Link, animateScroll as scroll } from "react-scroll";
-import UserContext from '../userContext/UserContext'
+import UserContext from '../Account/userContext/UserContext'
 import insta from '../../assets/instagram.png';
 import whatsapp from '../../assets/whatsapp.png';
 import gmail from '../../assets/gmail.png';
@@ -23,7 +23,6 @@ const Lower = () => {
 				    smooth={true}
 				    offset={-70}
 				    duration={500}
-			
 						>
 							<h2  className="brand-h2-first-child" >Vigour&nbsp;</h2><h2 className="lbh2" >Mania</h2>
 						</Link>

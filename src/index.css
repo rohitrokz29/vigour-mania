@@ -1,7 +1,12 @@
 :root{
   margin: 0;
   padding: 0;
-/*  width: 100%;*/
+}
+.light-text{
+  color:#00000070;
+}
+.dark-text{
+  color:#000000d1;
 }
 
 *{
@@ -13,6 +18,7 @@
 a{
   color:#030300d6;
     font-size: 110%;
+    align-items: center;
   text-decoration: none;
 }
 .active{

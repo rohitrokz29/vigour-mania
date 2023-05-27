@@ -20,7 +20,7 @@ const Signup = () => {
 
 							  <div className="input-container">
    								 <label className="fa fa-user icon" htmlFor="username" ></label>
-							<input className="input-field" type="text" placeholder="Username for Account" name="username" id="username" value={data.email}  onChange={handleChange}/>
+							<input className="input-field" type="text" placeholder="Username " name="username" id="username" value={data.email}  onChange={handleChange}/>
 							  </div>	
 							  <div className="input-container">
    								 <label className="fa fa-envelope icon" htmlFor="email" ></label>
@@ -43,7 +43,7 @@ const Signup = () => {
 						<br/>
 						<br/>
 						<br/>
-						<Link to="/signin" style={{color:"#000"}}>Already a User? Signin-></Link>
+						<Link to="/signin" style={{color:"#000"}}>Already a User? Signin</Link>
 					</div>
 		
 		</>

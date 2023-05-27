@@ -1,14 +1,14 @@
 import React from 'react'
 
-import Heads from '../cards/Heads'
-import blogs  from '../../assets/blogs.jpg'
+import Heads from '../../cards/Heads'
+import blogs  from '../../../assets/blogs.jpg'
 
 
-import tutorial from "../../assets/tutorial.jpg";
-import diets from "../../assets/diets.jpg"
-import advices from "../../assets/advices.jpg"
-import tracker from "../../assets/tracker.png"
-import notebook from "../../assets/notebook.png"
+import tutorial from "../../../assets/tutorial.jpg";
+import diets from "../../../assets/diets.jpg"
+import advices from "../../../assets/advices.jpg"
+import tracker from "../../../assets/tracker.png"
+import notebook from "../../../assets/notebook.png"
 
 const Features = () => {
 

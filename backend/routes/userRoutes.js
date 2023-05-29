@@ -1,9 +1,16 @@
+/*
+contains the user routes
+ */
 const express=require('express');
-const {Signup} =require('../controllers/userControl');
+const {Signup, Signin} =require('../controllers/userControl');
 
-const router=express.Router();
+const userRouter=express.Router();
 
-router.get('/signup',Signup);
+/*Signup route  */
+userRouter.post('/signup',Signup);
 
+/*Signin route */
+userRouter.post('/signin',Signin);
 
-module.exports = router
+/*Exporting router */
+module.exports = userRouter

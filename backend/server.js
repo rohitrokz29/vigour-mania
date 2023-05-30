@@ -19,6 +19,10 @@ app.use(express.urlencoded({ extended: false }))
  */
 app.use('/api/user',require('./routes/userRoutes'))
 
+/**
+ * Router to control all request related to Journal and its comments
+ */
+app.use('/api/journal',require('./routes/journalRoutes'));
 
 
 /*

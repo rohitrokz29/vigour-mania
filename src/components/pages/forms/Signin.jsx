@@ -14,11 +14,11 @@ const Signin = () => {
 
 				<div className="input-container">
 					<label className="fa fa-envelope icon" htmlFor="email" ></label>
-					<input className="input-field" type="email" placeholder="Email" name="email" id="email" value={data.email} onChange={handleChange} />
+					<input className="input-field" type="email" autoComplete='on' placeholder="Email" name="email" id="email" value={data.email} onChange={handleChange} />
 				</div>
 				<div className="input-container">
 					<label className="fa fa-key icon" htmlFor="password"></label>
-					<input className="input-field" type="password" placeholder="Password" name="password" id='password' value={data.password} onChange={handleChange} />
+					<input className="input-field"  autoComplete='on'type="password" placeholder="Password" name="password" id='password' value={data.password} onChange={handleChange} />
 				</div>
 
 				<button type="submit" className="btn">Signin</button>

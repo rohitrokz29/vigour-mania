@@ -10,9 +10,9 @@ const cors = require('cors');
 
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }));
 
 /*
     using router for user methods like signup, signin,etc
@@ -41,4 +41,4 @@ mongoose.connect(process.env.MONGODB_URI, {
         error ? console.log(error) : console.log("Running on Port ", process.env.PORT)
     })
 
-}).catch(err => console.log(err))
+}).catch(err => console.error(err))

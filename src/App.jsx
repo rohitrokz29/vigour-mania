@@ -1,6 +1,6 @@
 /* Dependencies*/
-import React ,{ useState } from 'react';
-import {createBrowserRouter,createRoutesFromElements,Route,RouterProvider} from 'react-router-dom';
+import React, { useState } from 'react';
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 
 /* Import Pages */
 import Home from './components/pages/Home/Home';
@@ -14,32 +14,32 @@ import Navbar from './components/Navbar';
 
 
 
-const router=createBrowserRouter(
-createRoutesFromElements(
-  <Route  path="/" >
-    <Route  element={<Navbar/>}>
-      <Route exact path="/" element={<Home/>} />
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" >
+      <Route element={<Navbar />}>
+        <Route exact path="/" element={<Home />} />
 
-      <Route path="/signin" element={<Accounts/>}/>
-    <Route path="/signup" element={<Accounts/>}/>
-    </Route>  
-    <Route element={<Navbar/>}>
-      <Route exact path='/explore' element={<Explore/>} />
+        <Route path="/signin" element={<Accounts />} />
+        <Route path="/signup" element={<Accounts />} />
+      </Route>
+      <Route element={<Navbar />}>
+        <Route exact path='/explore' element={<Explore />} />
+      </Route>
+
     </Route>
-
-  </Route>
   )
-  )
+)
 
 function App() {
 
 
   return (
     <>
-    <RouterProvider router={router}/>
-      
+        <RouterProvider router={router} />
+        
     </>
-    
+
   )
 }
 

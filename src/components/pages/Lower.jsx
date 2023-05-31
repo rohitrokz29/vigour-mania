@@ -1,15 +1,14 @@
 import React,{useContext} from 'react';
 import { Link, animateScroll as scroll } from "react-scroll";
-import UserContext from '../Account/userContext/UserContext'
 import insta from '../../assets/instagram.png';
 import whatsapp from '../../assets/whatsapp.png';
 import gmail from '../../assets/gmail.png';
 import location from '../../assets/location.png';	
 
 const Lower = () => {
-
-	const signIn = useContext(UserContext);
+const signIn=()=>{
 	
+}	
 
 
 	return (

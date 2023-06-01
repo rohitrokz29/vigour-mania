@@ -422,3 +422,13 @@ background: #00000026;
 .signin-side a:hover,.signup-side a:hover{
 	text-decoration: underline;
 }
+.error{
+	width: 100%;
+	text-align: center;
+	align-items: center;
+	padding-block: 2%;
+	padding-inline:1%;
+	border: 2px solid #e82222;
+	border-radius: 5px;
+	background-color: #f1eff4;
+}

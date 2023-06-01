@@ -8,6 +8,9 @@
 .dark-text{
   color:#000000d1;
 }
+.error-text{
+  color: #ff1a1a;
+}
 
 *{
   font-family: Calibri,Verdana;

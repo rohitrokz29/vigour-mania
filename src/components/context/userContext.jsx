@@ -4,26 +4,30 @@ export const UserContext = createContext();
 
 const userReducer = (state, action) => {
     switch (action.type) {
-        case "login":
+        case "signin":
             return { user: action.payload };
-            break;
-        case "signup":
-            return { user: action.payload };
+        case "logout":
+            return {user:null};            
         default:
-            return {...state};
-            break;
+            return { ...state };
     }
 }
 
 export const UserState = ({ children }) => {
 
     const [state, dispatch] = useReducer(userReducer, { user: null })
-    useEffect(()=>{
-        console.log(state);
-    },[state]);
-    
+    useEffect(() => {
+        const user= JSON.parse(localStorage.getItem('vmuser'))
+        
+        if(user){
+            dispatch({type:'login',payload:user})
+            console.log(state);
+
+        }
+    }, []);
+
     return (
-        <UserContext.Provider value={{ ...state ,dispatch}}  >
+        <UserContext.Provider value={{ ...state, dispatch }}  >
             {children}
         </UserContext.Provider>
     )

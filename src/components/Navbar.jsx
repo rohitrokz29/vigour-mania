@@ -1,30 +1,31 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
-import { Outlet, NavLink, Link,useLocation } from 'react-router-dom';
-
+import { Outlet, NavLink, Link, useLocation } from 'react-router-dom';
 import './styles/navbar.css';
-
+import { useUserContext } from './hooks/useUserContext';
+import { useLogout } from './hooks/useLogout';
 const Navbar = () => {
 
-		const {pathname}=useLocation();
-	
+	const { pathname } = useLocation();
+	const {user}=useUserContext();
+	const {logout}=useLogout();
 	return (
 		<>
 			<nav className="navbar">
-			{ pathname==="/"?
-				<ScrollLink className="brand"
-					activeClass="br-active"
-					to="home"
-					spy={true}
-					smooth={true}
-					offset={-70}
-					duration={500}
-				>
-					<h2 className="brand-h2 brand-h2-first-child">Vigour</h2> <h2 className="brand-h2" >Mania</h2>
-				</ScrollLink>:
-				<Link to='/' className="brand">
-					<h2 className="brand-h2 brand-h2-first-child">Vigour</h2> <h2 className="brand-h2" >Mania</h2>
-				</Link>
+				{pathname === "/" ?
+					<ScrollLink className="brand"
+						activeClass="br-active"
+						to="home"
+						spy={true}
+						smooth={true}
+						offset={-70}
+						duration={500}
+					>
+						<h2 className="brand-h2 brand-h2-first-child">Vigour</h2> <h2 className="brand-h2" >Mania</h2>
+					</ScrollLink> :
+					<Link to='/' className="brand">
+						<h2 className="brand-h2 brand-h2-first-child">Vigour</h2> <h2 className="brand-h2" >Mania</h2>
+					</Link>
 				}
 				<ul className="nav-list">
 
@@ -34,9 +35,15 @@ const Navbar = () => {
 					<li className="list-item">
 						<NavLink to="/explore">Explore</NavLink>
 					</li>
+					{user?
+					
+					<li className="list-item">
+						<button onClick={logout}>LogOut</button>
+					</li>
+					: 
 					<li className="list-item">
 						<NavLink to="/signin" className="signin">Signin</NavLink>
-					</li>
+					</li>}
 				</ul>
 			</nav>
 			<Outlet />

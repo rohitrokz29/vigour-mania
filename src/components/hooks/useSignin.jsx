@@ -1,19 +1,18 @@
-
-import axios from "axios"
-import React, { useState } from "react"
 import { useUserContext } from "./useUserContext";
+import { useState } from "react";
 import API from '../api/api'
-export const useSignup = () => {
+export const useSignin= () => {
+
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useUserContext();
-    const SignUp = async (data) => {
+    const signin = (data) => {
 
         setIsLoading(true);
 
-        API.post('/api/user/signup', data)
+        API.post('/api/user/signin', data)
             .then(async (response) => {
-                if (response.status === 201) {
+                if (response.status === 302) {
                     const user = response.data;
                     localStorage.setItem('vmuser', JSON.stringify(user));
                     dispatch({ type: 'signin', payload: user })
@@ -23,9 +22,7 @@ export const useSignup = () => {
                 setError(err.response.data.message);
             })
         setIsLoading(false);
-
-
-
     }
-    return { SignUp, error, isLoading };
+
+    return {signin,isLoading,error};
 }

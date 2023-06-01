@@ -5,16 +5,17 @@ import axios from 'axios'
 
 const Signup = () => {
 
-	const [data, setData] = useState({ username:"", email: "", password: '' })
+	const [data, setData] = useState({ username: "", email: "", password: '' })
 	const handleChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
 	}
-	const {SignUp}=useSignup();
-	const handleSubmit= (e)=>{
+	const { SignUp, error,isLoading } = useSignup();
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(data)
-		SignUp(JSON.stringify(data));
-		
+		SignUp(data);
+
 	}
 
 	return (
@@ -25,7 +26,7 @@ const Signup = () => {
 
 
 
-				
+
 
 				<div className="input-container">
 					<label className="fa fa-user icon" htmlFor="username" ></label>
@@ -40,8 +41,14 @@ const Signup = () => {
 					<input className="input-field" type="password" autoComplete='on' placeholder="Password" name="password" id='password' value={data.password} onChange={handleChange} />
 				</div>
 
-				<button type="submit" className="btn">Sign Up</button>
-
+				<button type="submit" disabled={isLoading} className="btn">Sign Up</button>
+				<div className="input-container">
+					{error &&
+						<div className="error error-text">
+							{error}
+						</div>
+					}
+				</div>
 
 			</form>
 			<div className="signup-side">

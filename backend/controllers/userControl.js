@@ -23,10 +23,10 @@ const Signup = async (req, res) => {
         const user = await User.signup(req.body);
         const token =  createToken(user._id);
         //user found -302
-        res.status(202).json({ id: user._id, token });
+        res.status(201).json({ id: user._id, token });
     } catch (error) {
         //internal server error
-        res.status(500).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 }
 
@@ -34,10 +34,10 @@ const Signup = async (req, res) => {
 const Signin = async (req, res) => {
     try {
         //below User.signin function exists in user model
-        const user=await User.signin({ email, password } = req.body);
+        const user=await User.signin(req.body);
         const token= createToken(user._id);
         //user found -302
-        res.status(202).json({user:user,token:token});
+        res.status(302).json({id:user,token:token});
     }
     catch(error){
         //internal server error

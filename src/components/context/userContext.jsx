@@ -22,8 +22,8 @@ export const UserState = ({ children }) => {
         if(user){
             dispatch({type:'login',payload:user})
             console.log(state);
-
         }
+        console.log(user)
     }, []);
 
     return (

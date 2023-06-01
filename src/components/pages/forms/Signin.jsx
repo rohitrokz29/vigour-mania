@@ -4,12 +4,13 @@ import { useSignin } from '../../hooks/useSignin'
 const Signin = () => {
 	const [data, setData] = useState({ email: "", password: '' })
 	const { signin, isLoading, error } = useSignin();
+
 	const handleChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
 	}
 	const handleSignin = (e) => {
 		e.preventDefault();
-		signin({ data });
+		signin(data );
 
 	}
 	return (

@@ -87,8 +87,8 @@ userSchema.statics.signin = async function signin({ email, password }) {
     }
     try {
         //finging user
-        console.log("schema")
-        const user = await this.findOne({ email: email }).select('_id');
+        const user = await this.findOne({ email: email }).select('_id password');
+
         if (!user) {
             //user doesnot exist 
             throw new Error("User doesn't Exist", { statusCode: 404 });

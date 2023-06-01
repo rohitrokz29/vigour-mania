@@ -17,7 +17,6 @@ const createToken =  (_id) => {
 const Signup = async (req, res) => {
     
     try {
-        console.log(req)
         //Signing up user //
         //below User.signup function exists in user model
         const user = await User.signup(req.body);
@@ -33,11 +32,12 @@ const Signup = async (req, res) => {
 /* Signin Controller function */
 const Signin = async (req, res) => {
     try {
+        console.log(req.body)
         //below User.signin function exists in user model
         const user=await User.signin(req.body);
         const token= createToken(user._id);
         //user found -302
-        res.status(302).json({id:user,token:token});
+        res.status(201).json({id:user._id,token:token});
     }
     catch(error){
         //internal server error

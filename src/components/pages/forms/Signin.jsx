@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState,useEffect } from 'react'
+import { Link, redirect } from 'react-router-dom'
 import { useSignin } from '../../hooks/useSignin'
+
 const Signin = () => {
+	
+
+	
 	const [data, setData] = useState({ email: "", password: '' })
 	const { signin, isLoading, error } = useSignin();
 

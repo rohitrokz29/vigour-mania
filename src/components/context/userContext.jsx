@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 export const UserContext = createContext();
 
@@ -14,20 +14,18 @@ const userReducer = (state, action) => {
 }
 
 export const UserState = ({ children }) => {
-
+    const [isSignedIn, setIsSignedIn] = useState(false)
     const [state, dispatch] = useReducer(userReducer, { user: null })
     useEffect(() => {
         const user= JSON.parse(localStorage.getItem('vmuser'))
-        
         if(user){
-            dispatch({type:'login',payload:user})
-            console.log(state);
+            dispatch({type:'signin',payload:user})
+            setIsSignedIn(true);
         }
-        console.log(user)
     }, []);
 
     return (
-        <UserContext.Provider value={{ ...state, dispatch }}  >
+        <UserContext.Provider value={{ ...state, dispatch,isSignedIn ,setIsSignedIn}}  >
             {children}
         </UserContext.Provider>
     )

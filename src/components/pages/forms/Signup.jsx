@@ -1,15 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSignup } from '../../hooks/useSignup'
-import axios from 'axios'
+import { useUserContext } from '../../hooks/useUserContext'
 
 const Signup = () => {
 
+	const { isSignedIn } = useUserContext();
+	useEffect(() => {
+		if (isSignedIn) {
+			redirect('/explore');
+		}
+	}, []);
 	const [data, setData] = useState({ username: "", email: "", password: '' })
 	const handleChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
 	}
-	const { SignUp, error,isLoading } = useSignup();
+	const { SignUp, error, isLoading } = useSignup();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

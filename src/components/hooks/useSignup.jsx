@@ -18,6 +18,7 @@ export const useSignup = () => {
                     localStorage.setItem('vmuser', JSON.stringify(user));
                     dispatch({ type: 'signin', payload: user })
                     setError(null);
+                    setIsSignedIn(true);
                 }
             }).catch(err => {
                 setError(err.response.data.message);

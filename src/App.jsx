@@ -1,42 +1,40 @@
 /* Dependencies*/
 import React, { useState } from 'react';
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
-
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider,Navigate } from 'react-router-dom';
 /* Import Pages */
 import Home from './components/pages/Home/Home';
 import Explore from './components/pages/Explore/Explore'
-import Features from './components/pages/Home/Features';
-import Contacts from './components/pages/Home/Contacts';
 import Accounts from './components/pages/Accounts';
 /* Components */
 import Navbar from './components/Navbar';
+import { useUserContext } from './components/hooks/useUserContext';
 
 
-
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" >
-      <Route element={<Navbar />}>
-        <Route exact path="/" element={<Home />} />
-
-        <Route path="/signin" element={<Accounts />} />
-        <Route path="/signup" element={<Accounts />} />
-      </Route>
-      <Route element={<Navbar />}>
-        <Route exact path='/explore' element={<Explore />} />
-      </Route>
-
-    </Route>
-  )
-)
 
 function App() {
-
+  const {isSignedIn,user}=useUserContext();
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" >
+        <Route element={isSignedIn? <Navigate to="/explore" replace /> :<Navbar/>} >
+          <Route exact path="/" element={<Home />} />
+  
+          <Route path="/signin" element={ <Accounts />}/>
+          <Route path="/signup" element={ <Accounts />}/>
+        </Route>
+        <Route element={<Navbar isSignedIn={isSignedIn} username={user?user.username:null}/>}>
+          <Route exact path='/explore' element={<Explore />} />
+        </Route>
+        <Route path="*"element={<h1>ERORR PAGE</h1>} />
+  
+      </Route>
+    )
+  )
+  
 
   return (
     <>
-        <RouterProvider router={router} />
+        <RouterProvider router={router} isSignedIn={isSignedIn} />
         
     </>
 

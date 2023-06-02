@@ -67,16 +67,16 @@ const Contacts = () => {
 							
 							 <div className="input-container">
    								 <label className="fa fa-user icon" htmlFor="name" ></label>
-   								 <input className="input-field" type="text" placeholder="Your Name" name="name" id="name" value={data.name} onChange={handleChange} />
+   								 <input className="input-field" type="text" autoComplete='on' placeholder="Your Name" name="name" id="name" value={data.name} onChange={handleChange} />
 							  </div>		
 
 							  <div className="input-container">
    								 <label className="fa fa-envelope icon" htmlFor="email" ></label>
-							<input className="input-field" type="email" placeholder="Email" name="email" id="email" value={data.email}  onChange={handleChange}/>
+							<input className="input-field" type="email" autoComplete='on' placeholder="Email" name="email" id="email" value={data.email}  onChange={handleChange}/>
 							  </div>		
 						<div className="input-container">
    								 <label className="fa fa-phone icon" htmlFor="mobile"></label>
-   								 <input className="input-field" type="tel" placeholder="Mobile Number" name="mobile" id='mobile' value={data.mobile} onChange={handleChange} />
+   								 <input className="input-field" type="tel" autoComplete='on' placeholder="Mobile Number" name="mobile" id='mobile' value={data.mobile} onChange={handleChange} />
 							  </div>		
 						
 						  <button type="submit" className="btn">Send Request</button>

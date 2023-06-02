@@ -68,7 +68,7 @@ userSchema.statics.signup = async function signup({ email, password, username })
 
         //creating user and saving in DB
         const user = new this({ email, password: hashPassword, user: { username, email } })
-        return user.save();
+        return {username:user.user.username,_id:user._id};
     }
     catch (err) {
         /*throwing error if occured */
@@ -87,7 +87,7 @@ userSchema.statics.signin = async function signin({ email, password }) {
     }
     try {
         //finging user
-        const user = await this.findOne({ email: email }).select('_id password');
+        const user = await this.findOne({ email: email }).select('_id password user.username');
 
         if (!user) {
             //user doesnot exist 
@@ -97,7 +97,7 @@ userSchema.statics.signin = async function signin({ email, password }) {
             //passwords doesnot matched
             throw new Error("Incorrect Password", { statusCode: 406 });
         }
-        return user;
+        return {username:user.user.username,_id:user._id};
     } catch (error) {
         throw new Error(error.message, { statusCode: 500 });
     }

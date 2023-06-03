@@ -8,6 +8,7 @@ import Accounts from './components/pages/Accounts';
 /* Components */
 import Navbar from './components/Navbar';
 import { useUserContext } from './components/hooks/useUserContext';
+import { Profile } from './components/user/Profile';
 
 
 
@@ -24,6 +25,7 @@ function App() {
         </Route>
         <Route element={<Navbar isSignedIn={isSignedIn} username={user?user.username:null}/>}>
           <Route exact path='/explore' element={<Explore />} />
+          <Route path='/user/:username' element={<Profile/>} />
         </Route>
         <Route path="*"element={<h1>ERORR PAGE</h1>} />
   

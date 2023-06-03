@@ -43,16 +43,15 @@ const Navbar = ({ isSignedIn, username }) => {
 							<li className="list-item">
 								<NavLink to="/diets">Diet's</NavLink>
 							</li>
-							<div class="user-profile">
-								<div class="user-icon acc-icon">
+							<div className="user-profile">
+								<div className="user-icon acc-icon">
 									<img src={Profile} alt="User Icon" />
 								</div>
-								<div class="dropdown-content">
-									<ul className='profile-list'>
+									<ul className='dropdown-content'>
 										<li className=" item-list">
 											<i className="fa fa-user light-text"></i>
 											<div className='text dark-text'>
-												<Link to={username} className='dark-text username' >
+												<Link to={`/user/${username}`} className='dark-text username' >
 													<span>{username}</span>
 												</Link>
 											</div>
@@ -81,7 +80,6 @@ const Navbar = ({ isSignedIn, username }) => {
 										{/* <li className="items-list"><a>Report Us</a></li> */}
 
 									</ul>
-								</div>
 							</div>
 						</>
 						:

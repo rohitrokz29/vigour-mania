@@ -6,7 +6,7 @@ import API from '../api/api'
 export const useSignup = () => {
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const { dispatch } = useUserContext();
+    const { dispatch,setIsSignedIn } = useUserContext();
     const SignUp = async (data) => {
 
         setIsLoading(true);
@@ -20,8 +20,9 @@ export const useSignup = () => {
                     setError(null);
                     setIsSignedIn(true);
                 }
-            }).catch(err => {
-                setError(err.response.data.message);
+            }).catch(error => {
+                console.log((error))
+                setError(error.response.data.message);
             })
         setIsLoading(false);
 

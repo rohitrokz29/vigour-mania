@@ -67,7 +67,8 @@ userSchema.statics.signup = async function signup({ email, password, username })
         const hashPassword = bcryptjs.hashSync(password, salt);
 
         //creating user and saving in DB
-        const user = new this({ email, password: hashPassword, user: { username, email } })
+        const user = new this({ email, password: hashPassword, user: { username, email } });
+        user.save();
         return {username:user.user.username,_id:user._id};
     }
     catch (err) {

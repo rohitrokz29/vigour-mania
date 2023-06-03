@@ -30,12 +30,10 @@ a{
 }
 
   @media (max-width:650px){
-    *{
-      font-size:95%;
-    }
+   
     .navbar{
       height:10vh;
-      font-size: 100%;
+      font-size: 95%;
     }
     .main{
         background-size:100vh;

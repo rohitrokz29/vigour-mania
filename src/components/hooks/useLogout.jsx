@@ -11,5 +11,5 @@ export const useLogout = () => {
         dispatch({ type: 'logout' });
         setIsSignedIn(false);
     }
-    return { logout };
+    return {logout };
 }

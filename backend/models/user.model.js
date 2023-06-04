@@ -43,8 +43,8 @@ userSchema.statics.signup = async function signup({ email, password, username })
             throw new Error("Invalid Email", { statusCode: 406 });
         }
 
-        if (!validator.isLength(username, { min: 5, max: 20 }) && !validator.matches(username, /^[a-zA-Z0-9]_-/)) {
-            throw new Error("Username Invalid", { statusCode: 411 });
+        if (!validator.isLength(username, { min: 5, max: 13 }) && !validator.matches(username, /^[a-zA-Z0-9]_-/)) {
+            throw new Error("Username too short or too long", { statusCode: 411 });
         }
 
         //checking if email and username already exist
@@ -69,7 +69,7 @@ userSchema.statics.signup = async function signup({ email, password, username })
         //creating user and saving in DB
         const user = new this({ email, password: hashPassword, user: { username, email } });
         user.save();
-        return {username:user.user.username,_id:user._id};
+        return { username: user.user.username, _id: user._id };
     }
     catch (err) {
         /*throwing error if occured */
@@ -98,11 +98,25 @@ userSchema.statics.signin = async function signin({ email, password }) {
             //passwords doesnot matched
             throw new Error("Incorrect Password", { statusCode: 406 });
         }
-        return {username:user.user.username,_id:user._id};
+        return { username: user.user.username, _id: user._id };
     } catch (error) {
         throw new Error(error.message, { statusCode: 500 });
     }
 
 }
+
+userSchema.statics.findUser = async function findUser({ username }) {
+    // if (!validator.isLength(username, { min: 5, max: 13 }) && !validator.matches(username, /^[a-zA-Z0-9]_-/)) {
+    //     throw new Error("Username Invalid", { statusCode: 411 });
+    // }
+    console.log(username)
+    // try {
+        const userData = await this.findOne({"user.username":username}).select("user")
+        return userData;
+    // } catch (error) {
+        // throw new Error("User Not Found",{StatusCode:404});
+    // }
+}
+
 //exporting user schema
 module.exports = mongoose.model('user', userSchema);

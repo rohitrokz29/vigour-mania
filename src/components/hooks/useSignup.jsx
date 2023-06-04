@@ -19,15 +19,18 @@ export const useSignup = () => {
                     dispatch({ type: 'signin', payload: user })
                     setError(null);
                     setIsSignedIn(true);
+                    setIsLoading(false);
+
                 }
             }).catch(error => {
                 console.log((error))
                 setError(error.response.data.message);
+                setIsLoading(false);
+
             })
-        setIsLoading(false);
 
 
 
     }
-    return { SignUp, error, isLoading };
+    return {SignUp, error, isLoading };
 }

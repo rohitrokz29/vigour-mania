@@ -4,18 +4,17 @@ import { useSignup } from '../../hooks/useSignup'
 import { useUserContext } from '../../hooks/useUserContext'
 
 const Signup = () => {
-
+	const [data, setData] = useState({ username: "", email: "", password: '' })
 	const { isSignedIn } = useUserContext();
 	useEffect(() => {
 		if (isSignedIn) {
 			redirect('/explore');
 		}
 	}, []);
-	const [data, setData] = useState({ username: "", email: "", password: '' })
 	const handleChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
 	}
-	const { SignUp, error, isLoading } = useSignup();
+	const {SignUp, error, isLoading } = useSignup();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -47,7 +46,7 @@ const Signup = () => {
 					<input className="input-field" type="password" autoComplete='on' placeholder="Password" name="password" id='password' value={data.password} onChange={handleChange} />
 				</div>
 
-				<button type="submit" disabled={isLoading} className="btn">Sign Up</button>
+				<button type="submit" disabled={isLoading} className="btn ">{isLoading?"Signing Up":"SignUp"}</button>
 				<div className="input-container">
 					{error &&
 						<div className="error error-text">

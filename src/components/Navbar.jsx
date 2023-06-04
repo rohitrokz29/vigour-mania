@@ -66,7 +66,7 @@ const Navbar = ({ isSignedIn, username }) => {
 										<li className=" item-list">
 											<i className="fa fa-circle-exclamation light-text"></i>
 											<div className='text light-text'>
-												<Link to='report' className='light-text'>Report</Link>
+												<Link to='/report' className='light-text'>Report</Link>
 											</div>
 										</li>
 										<li className=" item-list">
@@ -75,9 +75,6 @@ const Navbar = ({ isSignedIn, username }) => {
 												<Link className='light-text' onClick={logout}>Log Out</Link>
 											</div>
 										</li>
-										{/* <li className="items-list"><a>Notebook</a></li> */}
-										{/* <li className="items-list"><a>Log Out</a></li> */}
-										{/* <li className="items-list"><a>Report Us</a></li> */}
 
 									</ul>
 							</div>

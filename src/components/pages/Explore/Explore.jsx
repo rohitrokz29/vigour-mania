@@ -15,14 +15,16 @@ const spotlights = [
 	{
 		title: "Starters Zone",
 		description: "Start the Journey of Vigour Mania",
-		icon: "play"
+		icon: "play",
+		path:"/"
 
 	},
 	{
 		title: "Gym Guy's",
 		//directc to exercised page
 		description: "Visit Vigour Mania's Gym Section",
-		icon: "dumbbell"
+		icon: "dumbbell",
+		path:"/signin"
 
 	},
 	{
@@ -30,7 +32,6 @@ const spotlights = [
 		//direct to blogs if login
 		description: "Share your thoughts with others",
 		icon: "lightbulb"
-
 	}
 ]
 const evolve = [
@@ -85,7 +86,7 @@ const Explore = () => {
 						{
 							spotlights.map((item, index) => {
 								return (
-									<Spots key={index} index={index} title={item.title} description={item.description} icon={item.icon} />
+									<Spots key={index} index={index} title={item.title} description={item.description} icon={item.icon} path={item.path} />
 								)
 							})
 						}
@@ -96,7 +97,7 @@ const Explore = () => {
 					<div className="evo-area">
 						{
 							evolve.map((item, index) => {
-								return <Evolve index={index} key={index} title={item.title} description={item.description} />
+								return <Evolve index={index} key={index} title={item.title} description={item.description} path={item.path}/>
 							})
 						}
 					</div>

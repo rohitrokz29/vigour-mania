@@ -20,11 +20,14 @@ export const useSignin= () => {
                     dispatch({ type: 'signin', payload: user })
                     setError(null);
                     setIsSignedIn(true);
+                    setIsLoading(false);
+
                 }
             }).catch(err => {
                 setError(err.response.data.message);
+                setIsLoading(false);
+
             })
-        setIsLoading(false);
     }
 
     return {signin,isLoading,error};

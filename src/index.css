@@ -55,6 +55,9 @@ a{
       font-size:125% ;
     }
   
+    .evo-area{
+      justify-content: center;
+    }
   }
 
 

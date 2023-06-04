@@ -45,5 +45,14 @@ const Signin = async (req, res) => {
     }
 }
 
+const GetUser=async (req,res)=>{
+    try {
+        console.log(req.params)
+        const user=await User.findUser(req.params);
+        res.status(200).json(user.user)
+    } catch (error) {
+        res.json({message:error.message})
+    }
+}
 
-module.exports = { Signup, Signin };
+module.exports = { Signup, Signin ,GetUser};

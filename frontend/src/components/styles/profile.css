@@ -1,0 +1,156 @@
+.profile {
+    padding-block: 2%;
+    padding-inline: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.user-details {
+    background-color: #f7f7f7;
+    padding-block: 0.5rem;
+    width: 30%;
+    padding-inline: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    box-shadow: 0 0 10px #c3b9b9;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.user-image {
+    width: 20%;
+    aspect-ratio: 1/1;
+    margin-inline: 0.8rem;
+    border-radius: 5px;
+}
+
+.user-id {
+    margin-inline: 0.1rem;
+    margin-block: 0.1rem;
+
+    &>.username {
+        font-size: 150%;
+        font-weight: bolder;
+    }
+}
+
+.user-bio {
+    padding-inline: 0.5rem;
+    padding-block-end: 0.5rem;
+    padding-block-start: 1rem;
+
+}
+
+.user-data a {
+    display: flex;
+    justify-content: center;
+}
+
+.user-data {
+    padding-block-end: 0.5rem;
+    border-bottom: 1px solid#000;
+}
+
+.edit-profile {
+    width: 20vw;
+    height: 2rem;
+    text-align: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+    border: 1px solid #f72323b9;
+    background-color: #ffe6e6;
+    color: #ac2e2e;
+    cursor: pointer;
+    box-shadow: 0 0px 5px rgba(255, 17, 17, 0.988);
+    margin-block: 0.5rem;
+}
+
+.edit-profile:hover {
+    background-color: #ffb0b0;
+    color: #a40e0e;
+
+}
+
+.conn-list {
+    margin-block: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.contact-item {
+    margin-block: 0.25rem;
+
+    &>i {
+        width: 2rem;
+    }
+
+    &>i:hover {
+        color: #453f3f;
+    }
+}
+
+.user-summary {
+    width: 55%;
+    background-color: #f7f7f7;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    margin-inline: 2rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px #c3b9b9;
+}
+
+.track {
+    border-radius: 5px;
+    padding-inline: 0.5rem;
+    align-items: center;
+    margin-block: 0.5rem;
+    padding-block: 0.5rem;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    &>.track-name {
+        width: 5vw;
+        font-size: 120%;
+        display: inline-block;
+    }
+}
+
+.track:hover {
+    box-shadow: 0 0 10px #c3b9b9;
+
+    &>a {
+        background-color: #c3b9b9;
+        border-radius: 3px;
+    }
+}
+
+.track a {
+    width: 2rem;
+
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.track-chart {
+    align-items: center;
+    height: 2.5rem;
+    margin-inline: 5px;
+    width: 30vw;
+    background-color: #fff;
+    text-align: center;
+}
+.profile-img{
+    width: 1rem;
+}

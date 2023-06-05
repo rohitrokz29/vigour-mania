@@ -49,7 +49,7 @@ const GetUser=async (req,res)=>{
     try {
         console.log(req.params)
         const user=await User.findUser(req.params);
-        res.status(200).json(user.user)
+       user? res.status(200).json(user.user):res.status(302).json({message:"User Not found"})
     } catch (error) {
         res.json({message:error.message})
     }

@@ -28,6 +28,15 @@ const userSchema = new mongoose.Schema({
         },
         email: {
             type: String,
+        },
+        facebook:{
+            type:String
+        },
+        bio:{
+            type:String
+        },
+        twitter:{
+            type:String
         }
     }
 })
@@ -110,12 +119,12 @@ userSchema.statics.findUser = async function findUser({ username }) {
     //     throw new Error("Username Invalid", { statusCode: 411 });
     // }
     console.log(username)
-    // try {
+    try {
         const userData = await this.findOne({"user.username":username}).select("user")
         return userData;
-    // } catch (error) {
-        // throw new Error("User Not Found",{StatusCode:404});
-    // }
+    } catch (error) {
+        throw new Error("User Not Found",{StatusCode:404});
+    }
 }
 
 //exporting user schema

@@ -1,15 +1,16 @@
 import { useState } from "react"
 import API from "../api/api"
 import { useUserContext } from "./useUserContext";
+import { useParams } from "react-router-dom";
 
 export const useFetchUser=()=>{
-    const {user}=useUserContext();
     const [userData, setUserData] = useState(null);
-    const [isLoading, setIsLoading] = useState(false)  
+    const [isLoading, setIsLoading] = useState(true)  
     const [error, setError] = useState(null)     
+    const {username}=useParams();
     const fetchData=()=>{
         setIsLoading(true);
-        API.get(`/api/user/${user.username}`)
+        API.get(`/api/user/${username}`)
         .then((response)=>{
             if(response.status===200){
                 setUserData(response.data);

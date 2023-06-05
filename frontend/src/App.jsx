@@ -8,7 +8,7 @@ import Accounts from './components/pages/Accounts';
 /* Components */
 import Navbar from './components/Navbar';
 import { useUserContext } from './components/hooks/useUserContext';
-import { Profile } from './components/pages/user/Profile';
+import Profile from './components/pages/user/Profile';
 
 
 

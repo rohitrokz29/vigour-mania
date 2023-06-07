@@ -17,8 +17,9 @@ app.use(express.urlencoded({ extended: false }));
 /*
     using router for user methods like signup, signin,etc
  */
-app.use('/api/user',require('./routes/userRoutes'))
+app.use('/api/user',require('./routes/userRoutes'));
 
+app.use('/api/chart',require('./routes/chartsRouter'));
 /**
  * Router to control all request related to Journal and its comments
  */

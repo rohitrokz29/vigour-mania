@@ -47,7 +47,7 @@ const Signin = async (req, res) => {
 const GetUser = async (req, res) => {
     try {
         const user = await User.findUser(req.params);
-        user ? res.status(200).json(user.user) : res.status(302).json({ message: "User Not found" })
+        user ? res.status(200).json(user) : res.status(302).json({ message: "User Not found" })
     } catch (error) {
         res.json({ message: error.message })
     }
@@ -63,26 +63,5 @@ const UpdateUser = async (req, res) => {
     }
 }
 
-const AddChart=async (req,res)=>{
-    // adding first time chart to a user account
-    try {
-        const chartRes=await User.addChart({body:req.body,_id:req._id});
-        res.json(chartRes)
-    } catch (error) {
-        res.json(error)
-    }
 
-}
-
-const UpdateCharts = async (req, res) => {
-    //Update chart details
-    try {
-        const {chartType}=req.params;
-        const isUpdated=await User.updateChart({body:req.body,_id:req._id,chartType});
-        res.json(isUpdated)
-    } catch (error) {
-        res.json(error)
-    }
-}
-
-module.exports = { Signup, Signin, GetUser, UpdateUser, UpdateCharts, AddChart };
+module.exports = { Signup, Signin, GetUser, UpdateUser };

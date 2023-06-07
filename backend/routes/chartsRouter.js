@@ -13,4 +13,7 @@ chartsRouter.get('/get-charts',userAuth,GetCharts);
 /* updating charts data */
 chartsRouter.put('/update-chart-data',userAuth,UpdateCharts);
 
+// remain to add chart delete route
+
+
 module.exports = chartsRouter

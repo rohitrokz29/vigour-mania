@@ -3,10 +3,13 @@
   padding: 0;
 }
 .light-text{
-  color:#00000070;
+  color:#330000d9;
 }
 .dark-text{
-  color:#000000d1;
+  color:#000;
+}
+.bold{
+  font-weight: 600;
 }
 .error-text{
   color: #ff1a1a;

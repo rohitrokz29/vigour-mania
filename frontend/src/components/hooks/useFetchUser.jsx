@@ -1,6 +1,5 @@
 import { useState } from "react"
 import API from "../api/api"
-import { useUserContext } from "./useUserContext";
 import { useParams } from "react-router-dom";
 
 export const useFetchUser=()=>{
@@ -13,6 +12,7 @@ export const useFetchUser=()=>{
         API.get(`/api/user/${username}`)
         .then((response)=>{
             if(response.status===200){
+                console.log(response)
                 setUserData(response.data);
                 setIsLoading(false);
             }

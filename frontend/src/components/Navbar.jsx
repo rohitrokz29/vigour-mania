@@ -28,15 +28,19 @@ const Navbar = ({ isSignedIn, username }) => {
 				}
 				<ul className="nav-list">
 
-					<li className="list-item">
-						<NavLink to="/">Home</NavLink>
-					</li>
+					{!isSignedIn &&
+						<li className="list-item">
+							<NavLink to="/">Home</NavLink>
+						</li>}
 					<li className="list-item">
 						<NavLink to="/explore">Explore</NavLink>
 					</li>
 
 					{isSignedIn ?
 						<>
+						<li className="list-item">
+							<NavLink to="/my-trackers">Trackers</NavLink>
+						</li>
 							<li className="list-item">
 								<NavLink to="/journals">Journals</NavLink>
 							</li>
@@ -47,36 +51,36 @@ const Navbar = ({ isSignedIn, username }) => {
 								<div className="user-icon acc-icon">
 									<img src={Profile} alt="User Icon" />
 								</div>
-									<ul className='dropdown-content'>
-										<li className=" item-list">
-											<i className="fa fa-user light-text"></i>
-											<div className='text dark-text'>
-												<Link to={`/user/${username}`} className='dark-text username' >
-													<span>{username}</span>
-												</Link>
-											</div>
-										</li>
+								<ul className='dropdown-content'>
+									<li className=" item-list">
+										<i className="fa fa-user light-text"></i>
+										<div className='text dark-text'>
+											<Link to={`/user/${username}`} className='dark-text username' >
+												<span>{username}</span>
+											</Link>
+										</div>
+									</li>
 
-										<li className=" item-list">
-											<i className="fa fa-book light-text"></i>
-											<div className='text light-text'>
-												<Link to='/my-notebooks' className='light-text'>Notebooks</Link>
-											</div>
-										</li>
-										<li className=" item-list">
-											<i className="fa fa-circle-exclamation light-text"></i>
-											<div className='text light-text'>
-												<Link to='/report' className='light-text'>Report</Link>
-											</div>
-										</li>
-										<li className=" item-list">
-											<i className="fa fa-right-from-bracket light-text"></i>
-											<div className='text '>
-												<Link className='light-text' onClick={logout}>Log Out</Link>
-											</div>
-										</li>
+									<li className=" item-list">
+										<i className="fa fa-book light-text"></i>
+										<div className='text light-text'>
+											<Link to='/my-notebooks' className='light-text'>Notebooks</Link>
+										</div>
+									</li>
+									<li className=" item-list">
+										<i className="fa fa-circle-exclamation light-text"></i>
+										<div className='text light-text'>
+											<Link to='/report' className='light-text'>Report</Link>
+										</div>
+									</li>
+									<li className=" item-list">
+										<i className="fa fa-right-from-bracket light-text"></i>
+										<div className='text '>
+											<Link className='light-text' onClick={logout}>Log Out</Link>
+										</div>
+									</li>
 
-									</ul>
+								</ul>
 							</div>
 						</>
 						:

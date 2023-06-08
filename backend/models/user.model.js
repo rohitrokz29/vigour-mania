@@ -14,7 +14,8 @@ const chartSchema = new mongoose.Schema({
 
     chartType: { type: String },
     createdAt: { type: Date },
-
+    minValue:{type:Number},
+    maxValue:{type:Number},
     data: {
         type: [{ week: { type: Number }, value: { type: Number } }],
         default: []
@@ -27,6 +28,7 @@ const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true, immutable: true },
     password: { type: String, required: true },
     user: {
+        name:{type:String},
         username: { type: String, unique: true, required: true, immutable: true },
         email: { type: String, immutable: true },
         facebook: { type: String, default: "" },

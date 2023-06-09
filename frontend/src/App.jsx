@@ -32,7 +32,7 @@ function App() {
             <Route element={<Navbar isSignedIn={isSignedIn} username={user ? user.username : null} />}>
               <Route exact path='/explore' element={<Explore />} />
               <Route path='/user/:username' element={<Profile />} />
-            <Route path='/my-trackers' element={isSignedIn?<Tracks/>:<Navigate to="/explore" replace /> }/>
+            <Route path='/my-trackers' element={isSignedIn?<Tracks/>:<Navigate to="/signin" replace /> }/>
             </Route>
 
             <Route path="*" element={<h1>ERORR PAGE</h1>} />

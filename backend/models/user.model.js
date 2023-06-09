@@ -149,8 +149,10 @@ userSchema.statics.addChart = async function addChart({ body, _id }) {
     /*
     body={
         chartType:nvnh,
-            week:1,
+            week:1
             value:6687
+            min:22
+            ,max:22
 
     }
      */

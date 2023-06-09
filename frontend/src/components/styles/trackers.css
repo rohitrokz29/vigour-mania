@@ -1,0 +1,132 @@
+ .graphs {
+     display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-inline: 3%;
+    }
+
+ .trackers {
+     margin-block: 2rem;
+     margin-inline: 2%;
+     padding-inline: 1rem;
+     box-shadow: 0 0 10px #c3b9b9;
+ }
+
+ .track-forms {
+    margin-block: 2rem;
+    /* margin-inline: 2rem; */
+     padding-inline: 1rem;
+     height: fit-content;
+     box-shadow: 0 0 10px #c3b9b9;
+     /* width: 30vw; */
+
+ }
+
+ 
+
+ .tracker {
+     width: 50vw;
+     height: 45vh;
+     margin-block: 1rem;
+     padding-block-start: 1rem;
+     padding-block-end: 3rem;
+     border: 1px solid black;
+ }
+
+ .chartAction {
+     padding-inline: 2rem;
+     font-size: 1.5rem;
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+ }
+
+ .buttons {
+     display: flex;
+     flex-direction: row;
+     justify-content: end;
+     align-items: center;
+
+     &>button {
+         font-size: 1rem;
+         width: 5rem;
+         height: 2rem;
+         padding-inline: 3;
+         cursor: pointer;
+     }
+ }
+
+ .delete-graph {
+     border: 1px solid #f72323b9;
+     box-shadow: 0 0px 5px #ff1111fc;
+     border-top-right-radius: 10px;
+     border-bottom-right-radius: 10px;
+
+     &>a {
+         color: #ac2e2e;
+     }
+
+     &:hover {
+         background-color: #ffb0b0;
+         color: #a40e0e;
+
+     }
+ }
+
+ .add-data {
+     width: 100%;
+     border-top-left-radius: 10px;
+     border-bottom-left-radius: 10px;
+     border: 1px solid #97f70f;
+     background-color: #83f35d5c;
+     box-shadow: 0 0px 5px rgba(180, 255, 17, 0.988);
+     cursor: pointer;
+
+     &>a {
+         color: #253213;
+
+     }
+
+     &:hover {
+         background-color: #42ff037a;
+         color: #395d07;
+     }
+ }
+
+ .track-forms form {
+     display: flex;
+     width: 25vw;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     margin-block:2%;
+
+
+     &>button {
+         color: #517322;
+
+         height: 2rem;
+         font-size: 1rem;
+     }
+ }
+
+ .add-chart {
+     font-size: large;
+ }
+
+ .chart {
+     margin-block: 0.5rem;
+
+     &>label {
+         cursor: pointer;
+     }
+ }
+
+ .chart-name,
+ .chart-value {
+     width: 100%;
+     height: 2rem;
+     font-size: medium;
+     align-items: center;
+
+ }

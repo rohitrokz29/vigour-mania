@@ -13,7 +13,8 @@ export const useCharts = () => {
             if(response.status===200){
                 setCharts(response.data.charts);
                 setIsLoading(false);
-                console.log(response)
+                console.log(response.data.charts)
+
             }
         })
         .catch(err=>{
@@ -21,5 +22,22 @@ export const useCharts = () => {
             setIsLoading(false);
         })
     }
-    return {charts,error,isLoading,fetchTracks}
+    const addTracker=(data)=>{
+
+        setIsLoading(true)
+        API.put('api/chart/add-chart',data)
+        .then(response=>{
+            if(response.status===200){
+                setIsLoading(false)
+                setError('')
+                fetchTracks()
+            }
+        })
+        .catch(err=>{
+            setError(error);
+            console.log(error)
+            setIsLoading(false);
+        })
+    }
+    return {charts,error,isLoading,fetchTracks,addTracker}
 }

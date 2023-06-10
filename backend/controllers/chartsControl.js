@@ -27,4 +27,14 @@ const UpdateCharts = async (req, res) => {
     }
 }
 
-module.exports = { AddChart , GetCharts, UpdateCharts };
+const DeleteChart=async (req,res)=>{
+    try {
+        const {chartId}=req.params
+        const isDeleted=await User.deleteChart({_id:req._id,chartId})
+        res.status(200).json(isDeleted)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+module.exports = { AddChart , GetCharts, UpdateCharts ,DeleteChart};

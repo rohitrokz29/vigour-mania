@@ -14,10 +14,10 @@ const chartSchema = new mongoose.Schema({
 
     chartType: { type: String },
     createdAt: { type: Date },
-    minValue:{type:Number},
-    maxValue:{type:Number},
+    minValue: { type: Number },
+    maxValue: { type: Number },
     data: {
-        type: [{ week: { type: Number }, value: { type: Number } }],
+        type: [{ week: { type: Number, unique: true }, value: { type: Number, required: true } }],
         default: []
 
     }
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true, immutable: true },
     password: { type: String, required: true },
     user: {
-        name:{type:String},
+        name: { type: String },
         username: { type: String, unique: true, required: true, immutable: true },
         email: { type: String, immutable: true },
         facebook: { type: String, default: "" },
@@ -118,8 +118,8 @@ userSchema.statics.signin = async function signin({ email, password }) {
 userSchema.statics.findUser = async function findUser({ username }) {
     try {
         return this
-        .findOne({username}, { _id: 0,password:0,email:0,username:0,__v:0, 'user._id': 0, 'charts._id': 0, 'charts.data._id': 0 })
-        .exec()
+            .findOne({ username }, { _id: 0, password: 0, email: 0, username: 0, __v: 0, 'user._id': 0, 'charts._id': 0, 'charts.data._id': 0 })
+            .exec()
 
     } catch (error) {
         throw new Error("User Not Found", { StatusCode: 404 });
@@ -157,7 +157,13 @@ userSchema.statics.addChart = async function addChart({ body, _id }) {
     }
      */
     try {
-        const chart = { chartType: body.chartType, createdAt: new Date(), data: [{ week: body.week, value: body.value }] }
+        const chart = {
+            chartType: body.chartType,
+            createdAt: new Date(),
+            minValue: body.minValue,
+            maxValue: body.maxValue,
+            data: [{ week: body.week, value: body.value }]
+        }
         //ADDING NEW CHART TO the charts section
         const result = await this.findOneAndUpdate({ _id }, {
             $push: {
@@ -213,6 +219,13 @@ userSchema.statics.updateChart = async function updateChart({ body, _id }) {
     } catch (error) {
         throw new Error(error.message, { statusCode: 500 });
     }
+}
+
+userSchema.statics.deleteChart=async function deleteChart({_id,chartId}){
+    return this.updateOne(
+        { _id },
+        { $pull: { charts: { _id: chartId } } }
+      ).lean()
 }
 //exporting user schema
 module.exports = mongoose.model('user', userSchema);

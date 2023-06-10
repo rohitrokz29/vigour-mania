@@ -28,7 +28,7 @@ const Tracks = () => {
     return (
 
 
-        (!isLoading) &&
+        charts&&
         <>
             <div className="graphs">
                 <div className="trackers">

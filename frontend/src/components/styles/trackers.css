@@ -130,3 +130,15 @@
      align-items: center;
 
  }
+
+ .data-input{
+    width:5rem;
+    height:2rem ;
+    font-size: 1rem;
+    border: 1px solid #97f70f;
+    background-color: #83f35d5c;
+    box-shadow: 0 0px 5px rgba(180, 255, 17, 0.988);
+    &:focus{
+        background-color: #4ef9155c;
+    }
+ }

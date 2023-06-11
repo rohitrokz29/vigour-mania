@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
-import { ResponsiveContainer, CartesianGrid, XAxis, YAxis, LabelList, Tooltip, Area, AreaChart } from 'recharts'
+import React, { useRef, useState } from 'react'
+import { ResponsiveContainer, CartesianGrid, XAxis, YAxis, LabelList, Tooltip, Area, AreaChart, Legend } from 'recharts'
 import '../../../styles/trackers.css'
 import Heads from '../../../cards/Heads';
 import { Link } from 'react-router-dom';
 import { useCharts } from '../../../hooks/useCharts';
 const TrackerGraph = ({ graph }) => {
-    const { addChartData, error, isLoading ,deleteChart} = useCharts();
+
+    const { addChartData, error, isLoading, deleteChart } = useCharts();
     const { chartType, createdAt, minValue, maxValue, unit } = graph;
     const [data, setData] = useState(graph.data)
     const [isDataOpen, setIsDataOpen] = useState(false)
     const [value, setValue] = useState("");
+    const [placeholder, setPlaceholder] = useState("Enter Data")
+
     data.sort((a, b) => a.week - b.week)
     const maxWeek = data[data.length - 1].week
+
     for (var i = 1; i <= maxWeek; i++) {
         if (!data.find(item => item.week === i)) {
             data.push({ week: i, value: data[i].value });
@@ -21,19 +25,32 @@ const TrackerGraph = ({ graph }) => {
 
     const sendReq = async () => {
         let res = await addChartData(graph._id, createdAt, +value, maxWeek);
-        if (res.isModified) {
-            setData(res.data)
+        if (res) {
+            setData([...data, res])
             setIsDataOpen(false)
+
         }
-        else { setValue("Error") }
+        else {
+            setPlaceholder("Error")
+            setValue("")
+            setTimeout(() => {
+                setIsDataOpen(false)
+            }, 1500);
+
+        }
     }
-    
+
     const addData = () => {
-        isDataOpen ? sendReq() : setIsDataOpen(isDataOpen => !isDataOpen)
+        setValue("")
+        setPlaceholder(placeholder=>"Enter Data")
+        if (isDataOpen) { sendReq() }
+        else {
+            setIsDataOpen(isDataOpen => !isDataOpen)
+        }
     }
-    
-    const deleteTrack=async ()=>{
-        const res=await deleteChart(graph._id);
+
+    const deleteTrack = async () => {
+        const res = await deleteChart(graph._id);
     }
     return (
         <>
@@ -44,14 +61,14 @@ const TrackerGraph = ({ graph }) => {
                         <button className='add-data ' onClick={addData}><Link>{isLoading ? "Adding" : "Add Data"}</Link></button>
                         {
                             isDataOpen ?
-                                <input type="number" name="data" value={value} onChange={(e) => setValue(e.target.value)} placeholder='Enter Data' className='data-input' />
+                                <input type="number" name="data" value={value} onChange={(e) => setValue(e.target.value)} placeholder={placeholder} className='data-input' />
                                 : <button className='delete-graph ' onClick={deleteTrack}><Link>Delete</Link></button>
 
 
                         }
                     </div>
                 </div>
-                <ResponsiveContainer width="100%" height="100%"   >
+                <ResponsiveContainer width="100%" height="90%" key={`${data.length}`}  >
                     <AreaChart
                         height={400}
                         width={700}
@@ -62,6 +79,7 @@ const TrackerGraph = ({ graph }) => {
                             left: 20,
                             bottom: 20,
                         }}
+                        key={`${data.length}`}
                     >
                         <defs>
                             <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
@@ -75,6 +93,7 @@ const TrackerGraph = ({ graph }) => {
 
                         <YAxis label={{ value: unit, angle: -90, position: 'left' }} />
                         <Tooltip />
+                        {/* <Legend /> */}
                         <Area type="monotone" dataKey="value" stroke="#000" strokeWidth={1} fill="url(#colorValue)" dot={{ fill: "white" }} />
                         <LabelList dataKey="value" position="top" />
 

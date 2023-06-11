@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TrackerGraph from './TrackerGraph'
 import { useCharts } from '../../../hooks/useCharts'
+import Null from '../../../../assets/null.png'
 const Tracks = () => {
 
     const { charts, error, isLoading, fetchTracks, addTracker } = useCharts();
@@ -18,27 +19,43 @@ const Tracks = () => {
         e.preventDefault()
         const data = {
             week: 1,
-            chartType,unit,
+            chartType, unit,
             value: +value,
             min: +min,
             max: +max
         }
-        addTracker(data);}
-        
+        addTracker(data);
+    }
+
     return (
 
 
-        charts&&
         <>
+            <div className="trackers-head">
+                Your Trackers
+            </div>
             <div className="graphs">
-                <div className="trackers">
+
+                {charts[0] ? <div className="trackers">
+
                     {charts.map((item, index) => {
                         return (
-                            <TrackerGraph graph={item} key={index} />
+                            <TrackerGraph graph={item} key={item._id} />
                         )
-                    })}
+                    })
+                    }
+
                 </div>
-                <div className="track-forms">
+                    :
+
+                    <div className=" no-tracker">
+                        <h1>
+                            No active trackers
+                        </h1>
+                    </div>
+                }
+
+                <div className="track-forms trackers">
                     <form onSubmit={handleSubmit} >
                         <div className="add-chart ">Add Tracker</div>
                         <div className="input-field chart">
@@ -66,7 +83,7 @@ const Tracks = () => {
                             <br />
                             <input type="number" name='max' className="chart-value" id='maxValue' placeholder='Set Maximum Value' value={max} onChange={(e) => setMax(e.target.value)} />
                         </div>
-                        <button type='submit' className='add-data'>Add Tracker</button>
+                        <button type='submit' disabled={isLoading} className='add-data'>{isLoading?"Adding Tracker":"Add Tracker"}</button>
                     </form>
                     {/* {error!==null?<div className="error">{error}</div>:""} */}
                 </div>

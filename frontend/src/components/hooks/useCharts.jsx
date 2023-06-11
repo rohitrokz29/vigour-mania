@@ -4,7 +4,7 @@ import { useUserContext } from "./useUserContext";
 
 
 export const useCharts = () => {
-    const [charts, setCharts] = useState(null);
+    const [charts, setCharts] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -13,9 +13,8 @@ export const useCharts = () => {
         API.get('/api/charts/get-charts')
             .then(response => {
                 if (response.status === 200) {
-                    setCharts(response.data.charts);
+                    setCharts(charts=>response.data.charts);
                     setIsLoading(false);
-                    console.log(response.data.charts)
 
                 }
             })
@@ -23,8 +22,11 @@ export const useCharts = () => {
                 setError(err);
                 setIsLoading(false);
             })
+            setIsLoading(false);
+
     }
     const addTracker = (data) => {
+        setIsLoading(true);
 
         API.put('api/charts/add-chart', data)
             .then(response => {
@@ -37,6 +39,7 @@ export const useCharts = () => {
                 setError(error);
                 console.log(error)
             })
+            setIsLoading(false)
     }
 
     const addChartData = async (_id, createdAt, value, maxWeek) => {
@@ -47,30 +50,23 @@ export const useCharts = () => {
         const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
 
         const week = Math.floor(time / oneWeekInMilliseconds) + 1;
-        if (maxWeek === week) {
+        if (week<=maxWeek) {
             setError('cant add')
+            setIsLoading(false)
             return false;
         }
-        API.put('/api/charts/update-chart-data', { chartId: _id, week, value })
+        return API.put('/api/charts/update-chart-data', { chartId: _id, week, value })
             .then(res => {
-                if (res.data.acknowledged) {
-                    /*  API.get(`api/charts/get-chart/${chartId}`)
-                      then(res => {
-                          if (res.status === 200) {
-                              return { data: res.data.data, isModified: true }
-                          }
-                      })
-                          .catch(err => {
-                              return { isModified: false }
-                          })*/
-                    //REMAIN TO DO
-                    //Dont do the  aboue insted give the response of put method as the new Updated data
+                console.log(res)
+                if (res.status === 200) {
+                    setIsLoading(false)
+                    return { week: res.data.week, value: res.data.value }
                 }
             })
             .catch(err => {
                 setError(err)
                 setIsLoading(false)
-                return { isModified: false }
+                return false;
             })
 
     }
@@ -79,8 +75,7 @@ export const useCharts = () => {
         API.delete(`/api/charts/${_id}`)
             .then(res => {
                 if (res.data.acknowledged) {
-
-                    fetchTracks();
+                                 setCharts(charts=>charts.filter(item=>item._id!==_id))       
                     setIsLoading(false);
 
                 }
@@ -90,6 +85,8 @@ export const useCharts = () => {
                 setError(err)
                 return false;
             })
+            setIsLoading(true)
+
     }
     return { charts, error, isLoading, fetchTracks, addTracker, addChartData, deleteChart }
 }

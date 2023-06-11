@@ -206,7 +206,7 @@ userSchema.statics.updateChart = async function updateChart({ body, _id }) {
             week: body.week,
             value: body.value
         }
-        return this
+        const res = await this
             .updateOne({ _id: _id, 'charts._id': body.chartId }, {
                 $push: {
                     'charts.$.data': newData
@@ -214,18 +214,18 @@ userSchema.statics.updateChart = async function updateChart({ body, _id }) {
             })
             .lean()
             .exec()
-
+            return newData;
 
     } catch (error) {
         throw new Error(error.message, { statusCode: 500 });
     }
 }
 
-userSchema.statics.deleteChart=async function deleteChart({_id,chartId}){
+userSchema.statics.deleteChart = async function deleteChart({ _id, chartId }) {
     return this.updateOne(
         { _id },
         { $pull: { charts: { _id: chartId } } }
-      ).lean()
+    ).lean()
 }
 //exporting user schema
 module.exports = mongoose.model('user', userSchema);

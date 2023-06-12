@@ -16,12 +16,14 @@ const chartSchema = new mongoose.Schema({
     createdAt: { type: Date },
     minValue: { type: Number },
     maxValue: { type: Number },
+    unit:{type:String},
     data: {
         type: [{ week: { type: Number, unique: true }, value: { type: Number, required: true } }],
         default: []
 
     }
 })
+
 
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true, immutable: true },
@@ -38,11 +40,11 @@ const userSchema = new mongoose.Schema({
     },
     charts: {
         type: [chartSchema],
-        defaut: []
+        defaut: [],
+
     }
 
 })
-
 
 // Signup Method for controller
 userSchema.statics.signup = async function signup({ email, password, username }) {
@@ -161,17 +163,20 @@ userSchema.statics.addChart = async function addChart({ body, _id }) {
             chartType: body.chartType,
             createdAt: new Date(),
             minValue: body.minValue,
+            unit:body.unit,
             maxValue: body.maxValue,
             data: [{ week: body.week, value: body.value }]
         }
+        console.log(chart)
         //ADDING NEW CHART TO the charts section
-        const result = await this.findOneAndUpdate({ _id }, {
+        const result = await this.findByIdAndUpdate(_id, {
             $push: {
-                charts: chart
+                charts: { $each: [chart], $position: 0 }
             }
-        }, { new: true })
-            .lean()
-            .exec()
+        }, { new: true }).select('charts')
+
+        return result.charts[0]
+
     } catch (error) {
         throw new Error(error.message, { statusCode: 500 });
 
@@ -214,7 +219,7 @@ userSchema.statics.updateChart = async function updateChart({ body, _id }) {
             })
             .lean()
             .exec()
-            return newData;
+        return newData;
 
     } catch (error) {
         throw new Error(error.message, { statusCode: 500 });

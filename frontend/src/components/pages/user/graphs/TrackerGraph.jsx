@@ -3,10 +3,11 @@ import { ResponsiveContainer, CartesianGrid, XAxis, YAxis, LabelList, Tooltip, A
 import '../../../styles/trackers.css'
 import Heads from '../../../cards/Heads';
 import { Link } from 'react-router-dom';
-import { useCharts } from '../../../hooks/useCharts';
+import {useChartsContext} from '../../../hooks/useChartsContext';
+
 const TrackerGraph = ({ graph }) => {
 
-    const { addChartData, error, isLoading, deleteChart } = useCharts();
+    const { addChartData, error, isLoading, deleteChart,isDeleting,isAdding } = useChartsContext();
     const { chartType, createdAt, minValue, maxValue, unit } = graph;
     const [data, setData] = useState(graph.data)
     const [isDataOpen, setIsDataOpen] = useState(false)
@@ -58,11 +59,11 @@ const TrackerGraph = ({ graph }) => {
                 <div className="chartAction dark-text">
                     <div className="chartType">{chartType}</div>
                     <div className="buttons">
-                        <button className='add-data ' onClick={addData}><Link>{isLoading ? "Adding" : "Add Data"}</Link></button>
+                        <button className='add-data ' onClick={addData}><Link>{isAdding ? "Adding" : "Add Data"}</Link></button>
                         {
                             isDataOpen ?
                                 <input type="number" name="data" value={value} onChange={(e) => setValue(e.target.value)} placeholder={placeholder} className='data-input' />
-                                : <button className='delete-graph ' onClick={deleteTrack}><Link>Delete</Link></button>
+                                : <button className='delete-graph ' onClick={deleteTrack}><Link>{isDeleting?"Deleting":"Delete"}</Link></button>
 
 
                         }
@@ -76,7 +77,6 @@ const TrackerGraph = ({ graph }) => {
                         margin={{
                             top: 10,
                             right: 30,
-                            left: 20,
                             bottom: 20,
                         }}
                         key={`${data.length}`}
@@ -91,7 +91,7 @@ const TrackerGraph = ({ graph }) => {
                         <CartesianGrid strokeDasharray="4 4" />
                         <XAxis dataKey="week" label={{ value: 'week', position: 'bottom' }} />
 
-                        <YAxis label={{ value: unit, angle: -90, position: 'left' }} />
+                        <YAxis label={{ value: unit, angle: -90,position: 'center'  }} width={unit?80:60} />
                         <Tooltip />
                         {/* <Legend /> */}
                         <Area type="monotone" dataKey="value" stroke="#000" strokeWidth={1} fill="url(#colorValue)" dot={{ fill: "white" }} />

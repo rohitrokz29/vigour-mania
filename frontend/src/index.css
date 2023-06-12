@@ -1,6 +1,8 @@
 :root{
   margin: 0;
   padding: 0;
+  --light-box-shadow:0 0 10px #342b2b;
+  --dark-text-lt:#000000e0;
 }
 .light-text{
   color:#330000d9;

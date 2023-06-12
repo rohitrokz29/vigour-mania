@@ -1,16 +1,17 @@
 .trackers-head {
+    color:var(--dark-text-lt);
     max-width: 500px;
     padding-block: 0.5rem;
     margin-block: 1rem;
     margin-inline: 2%;
     padding-inline: 1rem;
     font-size: 2rem;
-    box-shadow: 0 0 10px #c3b9b9;
+    box-shadow: var(--light-box-shadow);
 
 }
 
 .no-tracker {
-    box-shadow: 0 0 10px #c3b9b9;
+    box-shadow: var(--light-box-shadow);
     border: 5px solid #e5a4a4;
     background-color: #473b3b;
     height: 300px;
@@ -48,7 +49,7 @@
 }
 
 .trackers {
-    
+
     width: fit-content;
     min-width: 30rem;
     padding-block: 0.5rem;
@@ -56,13 +57,14 @@
     margin-inline: 2%;
     padding-inline: 1rem;
     height: fit-content;
-    box-shadow: 0 0 10px #c3b9b9;
+    box-shadow: var(--light-box-shadow);
 }
 
 .track-forms {
     min-width: 15rem;
 
 }
+
 .tracker {
     width: 50vw;
     height: 50vh;
@@ -73,7 +75,7 @@
 }
 
 .chartAction {
-    padding-block:0.5rem;
+    padding-block: 0.5rem;
     margin-block-end: 3px;
     margin-inline: 1rem;
     padding-inline: 1rem;
@@ -100,7 +102,7 @@
 
 .delete-graph {
     border: 1px solid #f72323b9;
-    box-shadow: 0 0px 5px #ff1111fc;
+    box-shadow: 0 0px 5px #f60202fc;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 
@@ -121,7 +123,7 @@
     border-bottom-left-radius: 10px;
     border: 1px solid #97f70f;
     background-color: #83f35d5c;
-    box-shadow: 0 0px 5px rgba(180, 255, 17, 0.988);
+    box-shadow: 0 0px 5px rgba(115, 255, 0, 0.988);
     cursor: pointer;
 
     &>a {
@@ -130,7 +132,7 @@
     }
 
     &:hover {
-        background-color: #42ff037a;
+        background-color: #42ff0361;
         color: #395d07;
     }
 }
@@ -158,6 +160,7 @@
 
 .chart {
     margin-block: 0.5rem;
+    width: 90%;
 
     &>label {
         cursor: pointer;
@@ -174,6 +177,7 @@
 }
 
 .data-input {
+
     width: 5rem;
     height: 2rem;
     font-size: 1rem;

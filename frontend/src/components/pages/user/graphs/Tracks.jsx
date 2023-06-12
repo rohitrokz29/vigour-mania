@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import TrackerGraph from './TrackerGraph'
-import { useCharts } from '../../../hooks/useCharts'
+import { useChartsContext } from '../../../hooks/useChartsContext'
 import Null from '../../../../assets/null.png'
 const Tracks = () => {
 
-    const { charts, error, isLoading, fetchTracks, addTracker } = useCharts();
+    const { charts, error, isLoading, fetchTracks, addTracker } = useChartsContext();
     const [chartType, setChartType] = useState("");
     const [value, setValue] = useState(0);
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(0);
     const [unit, setUnit] = useState("")
-    useEffect(() => {
-        fetchTracks();
-        console.log(charts)
-    }, [])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {
             week: 1,
             chartType, unit,
             value: +value,
-            min: +min,
-            max: +max
+            minValue: +min,
+            maxValue: +max
         }
-        addTracker(data);
+        const res = await addTracker(data);
+
+        if (res) {
+            setChartType("");
+            setMax(0);
+            setValue(0);
+            setMin(0);
+            setUnit("")
+        }
     }
 
     return (
@@ -36,30 +40,38 @@ const Tracks = () => {
             </div>
             <div className="graphs">
 
-                {charts[0] ? <div className="trackers">
+                {
+                    isLoading ?
+                        <div className=" no-tracker">
+                            <h1>
+                                Loading...
+                            </h1>
+                        </div>
+                        :
+                        charts[0] ? <div className="trackers">
 
-                    {charts.map((item, index) => {
-                        return (
-                            <TrackerGraph graph={item} key={item._id} />
-                        )
-                    })
-                    }
+                            {charts.map((item, index) => {
+                                return (
+                                    <TrackerGraph graph={item} key={item._id} />
+                                )
+                            })
+                            }
 
-                </div>
-                    :
+                        </div>
+                            :
+                            <div className=" no-tracker">
+                                <h1>
+                                    No active trackers
+                                </h1>
+                            </div>
 
-                    <div className=" no-tracker">
-                        <h1>
-                            No active trackers
-                        </h1>
-                    </div>
                 }
 
                 <div className="track-forms trackers">
                     <form onSubmit={handleSubmit} >
                         <div className="add-chart ">Add Tracker</div>
-                        <div className="input-field chart">
-                            <label htmlFor="trackerName">Tracker Name</label>
+                        <div className="input-field chart ">
+                            <label htmlFor="trackerName  ">Tracker Name</label>
                             <br />
                             <input type="text" name='chartType' className="chart-name" id='trackerName' placeholder='Tracker Name' value={chartType} onChange={(e) => setChartType(e.target.value)} />
                         </div>
@@ -83,7 +95,7 @@ const Tracks = () => {
                             <br />
                             <input type="number" name='max' className="chart-value" id='maxValue' placeholder='Set Maximum Value' value={max} onChange={(e) => setMax(e.target.value)} />
                         </div>
-                        <button type='submit' disabled={isLoading} className='add-data'>{isLoading?"Adding Tracker":"Add Tracker"}</button>
+                        <button type='submit' disabled={isLoading} className='add-data'>{isLoading ? "Adding Tracker" : "Add Tracker"}</button>
                     </form>
                     {/* {error!==null?<div className="error">{error}</div>:""} */}
                 </div>

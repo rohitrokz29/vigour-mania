@@ -1,21 +1,26 @@
-import React, { useEffect } from 'react'
-import { useFetchUser } from '../../hooks/useFetchUser'
+import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import '../../styles/profile.css'
-import Image from '../../../assets/profile.webp'
-import Null from '../../../assets/null.png'
 import {
     ResponsiveContainer,
     LineChart,
     Line,
 } from 'recharts';
 
-const Profile = () => {
+//custom hooks
+import { useFetchUser } from '../../hooks/useFetchUser'
+//styles
+import '../../styles/profile.css'
+//assets
+import Image from '../../../assets/profile.webp'
+import Null from '../../../assets/null.png'
 
+const Profile = () => {
     const { userData, isLoading, error, fetchData } = useFetchUser();
+    const { username } = useParams();
+
     useEffect(() => {
-        fetchData()
-    }, [])
+        fetchData(username)
+    }, [username])
 
     const friends = [
         {
@@ -40,19 +45,16 @@ const Profile = () => {
     return (
 
         !isLoading && <>
-
             <div className="profile">
                 <div className="user-details">
                     <div className="user-data">
                         <div className="profile-details">
                             <img src={Image} alt="Profile" className="user-image" />
-
                             <ul className="user-id">
                                 <li className="username dark-text">{userData.user.username}</li>
                                 <li className="name light-text">{userData.user.name || "Rohit Kharche"}</li>
                             </ul>
                         </div>
-
                         <div className="user-bio dark-text">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed minus vitae provident ratione enim magnam voluptatem ut quia ducimus quisquam?
                         </div>
@@ -66,7 +68,6 @@ const Profile = () => {
                         <li className="contact-item">
                             <i className="fa fa-envelope light-text"></i>
                             <Link>{userData.user.email}</Link>
-
                         </li>
                         {userData.facebook &&
                             <li className="contact-item">
@@ -81,12 +82,10 @@ const Profile = () => {
                             <i className="fa fa-twitter light-text"></i>
                             <Link>{userData.user.twitter}</Link>
                         </li>}
-
                     </ul>
                 </div>
                 <div className="user-summary">
                     <div className="head">Trackers</div>
-
                     {
                         userData.charts[0] ?
                             userData.charts.map((item, index) => {
@@ -99,7 +98,6 @@ const Profile = () => {
                     }
                 </div>
             </div>
-
             <div className="friends ">
                 <div className="friends-head dark-text">
                     <div >
@@ -115,9 +113,7 @@ const Profile = () => {
                         <li>
                             <button className="add-friend friend-head-img ">Add friend</button>
                         </li>
-
                     </ul>
-
                 </div>
                 {
                     friends[0] ? friends.map((item, index) => {
@@ -154,7 +150,7 @@ const TrackerSummary = ({ item }) => {
                 >
                     <LineChart width={300} height={100} data={item.data}>
 
-                        <Line type="monotone" dataKey="value" stroke="#f00" activeDot={{ r: 12 }} strokeWidth={2} />
+                        <Line type="monotone" dataKey="value" stroke="#f00" activeDot={{ r: 12 }} strokeWidth={1} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
@@ -177,9 +173,11 @@ const FriendComp = ({ image, username, name }) => {
                 <li>
                     <button className="add-friend ">Add friend</button>
                 </li>
-
             </ul>
         </div>
     )
 }
+
+
+
 export default Profile;

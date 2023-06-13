@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
+//components
 import TrackerGraph from './TrackerGraph'
+//custom hooks
 import { useChartsContext } from '../../../hooks/useChartsContext'
+//assets
 import Null from '../../../../assets/null.png'
+
 const Tracks = () => {
 
     const { charts, error, isLoading, fetchTracks, addTracker } = useChartsContext();
@@ -21,7 +25,6 @@ const Tracks = () => {
             maxValue: +max
         }
         const res = await addTracker(data);
-
         if (res) {
             setChartType("");
             setMax(0);
@@ -30,10 +33,7 @@ const Tracks = () => {
             setUnit("")
         }
     }
-
     return (
-
-
         <>
             <div className="trackers-head">
                 Your Trackers
@@ -48,34 +48,32 @@ const Tracks = () => {
                             </h1>
                         </div>
                         :
-                        charts[0] ? <div className="trackers">
+                        charts[0] ?
+                            <div className="trackers">
 
-                            {charts.map((item, index) => {
-                                return (
-                                    <TrackerGraph graph={item} key={item._id} />
-                                )
-                            })
-                            }
-
-                        </div>
+                                {charts.map((item, index) => {
+                                    return (
+                                        <TrackerGraph graph={item} key={item._id} />
+                                    )
+                                })
+                                }
+                            </div>
                             :
                             <div className=" no-tracker">
                                 <h1>
                                     No active trackers
                                 </h1>
                             </div>
-
                 }
 
                 <div className="track-forms trackers">
                     <form onSubmit={handleSubmit} >
                         <div className="add-chart ">Add Tracker</div>
                         <div className="input-field chart ">
-                            <label htmlFor="trackerName  ">Tracker Name</label>
+                            <label htmlFor="trackerName">Tracker Name</label>
                             <br />
                             <input type="text" name='chartType' className="chart-name" id='trackerName' placeholder='Tracker Name' value={chartType} onChange={(e) => setChartType(e.target.value)} />
                         </div>
-
                         <div className="input-field chart">
                             <label htmlFor="firstValue">First Value</label>
                             <br />
@@ -99,10 +97,8 @@ const Tracks = () => {
                     </form>
                     {/* {error!==null?<div className="error">{error}</div>:""} */}
                 </div>
-
             </div>
         </>
-
     )
 }
 

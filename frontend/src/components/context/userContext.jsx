@@ -1,5 +1,9 @@
-import { createContext, useEffect, useReducer, useState } from "react";
-import { redirect } from "react-router-dom";
+import {
+    createContext,
+    useEffect,
+    useReducer,
+    useState
+} from "react";
 
 export const UserContext = createContext();
 
@@ -28,7 +32,12 @@ export const UserState = ({ children }) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ ...state, dispatch, isSignedIn, setIsSignedIn }}  >
+        <UserContext.Provider value={{
+            ...state,
+            dispatch,
+            isSignedIn,
+            setIsSignedIn
+        }}  >
             {children}
         </UserContext.Provider>
     )

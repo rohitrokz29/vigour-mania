@@ -19,6 +19,16 @@ const GetCharts=async (req,res)=>{
         res.status(500).json(error)
     }
 }
+const GetOneChart=async (req,res)=>{
+    try{
+        const {chartId}=req.params
+        const result=await User.getOneChart({_id:req._id,chartId});
+        res.status(200).json(result);
+    }
+    catch(error){
+        res.status(500).json(error);
+    }
+}
 const UpdateCharts = async (req, res) => {
     //Update chart details
     try {
@@ -39,4 +49,5 @@ const DeleteChart=async (req,res)=>{
     }
 }
 
-module.exports = { AddChart , GetCharts, UpdateCharts ,DeleteChart};
+
+module.exports = { AddChart , GetCharts, UpdateCharts ,DeleteChart,GetOneChart};

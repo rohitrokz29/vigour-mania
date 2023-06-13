@@ -1,5 +1,9 @@
 import API from "../api/api";
-import { createContext, useState, useEffect } from "react";
+import {
+    createContext,
+    useState,
+    useEffect,
+} from "react";
 export const chartContext = createContext();
 
 
@@ -9,10 +13,10 @@ export const ChartState = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isAdding, setisAdding] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+
     useEffect(() => {
         fetchTracks()
     }, [])
-
 
     const fetchTracks = async () => {
         setIsLoading(true)

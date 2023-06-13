@@ -232,5 +232,22 @@ userSchema.statics.deleteChart = async function deleteChart({ _id, chartId }) {
         { $pull: { charts: { _id: chartId } } }
     ).lean()
 }
+userSchema.statics.getOneChart=async function getOneChart({_id,chartId}){
+    try {
+        const res=await this.findOne({_id},{
+            charts:{
+                $elemMatch:{
+                    _id:chartId
+                }
+            }
+        })
+
+
+        
+        return res.charts[0];
+    } catch (error) {
+        
+    }
+}
 //exporting user schema
 module.exports = mongoose.model('user', userSchema);

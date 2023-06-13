@@ -1,15 +1,15 @@
 
-import  { useState } from "react"
+import { useState } from "react"
 import { useUserContext } from "./useUserContext";
 import API from '../api/api'
+
 export const useSignup = () => {
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const { dispatch,setIsSignedIn } = useUserContext();
+    const { dispatch, setIsSignedIn } = useUserContext();
+
     const SignUp = async (data) => {
-
         setIsLoading(true);
-
         API.post('/api/user/signup', data)
             .then(async (response) => {
                 if (response.status === 201) {
@@ -19,17 +19,16 @@ export const useSignup = () => {
                     setError(null);
                     setIsSignedIn(true);
                     setIsLoading(false);
-
                 }
             }).catch(error => {
                 console.log((error))
                 setError(error.response.data.message);
                 setIsLoading(false);
-
             })
-
-
-
     }
-    return {SignUp, error, isLoading };
+    return {
+        SignUp,
+        error,
+        isLoading
+    };
 }

@@ -11,16 +11,15 @@ const Navbar = lazy(() => import('./components/Navbar'));
 const Profile = lazy(() => import('./components/pages/user/Profile'));
 const Tracks = lazy(() => import('./components/pages/user/graphs/Tracks'));
 
-//contexts and functions
+//custom hooks
 import { useUserContext } from './components/hooks/useUserContext';
+//contexts
 import { ChartState } from './components/context/chartContext';
 
 
 
 function App() {
   const { isSignedIn, user } = useUserContext();
-
-
 
   return (
     <>
@@ -85,14 +84,11 @@ function App() {
                     : <Navigate to="/signin" replace />}
               />
             </Route>
-
             <Route path="*" element={<h1>ERORR PAGE</h1>} />
-
           </Route>
         </Routes>
       </BrowserRouter>
     </>
-
   )
 }
 

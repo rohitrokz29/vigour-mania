@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+//styles
 import '../../styles/home.css';
-
+//components
 import Features from './Features';
 import Contacts from './Contacts';
 import Lower from '../Lower';
@@ -22,11 +23,8 @@ const Home = () => {
 						</button>
 				</div>
 			</main>
-			
 			<Features />
-
 			<Contacts />
-
 			<Lower/>
 		</>
 	)

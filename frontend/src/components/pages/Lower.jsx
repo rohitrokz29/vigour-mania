@@ -60,10 +60,8 @@ const Lower = () => {
 						<ul>
 							<li>Guide People for Better Health</li>
 							<li>Provide Efficient Techniques</li>
-
 						</ul>
 					</div>
-
 				</div>
 				<div className="lower-contact">
 					<ul>
@@ -77,8 +75,6 @@ const Lower = () => {
 					</ul>
 				</div>
 				<form onSubmit={handleSubmit} className="contact-form Lform">
-
-
 					<h3 style={{ color: "#000" }}>Already a user, SignIn Now</h3>
 					<div className="input-container">
 						<label className="fa fa-envelope icon" htmlFor="sign-in-email" ></label>

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSignup } from '../../hooks/useSignup'
 import { useUserContext } from '../../hooks/useUserContext'
@@ -14,7 +14,7 @@ const Signup = () => {
 	const handleChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
 	}
-	const {SignUp, error, isLoading } = useSignup();
+	const { SignUp, error, isLoading } = useSignup();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -25,14 +25,8 @@ const Signup = () => {
 
 	return (
 		<>
-
 			<form onSubmit={handleSubmit} className="signup-form">
 				<h2 style={{ paddingBlock: "4%" }}>Sign Up </h2>
-
-
-
-
-
 				<div className="input-container">
 					<label className="fa fa-user icon" htmlFor="username" ></label>
 					<input className="input-field" type="text" autoComplete='on' placeholder="Username " name="username" id="username" value={data.username} onChange={handleChange} />
@@ -45,8 +39,7 @@ const Signup = () => {
 					<label className="fa fa-key icon" htmlFor="password"></label>
 					<input className="input-field" type="password" autoComplete='on' placeholder="Password" name="password" id='password' value={data.password} onChange={handleChange} />
 				</div>
-
-				<button type="submit" disabled={isLoading} className="btn ">{isLoading?"Signing Up":"SignUp"}</button>
+				<button type="submit" disabled={isLoading} className="btn ">{isLoading ? "Signing Up" : "SignUp"}</button>
 				<div className="input-container">
 					{error &&
 						<div className="error error-text">
@@ -54,7 +47,6 @@ const Signup = () => {
 						</div>
 					}
 				</div>
-
 			</form>
 			<div className="signup-side">
 				<h3>Get Entered in the World of </h3>
@@ -66,7 +58,6 @@ const Signup = () => {
 				<br />
 				<Link to="/signin" style={{ color: "#000" }}>Already a User? Signin</Link>
 			</div>
-
 		</>
 	)
 }

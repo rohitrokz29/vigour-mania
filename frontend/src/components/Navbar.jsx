@@ -1,11 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+/* Dependencies*/
+import React from 'react';
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import { Outlet, NavLink, Link, useLocation } from 'react-router-dom';
+//styles
 import './styles/navbar.css';
+//components
 import Profile from '../assets/profile.webp'
+//custom hooks
 import { useLogout } from './hooks/useLogout';
-const Navbar = ({ isSignedIn, username }) => {
 
+
+const Navbar = ({ isSignedIn, username }) => {
 	const { pathname } = useLocation();
 	const { logout } = useLogout();
 	return (
@@ -35,12 +40,11 @@ const Navbar = ({ isSignedIn, username }) => {
 					<li className="list-item">
 						<NavLink to="/explore">Explore</NavLink>
 					</li>
-
 					{isSignedIn ?
 						<>
-						<li className="list-item">
-							<NavLink to="/my-trackers">Trackers</NavLink>
-						</li>
+							<li className="list-item">
+								<NavLink to="/my-trackers">Trackers</NavLink>
+							</li>
 							<li className="list-item">
 								<NavLink to="/journals">Journals</NavLink>
 							</li>
@@ -60,7 +64,6 @@ const Navbar = ({ isSignedIn, username }) => {
 											</Link>
 										</div>
 									</li>
-
 									<li className=" item-list">
 										<i className="fa fa-book light-text"></i>
 										<div className='text light-text'>
@@ -79,7 +82,6 @@ const Navbar = ({ isSignedIn, username }) => {
 											<Link className='light-text' onClick={logout}>Log Out</Link>
 										</div>
 									</li>
-
 								</ul>
 							</div>
 						</>
@@ -89,7 +91,6 @@ const Navbar = ({ isSignedIn, username }) => {
 						</li>
 					}
 				</ul>
-
 			</nav>
 			<Outlet />
 		</>

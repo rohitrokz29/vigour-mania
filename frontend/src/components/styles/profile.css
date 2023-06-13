@@ -112,6 +112,7 @@
     margin-inline: 2rem;
     display: flex;
     flex-direction: column;
+    font-size: 120%;
     box-shadow: 0 0 10px #c3b9b9;
 }
 

@@ -69,15 +69,12 @@ const evolve = [
 ]
 
 const Explore = () => {
-	
-	
 	return (
 		<>
 			<div className="explore-box">
 				<div className="explore-head">
 					<span className='light-text first-span'>Welcome to&nbsp; </span>
 					<h1 className='dark-text'>Vigour Mania</h1><br />
-
 					<span className='light-text'>Explore the world of Fitness and Sports</span>
 				</div>
 				<div className="spotlight">
@@ -101,7 +98,6 @@ const Explore = () => {
 							})
 						}
 					</div>
-
 				</div>
 			</div>
 		</>

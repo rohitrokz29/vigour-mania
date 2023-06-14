@@ -38,12 +38,10 @@
         color: #977d7d;
     }
 
-    /* height:500px; */
 }
 
 .graphs {
     display: flex;
-    /* flex-direction: row; */
     flex-wrap: wrap;
     justify-content: space-around;
     padding-inline: 3%;
@@ -84,14 +82,14 @@
 
 .chartType {
     font-size: 110%;
-
-    &>i {
+    &>a i {
+        align-items: center;
         padding-inline: 0.5rem;
         font-weight: bolder;
     }
 }
 
-.chartType:hover {
+.chartType a:hover {
     color: #890615;
 }
 
@@ -160,19 +158,22 @@
 
 .track-forms form {
     display: flex;
-    width: 25vw;
+    width: 25vw; 
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-block-start: 1rem;
     margin-block: 2%;
+    box-shadow: var(--light-box-shadow);
 
     & label {
         font-size: 120%;
     }
 
     &>button {
+        margin-block-end: 1rem;
+        width: 95%;
         color: #517322;
-
         height: 2rem;
         font-size: 1rem;
     }
@@ -214,12 +215,5 @@
 
 
 
-    &:hover {
-        background-color: #32b108bf;
-        color: #050801;
-    }
-
-    &:focus {
-        background-color: #4ef9155c;
-    }
+ 
 }

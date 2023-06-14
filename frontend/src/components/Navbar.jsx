@@ -92,6 +92,7 @@ const Navbar = ({ isSignedIn, username }) => {
 					}
 				</ul>
 			</nav>
+		
 			<Outlet />
 		</>
 	)

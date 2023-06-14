@@ -64,12 +64,14 @@ const TrackerGraph = ({ graph }) => {
         <>
             <div className="tracker">
                 <div className="chartAction dark-text">
-                    <Link to={chartType} className="chartType">
-                        {chartType}
-                        <i className="fa fa-angle-right"></i>
-                    </Link>
+                    <div className="chartType">
+                        <Link to={chartType}>
+                            {chartType}
+                            <i className="fa fa-angle-right"></i>
+                        </Link>
+                    </div>
                     <div className="buttons">
-                        <button className='add-data ' onClick={addData}><Link>{isAdding ? "Adding" : "Add Data"}</Link></button>
+                        <button className='add-data '  onClick={addData}><Link>{isAdding ? "Adding" : "Add Data"}</Link></button>
                         {
                             isDataOpen ?
                                 <input type="number" name="data" value={value} onChange={(e) => setValue(e.target.value)} placeholder={placeholder} className='data-input' />

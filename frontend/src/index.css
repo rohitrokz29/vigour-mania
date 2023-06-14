@@ -1,7 +1,8 @@
 :root{
   margin: 0;
   padding: 0;
-  --light-box-shadow:2px 2px 5px #00000069;
+  align-items: center;
+  --light-box-shadow:2px 2px 5px #8b0e0ecb;
   --dark-text-lt:#000000e0;
 }
 .light-text{

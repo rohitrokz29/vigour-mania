@@ -41,29 +41,23 @@ const Tracks = () => {
             <div className="graphs">
 
                 {
-                    isLoading ?
-                        <div className=" no-tracker">
-                            <h1>
-                                Loading...
-                            </h1>
+
+                    charts[0] ?
+                        <div className="trackers">
+
+                            {charts.map((item, index) => {
+                                return (
+                                    <TrackerGraph graph={item} key={item._id} />
+                                )
+                            })
+                            }
                         </div>
                         :
-                        charts[0] ?
-                            <div className="trackers">
-
-                                {charts.map((item, index) => {
-                                    return (
-                                        <TrackerGraph graph={item} key={item._id} />
-                                    )
-                                })
-                                }
-                            </div>
-                            :
-                            <div className=" no-tracker">
-                                <h1>
-                                    No active trackers
-                                </h1>
-                            </div>
+                        <div className=" no-tracker">
+                            <h1>
+                                {isLoading?"Loading...":"No Active Trackers"}
+                            </h1>
+                        </div>
                 }
 
                 <div className="track-forms trackers">

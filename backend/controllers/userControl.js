@@ -47,6 +47,29 @@ const Signin = async (req, res) => {
 const GetUser = async (req, res) => {
     try {
         const user = await User.findUser(req.params);
+        console.log(user)
+        const { charts } = user
+        /*
+            we have charts=[
+                {
+                    data:[{week,value}]
+                },
+                {
+                    data:[{week,value}]
+                },
+                {
+                    data:[{week,value}]
+                }
+            ]
+            we need to send charts data as
+            charts =[
+                {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 1
+                   {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 2
+                {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 3 
+                {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 4
+
+            ]
+        */
         user ? res.status(200).json(user) : res.status(302).json({ message: "User Not found" })
     } catch (error) {
         res.json({ message: error.message })

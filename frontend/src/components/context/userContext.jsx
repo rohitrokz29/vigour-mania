@@ -21,6 +21,7 @@ const userReducer = (state, action) => {
 export const UserState = ({ children }) => {
     const [isSignedIn, setIsSignedIn] = useState(false)
     const [state, dispatch] = useReducer(userReducer, { user: null })
+    const [progress, setProgress] = useState(0)
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('vmuser'))
         if (user) {
@@ -36,7 +37,9 @@ export const UserState = ({ children }) => {
             ...state,
             dispatch,
             isSignedIn,
-            setIsSignedIn
+            setIsSignedIn,
+            progress,
+            setProgress
         }}  >
             {children}
         </UserContext.Provider>

@@ -1,8 +1,7 @@
 /* Dependencies*/
 import React, { Suspense, lazy } from 'react';
 import { Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
-
-
+import LoadingBar from 'react-top-loading-bar'
 //Components
 const Home = lazy(() => import('./components/pages/Home/Home'));
 const Explore = lazy(() => import('./components/pages/Explore/Explore'));
@@ -19,10 +18,18 @@ import { ChartState } from './components/context/chartContext';
 
 
 function App() {
-  const { isSignedIn, user } = useUserContext();
-
+  const { isSignedIn, user,progress,setProgress } = useUserContext();
   return (
     <>
+      <LoadingBar
+        height={3}
+        color='#FF0000'
+        shadow={true}
+        style={{
+          boxShadow: '2px 2px 5px #000'
+        }}
+        progress={progress}
+     />
       <BrowserRouter>
         <Routes>
           <Route path="/" >

@@ -120,7 +120,7 @@ userSchema.statics.signin = async function signin({ email, password }) {
 userSchema.statics.findUser = async function findUser({ username }) {
     try {
         return this
-            .findOne({ username }, { _id: 0, password: 0, email: 0, username: 0, __v: 0, 'user._id': 0, 'charts._id': 0, 'charts.data._id': 0 })
+            .findOne({ username }, { _id: 0, password: 0, email: 0, username: 0, __v: 0, 'user._id': 0, 'charts._id': 0, 'charts.data._id': 0,'charts.chartType':0,'charts.createdAt':0 })
             .exec()
 
     } catch (error) {

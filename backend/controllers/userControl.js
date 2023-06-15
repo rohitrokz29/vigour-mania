@@ -47,8 +47,7 @@ const Signin = async (req, res) => {
 const GetUser = async (req, res) => {
     try {
         const user = await User.findUser(req.params);
-        console.log(user)
-        const { charts } = user
+        const {charts}=user;
         /*
             we have charts=[
                 {
@@ -70,7 +69,29 @@ const GetUser = async (req, res) => {
 
             ]
         */
-        user ? res.status(200).json(user) : res.status(302).json({ message: "User Not found" })
+        var maxWeek = -Infinity;
+        for (const chart of charts) {
+            for (const dataObj of chart.data) {
+                if (dataObj.week > maxWeek) {
+                    maxWeek = dataObj.week;
+                }
+            }
+        }
+        let newCharts = [];
+        let chartTypes=[];
+        charts.map(item=>{
+            
+            chartTypes.push({chartType:item.chartType,length:item.data.length})
+        })
+        for (var i = 1; i <= maxWeek; i++) {
+            const obj = { week:i  };
+            charts.map((item,index)=>{
+                var data = item.data.find(item => item.week === i)
+                obj[`value${index}`] = data?data.value:null;
+            })
+            newCharts.push(obj)
+        }
+        user ? res.status(200).json({ user: user.user, charts: newCharts,chartTypes }) : res.status(302).json({ message: "User Not found" })
     } catch (error) {
         res.json({ message: error.message })
     }
@@ -87,4 +108,9 @@ const UpdateUser = async (req, res) => {
 }
 
 
-module.exports = { Signup, Signin, GetUser, UpdateUser };
+module.exports = {
+    Signup,
+    Signin,
+    GetUser,
+    UpdateUser
+};

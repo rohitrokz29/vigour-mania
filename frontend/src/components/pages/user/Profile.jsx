@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
-    AreaChart,
-    Area,
     XAxis,
     YAxis,
     CartesianGrid,
     Tooltip,
-    ResponsiveContainer
+    ResponsiveContainer,
+    LineChart,
+    Line,
+    Radar,
+    RadarChart,
+    PolarAngleAxis,
+    PolarGrid,
+    PolarRadiusAxis
+
 } from 'recharts';
 
 
@@ -91,10 +97,11 @@ const Profile = () => {
                     </ul>
                 </div>
                 <div className="user-summary">
-                    <div className="head">Trackers</div>
+                    <div className="head dark-text">Trackers Overview</div>
+
                     {
                         userData.charts[0] ?
-                            <TrackerSummary charts={userData.charts} />
+                            <TrackerSummary charts={userData.charts} chartTypes={userData.chartTypes} />
                             :
                             <div className="image">
                                 <img src={Null} alt="" />
@@ -133,43 +140,45 @@ const Profile = () => {
     )
 }
 
-const TrackerSummary = ({ charts }) => {
-    const { username } = useParams()
+const TrackerSummary = ({ charts, chartTypes }) => {
 
-    let colorCodes = ["#17607D", "#F2D8A7", "#1FCECB", "#FF9311", "#003D5C", "#F27649", "#D5CDB6", "#008C74", "#30588C", "#263138"];
-  
-    return (
+    //set colorcodes  theme  wise
+    let colorCodes = ["#fc0505", "#fc7d05", "#22fc05", "#05fcc6", "#050dfc", "#7d07fa"];
+    return (<>
         <div className="track">
 
             <div className="track-chart">
 
                 <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart
-                        width={500}
-                        height={400}
-                        data={charts.data}
+                    <LineChart
+                        data={charts}
                         margin={{
-                            top: 10,
-                            right: 30,
+                            top: 20,
+                            right: 20,
                             left: 0,
                             bottom: 0,
                         }}
+                        style={{
+                            backgroundColor: "#0000001f"
+                        }}
                     >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="week" />
-                        <YAxis />
-                        <Tooltip />
+                        <CartesianGrid strokeDasharray="3 3" fill="#ff00001a" fillOpacity={0.2} />
+                        <XAxis dataKey="week" label={{ value: 'week', position: 'insideBottom' }} height={40} />
+                        <YAxis label={{ value: "value", angle: "-90", position: 'insideLeft' }} width={40} />
+                        <Tooltip cursor={{ stroke: 'grey', strokeWidth: 1 }} />
                         {
-                        // arrArea.map(item => item)
-                        charts.map(item=>{
-                            return <Area type='monotone' color='#000' dataKey={item.data.value}/>
-                        })
+                            charts.map((item, index) => {
+                                return <Line key={index} connectNulls type='monotone' name={chartTypes[index % chartTypes.length].chartType} stroke={colorCodes[(index) % 6]} dataKey={`value${index}`} />
+                            })
                         }
-                    </AreaChart>
+                    </LineChart>
                 </ResponsiveContainer>
 
             </div>
+           
         </div>
+
+    </>
     )
 }
 const FriendComp = ({ image, username, name }) => {

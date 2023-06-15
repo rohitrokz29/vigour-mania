@@ -24,14 +24,6 @@ const TrackerGraph = ({ graph }) => {
     const [value, setValue] = useState("");
     const [placeholder, setPlaceholder] = useState("Enter Data")
 
-    data.sort((a, b) => a.week - b.week)
-    const maxWeek = data[data.length - 1].week
-
-    for (var i = 1; i <= maxWeek; i++) {
-        if (!data.find(item => item.week === i)) {
-            data.push({ week: i, value: data[i].value });
-        }
-    }
 
     const sendReq = async () => {
         let res = await addChartData(graph._id, createdAt, +value, maxWeek);
@@ -101,7 +93,7 @@ const TrackerGraph = ({ graph }) => {
                         <XAxis dataKey="week" label={{ value: 'week', position: 'bottom' }} />
                         <YAxis label={{ value: unit, angle: -90, position: 'center' }} width={unit ? 80 : 60} />
                         <Tooltip />
-                        <Area type="monotone" dataKey="value" stroke="#000" strokeWidth={1} fill="url(#colorValue)" dot={{ fill: "white" }} />
+                        <Area type="monotone" connectNulls dataKey="value" stroke="#000" strokeWidth={1} fill="url(#colorValue)" dot={{ fill: "white" }} />
                         <LabelList dataKey="value" position="top" />
                     </AreaChart>
                 </ResponsiveContainer>

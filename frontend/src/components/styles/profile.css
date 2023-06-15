@@ -4,22 +4,24 @@
 }
 
 .profile {
-    margin-inline: 1rem;
+    margin-inline: 5px;
     margin-block: 1rem;
     display: flex;
+    justify-content: center;
 }
 
 .user-details {
+    width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .user-data {
-    width: 20rem;
-    padding-inline: 1rem;
-    margin-block-end: 1rem;
-    display: flex;
+    padding-inline: 5px;
+    margin-block-end: 5px;
+    display: flex;   
+
     flex-direction: column;
     justify-content: center;
     border-radius: 5px;
@@ -61,7 +63,7 @@
     font-size: 1rem;
     color: #390101;
     cursor: pointer;
-    background-color: #ff000000;
+    background-color: #ff00001a;
     border: 2px solid #ff0000c9;
     border-radius: 8px;
     outline-offset: 2px;
@@ -74,8 +76,8 @@
 }
 
 .conn-list {
-    padding-inline: 0.5rem;
     padding-block: 0.5rem;
+padding-inline: 0.5rem;
     box-shadow: var(--light-box-shadow);
 
     &>.conn-head {
@@ -83,7 +85,7 @@
         margin-block-end: 0.5rem;
         text-align: center;
         font-size: 1.25rem;
-        border-bottom: 2px solid rgba(16, 1, 1, 0.403);
+        border-bottom: 2px solid #10010167;
     }
 
     &>.contact-item {
@@ -94,10 +96,49 @@
         }
     }
 }
-.contact-item a:hover,.contact-item i:hover {
+
+.contact-item a:hover,
+.contact-item i:hover {
     color: #ae0303;
 }
-.track-chart{
+
+
+.track-chart {
+width: 100%;
+    height: 45vh;
+}
+
+.user-summary {
+    margin-inline: 1rem;
+    padding-inline: 1rem;
     width: 60vw;
-    height: 50vh;
+    height: fit-content;
+    &>.track{
+    box-shadow: var(--light-box-shadow);
+}
+}
+
+.user-summary .head {
+    font-size: 1.25rem;
+    margin-inline: 5%;
+    padding-inline: 5%;
+    margin-block: 0.25rem;
+    display: inline-block;
+    border-bottom: 2px solid #10010167;
+
+}
+
+@media( max-width:800px) {
+    .profile{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .user-details {
+        width: 90%;
+        padding-block-end: 1rem;
+    }
+    .user-summary{
+        width: 100%;
+    }
 }

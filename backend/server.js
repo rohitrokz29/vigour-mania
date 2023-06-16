@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const cookieParser=require('cookie-parser')
 /*
 Configure dotenv to access the anvironment variables (Secret Variables) like MongoDB URI and JWT Secrets
 */
@@ -13,6 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 /*
     using router for user methods like signup, signin,etc

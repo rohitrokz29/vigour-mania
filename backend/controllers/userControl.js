@@ -5,13 +5,13 @@
 const User = require('../models/user.model')
 const jwt = require('jsonwebtoken');
 
-/*
-Creating token for user sessions
-*/
-const createToken = (_id) => {
-    return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "5d" });
-}
+/*Create Tokens */
+const CreateToken=(_id)=>{
 
+    const accessToken = jwt.sign({ _id}, process.env.ACCESS_JWT_SECRET, { expiresIn: '1d' });
+    const refreshToken = jwt.sign({ _id }, process.env.REFRESH_JWT_SECRET, { expiresIn: '2d' })
+    return {accessToken,refreshToken}
+}
 
 /* Signup Controller function */
 const Signup = async (req, res) => {
@@ -19,9 +19,10 @@ const Signup = async (req, res) => {
         //Signing up user //
         //below User.signup function exists in user model
         const user = await User.signup(req.body);
-        const token = createToken(user._id);
+        const {accessToken,refreshToken}=CreateToken(req._id);
         //user found -302
-        res.status(201).json({ username: user.username, _id: user._id, token });
+
+        res.status(201).json({ username: user.username, _id: user._id, accessToken, refreshToken });
     } catch (error) {
         //internal server error
         res.status(400).json({ message: error.message });
@@ -30,12 +31,11 @@ const Signup = async (req, res) => {
 /* Signin Controller function */
 const Signin = async (req, res) => {
     try {
-        console.log(req.body)
         //below User.signin function exists in user model
         const user = await User.signin(req.body);
-        const token = createToken(user._id);
+        const {accessToken,refreshToken}=CreateToken(req._id);
         //user found -302
-        res.status(201).json({ username: user.username, _id: user._id, token: token });
+        res.status(201).json({ username: user.username, _id: user._id, accessToken, refreshToken });
     }
     catch (error) {
         //internal server error
@@ -43,11 +43,24 @@ const Signin = async (req, res) => {
     }
 }
 
+/*
+Refreshing User Token
+*/
+const RefreshAuthToken =async (req,res)=>{
+    try {
+        const user = await User.signin(req.body);
+        const {accessToken,refreshToken}=CreateToken(req._id);
+        res.status(201).json({ username: user.username, _id: user._id, accessToken, refreshToken });
+    } catch (error) {
+        res.status(500).json({ message: error.message });   
+    }
+}
+
 /* Controller function to acces user Profile */
 const GetUser = async (req, res) => {
     try {
         const user = await User.findUser(req.params);
-        const {charts}=user;
+        const { charts } = user;
         /*
             we have charts=[
                 {
@@ -78,20 +91,20 @@ const GetUser = async (req, res) => {
             }
         }
         let newCharts = [];
-        let chartTypes=[];
-        charts.map(item=>{
-            
-            chartTypes.push({chartType:item.chartType,length:item.data.length})
+        let chartTypes = [];
+        charts.map(item => {
+
+            chartTypes.push({ chartType: item.chartType, length: item.data.length })
         })
         for (var i = 1; i <= maxWeek; i++) {
-            const obj = { week:i  };
-            charts.map((item,index)=>{
+            const obj = { week: i };
+            charts.map((item, index) => {
                 var data = item.data.find(item => item.week === i)
-                obj[`value${index}`] = data?data.value:null;
+                obj[`value${index}`] = data ? data.value : null;
             })
             newCharts.push(obj)
         }
-        user ? res.status(200).json({ user: user.user, charts: newCharts,chartTypes }) : res.status(302).json({ message: "User Not found" })
+        user ? res.status(200).json({ user: user.user, charts: newCharts, chartTypes }) : res.status(302).json({ message: "User Not found" })
     } catch (error) {
         res.json({ message: error.message })
     }
@@ -112,5 +125,6 @@ module.exports = {
     Signup,
     Signin,
     GetUser,
-    UpdateUser
+    UpdateUser,
+    RefreshAuthToken
 };

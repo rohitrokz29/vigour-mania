@@ -35,6 +35,64 @@ a{
   color: #020000;
 }
 
+
+
+
+  .input-container {
+    display: flex;
+    width: 80%;
+    margin-bottom: 15px;
+  
+  }
+  
+  /* Style the form icons */
+  .icon {
+    padding: 10px;
+    background: #fff;
+    color: #000;
+    min-width: 50px;
+    border: 0.5px solid #766767;
+    border-right: 0;
+    text-align: center;
+  }
+  
+  /* Style the input fields */
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    font-size: 110%;
+    font-family: ui-serif;
+  
+  
+  }
+  
+  
+  .input-field:focus {
+    border: 2px solid #27ee06;
+    /* #ee0606*/
+  }
+  
+  .btn {
+    background-color: dodgerblue;
+    color: #000;
+    padding: 10px 20px;
+    margin-bottom: 5%;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    opacity: 0.9;
+    background: -webkit-linear-gradient(#f3eeee, #ff4d4d);
+    font-size: 120%;
+    font-weight: bolder;
+  }
+  
+  .btn:hover {
+    opacity: 1;
+  }
+  
+  
+
   @media (max-width:650px){
    
     .navbar{
@@ -65,6 +123,4 @@ a{
       justify-content: center;
     }
   }
-
-
 

@@ -4,6 +4,7 @@ import {
     useState,
     useEffect,
 } from "react";
+import axios from "axios";
 import { useUserContext } from "../hooks/useUserContext";
 export const chartContext = createContext();
 
@@ -14,14 +15,16 @@ export const ChartState = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isAdding, setisAdding] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
-    const {setProgress}=useUserContext();
+    const {setProgress,user}=useUserContext();
     useEffect(() => {
+        axios.defaults.headers.common['authorization'] = user.accesToken;
         fetchTracks()
     }, [])
 
     const fetchTracks = async () => {
         setProgress(40);
         setIsLoading(true)
+        //HERE SOME PROBLEM WITH AUTH
         API.get('/api/charts/get-charts')
             .then(response => {
                 setProgress(70);

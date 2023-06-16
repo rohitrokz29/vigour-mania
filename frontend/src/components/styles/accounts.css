@@ -1,0 +1,60 @@
+
+/* Accounts.js */
+
+.accounts {
+
+	display: flex;
+	justify-content: center;
+	height: 90vh;
+	background: -webkit-linear-gradient(#f3eeee, #ff4d4d);
+}
+
+/* Sign In form*/
+
+.signin-box {
+	background: #00000026;
+	margin-block: 7%;
+
+	width: 80%;
+	display: flex;
+	flex-wrap: wrap-reverse;
+	align-items: center;
+	justify-content: center;
+}
+
+.signin-form,
+.signup-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.signin-side,
+.signup-side {
+	background-color: #f0f8ffbd;
+	padding: 1%;
+	border-radius: 15px;
+
+	&>h3 {
+		font-size: 140%;
+	}
+
+}
+
+.signin-side a:hover,
+.signup-side a:hover {
+	text-decoration: underline;
+}
+
+.error {
+	width: 100%;
+	text-align: center;
+	align-items: center;
+	padding-block: 2%;
+	padding-inline: 1%;
+	border: 2px solid #e82222;
+	border-radius: 5px;
+	background-color: #f1eff4;
+}

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import Signin from './forms/Signin'
 import Signup from './forms/Signup';
-
+import '../styles/accounts.css'
 const Accounts = () => {
 
 	const { pathname } = useLocation();

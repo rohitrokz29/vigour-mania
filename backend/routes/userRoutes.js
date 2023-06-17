@@ -10,25 +10,31 @@ const { Signup,
     Signin,
     GetUser,
     UpdateUser,
-    RefreshAuthToken
+    RefreshAuthToken,
+    LogOut
 } = require('../controllers/userControl');
 
 
 const userRouter = express.Router();
 
-/*Signup route  */
+//*SIGNUP ROUTE
 userRouter.post('/signup', Signup);
 
-/*Signin route */
+//*SIGNIN ROUTE
 userRouter.post('/signin', Signin);
 
-/*refresh auth token */
+// *LogOut Route 
+userRouter.post('/logout',userAuth,LogOut);
+
+//TODO : while fetching data if it is expired token you need to refresh token
+//*refresh auth token 
 userRouter.post('/refresh', refreshAuth, RefreshAuthToken);
 
-/*get User data for profile */
+//*get User data for profile 
 userRouter.get('/:username', GetUser)
 
-/* updating user details  with granting access*/
+//* updating user details  with granting access
 userRouter.put('/edit-details', userAuth, UpdateUser);
-/*Exporting router */
+
+//*Exporting router 
 module.exports = userRouter

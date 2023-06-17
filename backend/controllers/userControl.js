@@ -3,84 +3,145 @@
  **/
 
 const User = require('../models/user.model')
+const RefreshToken = require('../models/refreshToken.model')
 const jwt = require('jsonwebtoken');
+/**Options */
+const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production'
+};
 
-/*Create Tokens */
-const CreateToken=(_id)=>{
 
-    const accessToken = jwt.sign({ _id}, process.env.ACCESS_JWT_SECRET, { expiresIn: '1d' });
-    const refreshToken = jwt.sign({ _id }, process.env.REFRESH_JWT_SECRET, { expiresIn: '2d' })
-    return {accessToken,refreshToken}
+//*Create Auth Tokens  For Signin and Signup
+const CreateAccessToken = (_id) => {
+    const accessToken = jwt.sign({ _id }, process.env.ACCESS_JWT_SECRET, { expiresIn: '1m' });
+    return accessToken
+}
+
+//*Refresh Token to refresh auth token when expired
+const CreateRefreshToken = (_id) => {
+    const refreshToken = jwt.sign({ _id }, process.env.REFRESH_JWT_SECRET, { expiresIn: '5m' })
+    return refreshToken;
 }
 
 /* Signup Controller function */
 const Signup = async (req, res) => {
     try {
-        //Signing up user //
-        //below User.signup function exists in user model
+        //*Signing up user //
+        //*below User.signup function exists in user model
         const user = await User.signup(req.body);
-        const {accessToken,refreshToken}=CreateToken(req._id);
-        //user found -302
+        //*user found -302
 
-        res.status(201).json({ username: user.username, _id: user._id, accessToken, refreshToken });
+        const accessToken = CreateAccessToken(user._id);
+        const refreshToken = CreateRefreshToken(user._id);
+        //*token created
+        const newRefreshToken = await RefreshToken.newRefreshToken(refreshToken)
+        //*refreshToken  stored
+        //*sending auth token and refresh token in the cookies
+        res
+            .cookie('accessToken', accessToken, cookieOptions)
+            .cookie('refreshToken', newRefreshToken, cookieOptions)
+            .status(201).json({ username: user.username, _id: user._id });
     } catch (error) {
-        //internal server error
+        //*internal server error
         res.status(400).json({ message: error.message });
     }
 }
-/* Signin Controller function */
+//* Signin Controller function */
 const Signin = async (req, res) => {
     try {
-        //below User.signin function exists in user model
+        //*below User.signin function exists in user model
         const user = await User.signin(req.body);
-        const {accessToken,refreshToken}=CreateToken(req._id);
-        //user found -302
-        res.status(201).json({ username: user.username, _id: user._id, accessToken, refreshToken });
+
+        const accessToken = CreateAccessToken(user._id);
+        const refreshToken = CreateRefreshToken(user._id);
+        const newRefreshToken = await RefreshToken.newRefreshToken(refreshToken)
+        //*user found -302
+        //*sending auth token and refresh token in the cookies
+        res
+            .cookie('accessToken', accessToken, cookieOptions)
+            .cookie('refreshToken', newRefreshToken, cookieOptions)
+            .status(201)
+            .json({ username: user.username, _id: user._id });
     }
     catch (error) {
-        //internal server error
+        //*internal server error
+        res.status(500).json({ message: error });
+    }
+}
+/*
+*LogOut Controller
+*/
+const LogOut = async (req, res) => {
+    try {
+
+        const result = await RefreshToken.deleteToken(req.cookies.refreshToken);
+        //*checking if refresh token is deleted or not 
+        if (result.deletedCount == 1) {
+            //*if refresh token deleted clearing tokens in cookies
+            return res
+                .clearCookie('accessToken')
+                .clearCookie('refreshToken')
+                .status(200)
+                .json({ message: "Successfully Logged Out" })
+        }
+        return res.status(400).json("LogOut Falied")
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 }
 
 /*
-Refreshing User Token
+* Refreshing User Token
 */
-const RefreshAuthToken =async (req,res)=>{
+const RefreshAuthToken = async (req, res) => {
     try {
-        const user = await User.signin(req.body);
-        const {accessToken,refreshToken}=CreateToken(req._id);
-        res.status(201).json({ username: user.username, _id: user._id, accessToken, refreshToken });
+        //*refreshing a auth token i.e., creating a new auth token 
+        const token = await RefreshToken.newAuthToken(req.refreshTokenId)
+        if (token) {
+            //* if refresh token exists creating a new auth token
+            const newAccessToken = CreateAccessToken(token.userId);
+            //*refresh or changing the auth token
+            return res
+                .cookie('accessToken', newAccessToken, cookieOptions)
+                .cookie('refreshToken', token.refreshTokenId, cookieOptions)
+                .status(200)
+                .json({ message: "New Token Created" });
+        }
+        //*if refresh token does not exist or expired we logout the user 
+        return res
+            .redirect('/logout')
     } catch (error) {
-        res.status(500).json({ message: error.message });   
+        res.status(500).json({ message: error.message });
     }
 }
 
-/* Controller function to acces user Profile */
+/*
+* Controller function to acces user Profile
+ */
 const GetUser = async (req, res) => {
     try {
         const user = await User.findUser(req.params);
         const { charts } = user;
         /*
-            we have charts=[
-                {
-                    data:[{week,value}]
-                },
-                {
-                    data:[{week,value}]
-                },
-                {
-                    data:[{week,value}]
-                }
-            ]
-            we need to send charts data as
-            charts =[
-                {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 1
-                   {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 2
-                {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 3 
-                {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 4
-
-            ]
+          *  we have charts=[
+           *     {
+           *         data:[{week,value}]
+           *     },
+           *     {
+           *         data:[{week,value}]
+           *     },
+           *     {
+           *         data:[{week,value}]
+           *     }
+           * ]
+           * we need to send charts data as
+           * charts =[
+           *     {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 1
+           *        {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 2
+           *     {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 3 
+           *     {week:week,value1:value1,value2:value2,value3:value3,....}..value3->belong to 3rd graph on week=week 4
+           * ]
         */
         var maxWeek = -Infinity;
         for (const chart of charts) {
@@ -109,7 +170,9 @@ const GetUser = async (req, res) => {
         res.json({ message: error.message })
     }
 }
-/* Controller function to update user Profile details */
+/*
+* Controller function to update user Profile details 
+*/
 const UpdateUser = async (req, res) => {
     try {
         const isUpdated = await User.updateUser({ body: req.body, _id: req._id });
@@ -126,5 +189,6 @@ module.exports = {
     Signin,
     GetUser,
     UpdateUser,
-    RefreshAuthToken
+    RefreshAuthToken,
+    LogOut
 };

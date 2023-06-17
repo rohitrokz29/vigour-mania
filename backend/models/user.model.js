@@ -188,7 +188,7 @@ userSchema.statics.getCharts = async function getCharts({ _id }) {
     try {
         return await this
             .findOne({ _id, 'charts.0': { $exists: true } })
-            .select('-_id charts.chartType charts.createdAt charts.data.week  charts.data.value charts._id ')
+            .select('-_id charts.chartType charts.createdAt charts.data.week  charts.data.value charts._id  charts.minValue charts.maxValue')
             .sort({ "charts.createdAt": 1 })
             .lean()
             .exec()

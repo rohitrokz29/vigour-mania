@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { CreateAccessToken } = require('../controllers/tokens/createTokens');
 /*
 *Mongoose model to store refresh token
  */
@@ -53,14 +54,16 @@ refreshTokenSchema.statics.newAuthToken = async function newAuthToken(refreshTok
         *} 
          */
         const refreshToken = await this.findOne({ _id: refreshTokenId });
-        return jwt.verify(refreshToken.refreshToken, process.env.REFRESH_JWT_SECRET, (err, result) => {
-            
+        return jwt.verify(refreshToken.refreshToken, process.env.REFRESH_JWT_SECRET, async (err, result) => {
+
             if (err?.name === "TokenExpiredError") {
                 //*if refresh token expired we delete the token
-                this.deleteOne({ _id: refreshToken })
+               await  this.deleteOne({ _id: refreshToken })
                 return null;
             }
-            return { refreshTokenId: refreshToken._id, userId: result._id };
+            //* if refresh token exists/not expired creating a new auth token
+            const newAccessToken = CreateAccessToken(result._id);
+            return { refreshTokenId: refreshToken?._id, newAccessToken};
         })
     } catch (error) {
         throw Error(error)

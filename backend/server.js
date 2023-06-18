@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser=require('cookie-parser');
 const cookieEncrypter=require('cookie-encrypter');
+// const csurf=require('csurf')
+
 /*
 Configure dotenv to access the anvironment variables (Secret Variables) like MongoDB URI and JWT Secrets
 */
@@ -16,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_ENCRYPT_SECRET.toString()));
 app.use(cookieEncrypter(process.env.COOKIE_ENCRYPT_SECRET.toString()));
-
+// app.use(csurf({cookie:true}));
 /*
     using router for user methods like signup, signin,etc
  */

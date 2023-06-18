@@ -4,25 +4,19 @@
 
 const User = require('../models/user.model')
 const RefreshToken = require('../models/refreshToken.model')
-const jwt = require('jsonwebtoken');
+
+const {
+    CreateAccessToken,
+    CreateRefreshToken
+} = require('./tokens/createTokens')
+
 /**Options */
 const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production'
+    secure: process.env.NODE_ENV === 'production',
+
 };
 
-
-//*Create Auth Tokens  For Signin and Signup
-const CreateAccessToken = (_id) => {
-    const accessToken = jwt.sign({ _id }, process.env.ACCESS_JWT_SECRET, { expiresIn: '1m' });
-    return accessToken
-}
-
-//*Refresh Token to refresh auth token when expired
-const CreateRefreshToken = (_id) => {
-    const refreshToken = jwt.sign({ _id }, process.env.REFRESH_JWT_SECRET, { expiresIn: '5m' })
-    return refreshToken;
-}
 
 /* Signup Controller function */
 const Signup = async (req, res) => {
@@ -35,12 +29,12 @@ const Signup = async (req, res) => {
         const accessToken = CreateAccessToken(user._id);
         const refreshToken = CreateRefreshToken(user._id);
         //*token created
-        const newRefreshToken = await RefreshToken.newRefreshToken(refreshToken)
+        const newRefreshTokenId = await RefreshToken.newRefreshToken(refreshToken)
         //*refreshToken  stored
         //*sending auth token and refresh token in the cookies
         res
             .cookie('accessToken', accessToken, cookieOptions)
-            .cookie('refreshToken', newRefreshToken, cookieOptions)
+            .cookie('refreshTokenId', newRefreshTokenId, cookieOptions)
             .status(201).json({ username: user.username, _id: user._id });
     } catch (error) {
         //*internal server error
@@ -55,12 +49,12 @@ const Signin = async (req, res) => {
 
         const accessToken = CreateAccessToken(user._id);
         const refreshToken = CreateRefreshToken(user._id);
-        const newRefreshToken = await RefreshToken.newRefreshToken(refreshToken)
+        const newRefreshTokenId = await RefreshToken.newRefreshToken(refreshToken)
         //*user found -302
         //*sending auth token and refresh token in the cookies
         res
             .cookie('accessToken', accessToken, cookieOptions)
-            .cookie('refreshToken', newRefreshToken, cookieOptions)
+            .cookie('refreshTokenId', newRefreshTokenId, cookieOptions)
             .status(201)
             .json({ username: user.username, _id: user._id });
     }
@@ -75,19 +69,19 @@ const Signin = async (req, res) => {
 const LogOut = async (req, res) => {
     try {
 
-        const result = await RefreshToken.deleteToken(req.cookies.refreshToken);
+        const result = await RefreshToken.deleteToken(req.cookies.refreshTokenId);
         //*checking if refresh token is deleted or not 
         if (result.deletedCount == 1) {
             //*if refresh token deleted clearing tokens in cookies
             return res
                 .clearCookie('accessToken')
-                .clearCookie('refreshToken')
+                .clearCookie('refreshTokenId')
                 .status(200)
                 .json({ message: "Successfully Logged Out" })
         }
         return res.status(400).json("LogOut Falied")
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 }
 
@@ -96,21 +90,27 @@ const LogOut = async (req, res) => {
 */
 const RefreshAuthToken = async (req, res) => {
     try {
+        console.log(req.refreshTokenId)
         //*refreshing a auth token i.e., creating a new auth token 
         const token = await RefreshToken.newAuthToken(req.refreshTokenId)
+        /*
+         *token={refreshTokenId,newAccessToken} 
+         */
         if (token) {
-            //* if refresh token exists creating a new auth token
-            const newAccessToken = CreateAccessToken(token.userId);
             //*refresh or changing the auth token
             return res
-                .cookie('accessToken', newAccessToken, cookieOptions)
-                .cookie('refreshToken', token.refreshTokenId, cookieOptions)
+                .cookie('accessToken', token.newAccessToken, cookieOptions)
+                .cookie('refreshTokenId', token.refreshTokenId, cookieOptions)
                 .status(200)
                 .json({ message: "New Token Created" });
         }
         //*if refresh token does not exist or expired we logout the user 
         return res
-            .redirect('/logout')
+        .clearCookie('accessToken')
+        .clearCookie('refreshTokenId')
+        .status(401)
+        .json({message:"Refresh Token Expired"})
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

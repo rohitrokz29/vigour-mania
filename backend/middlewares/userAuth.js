@@ -5,13 +5,15 @@ const jwt = require('jsonwebtoken');
 const userAuth = async (req, res, next) => {
     const { accessToken } = req.cookies;
     //reading jwt token
+    console.log(accessToken)
     if (!accessToken) {
         return res.status(401).json({ message: "Token not found" });
     }
     try {
+        res.setHeader('Access-Control-Allow-Origin', 'http://http://127.0.0.1:5173/');
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
         //finding if id obtained form token verification exists or not
-        console.log(accessToken)
-        console.log(req.cookies)
+        
 
         const result = await jwt.verify(accessToken, process.env.ACCESS_JWT_SECRET, async (err, result) => {
             //*if accessToken is expired creating a new accessToken
@@ -33,13 +35,11 @@ const userAuth = async (req, res, next) => {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === 'production',
                 })
-                console.log(tokenVerified)
                 req._id = tokenVerified._id
                 return;
             }
-            req._id = result._id;
+            req._id = result?._id;
         });
-        console.log(result)
 
         if (req._id) {
 

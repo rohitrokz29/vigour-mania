@@ -167,7 +167,6 @@ userSchema.statics.addChart = async function addChart({ body, _id }) {
             maxValue: body.maxValue,
             data: [{ week: body.week, value: body.value }]
         }
-        console.log(chart)
         //ADDING NEW CHART TO the charts section
         const result = await this.findByIdAndUpdate(_id, {
             $push: {
@@ -186,6 +185,7 @@ userSchema.statics.addChart = async function addChart({ body, _id }) {
 /* Retrieving user charts */
 userSchema.statics.getCharts = async function getCharts({ _id }) {
     try {
+        console.log(_id)
         return await this
             .findOne({ _id, 'charts.0': { $exists: true } })
             .select('-_id charts.chartType charts.createdAt charts.data.week  charts.data.value charts._id  charts.minValue charts.maxValue')

@@ -11,7 +11,11 @@ const {
 } = require('./tokens/createTokens')
 
 /**Options */
+/*
+!When domain is set cookies  are not sent
+ */
 const cookieOptions = {
+    // domain:".127.0.0.1",
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
 
@@ -25,17 +29,22 @@ const Signup = async (req, res) => {
         //*below User.signup function exists in user model
         const user = await User.signup(req.body);
         //*user found -302
-
+        
         const accessToken = CreateAccessToken(user._id);
         const refreshToken = CreateRefreshToken(user._id);
         //*token created
         const newRefreshTokenId = await RefreshToken.newRefreshToken(refreshToken)
         //*refreshToken  stored
+        const refreshTokenExpiry=Date.now()+5*24*60*60*1000;
+        const authTokenExpiry=Date.now()+24 * 60 * 60 * 1000
+
         //*sending auth token and refresh token in the cookies
         res
             .cookie('accessToken', accessToken, cookieOptions)
             .cookie('refreshTokenId', newRefreshTokenId, cookieOptions)
-            .status(201).json({ username: user.username, _id: user._id });
+            .status(201)
+            .json({ username: user.username, _id: user._id ,refreshTokenExpiry,authTokenExpiry});
+
     } catch (error) {
         //*internal server error
         res.status(400).json({ message: error.message });
@@ -50,13 +59,16 @@ const Signin = async (req, res) => {
         const accessToken = CreateAccessToken(user._id);
         const refreshToken = CreateRefreshToken(user._id);
         const newRefreshTokenId = await RefreshToken.newRefreshToken(refreshToken)
+        const refreshTokenExpiry=Date.now()+ 5 * 24 * 60 * 60 * 1000;
+        const authTokenExpiry=Date.now()+ 24 * 60 * 60 * 1000
+
         //*user found -302
         //*sending auth token and refresh token in the cookies
-        res
+          res
             .cookie('accessToken', accessToken, cookieOptions)
             .cookie('refreshTokenId', newRefreshTokenId, cookieOptions)
             .status(201)
-            .json({ username: user.username, _id: user._id });
+            .json({ username: user.username, _id: user._id ,refreshTokenExpiry,authTokenExpiry});
     }
     catch (error) {
         //*internal server error
@@ -90,19 +102,19 @@ const LogOut = async (req, res) => {
 */
 const RefreshAuthToken = async (req, res) => {
     try {
-        console.log(req.refreshTokenId)
         //*refreshing a auth token i.e., creating a new auth token 
         const token = await RefreshToken.newAuthToken(req.refreshTokenId)
         /*
          *token={refreshTokenId,newAccessToken} 
          */
         if (token) {
+            const authTokenExpiry=Date.now()+24 * 60 * 60 * 1000;
             //*refresh or changing the auth token
             return res
                 .cookie('accessToken', token.newAccessToken, cookieOptions)
                 .cookie('refreshTokenId', token.refreshTokenId, cookieOptions)
                 .status(200)
-                .json({ message: "New Token Created" });
+                .json({ message: "New Token Created" ,authTokenExpiry});
         }
         //*if refresh token does not exist or expired we logout the user 
         return res

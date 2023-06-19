@@ -12,10 +12,8 @@ export const UserContext = createContext();
 const userReducer = (state, action) => {
     switch (action.type) {
         case "signin":
-            API.defaults.headers.common['authorization'] = action.payload.accessToken;
             return { user: action.payload };
         case "logout":
-            axios.defaults.headers.common['authorization'] = null;
             return { user: null };
         default:
             return { ...state };
@@ -27,20 +25,20 @@ export const UserState = ({ children }) => {
     const [state, dispatch] = useReducer(userReducer, { user: null })
     const [progress, setProgress] = useState(0)
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('vmuser'))
+        const user=JSON.parse(localStorage.getItem('vmuser'))
+        console.log(user)
         if (user) {
-            const { exp } = JSON.parse(window.atob(user.accessToken.split('.')[1]))
-            if (exp * 1000 < Date.now()) {
-                const { refreshToken } = JSON.parse(localStorage.getItem('vmuser'))
-                API.post('/api/user/refresh', {
-                    headers: { 'authorization': 'Bearer ' + refreshToken }
-                })
+            if (user.authTokenExpiry <= Date.now()) {
+                API.post('/api/user/refresh')
                     .then((result) => {
-                        localStorage.setItem('vmuser', result.data)
-                        dispatch({ type: 'signin', payload: result.data })
+                        console.log(result)
+                        user.authTokenExpiry=result.authTokenExpiry
+                        localStorage.setItem('vmuser', user)
+                        dispatch({ type: 'signin', payload: user })
                         setIsSignedIn(true);
                     })
                     .catch((error) => {
+                        dispatch({ type: 'logout', payload: user })
                         localStorage.clear();
                         setIsSignedIn(false)
                     })

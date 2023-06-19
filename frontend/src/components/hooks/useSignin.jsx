@@ -18,6 +18,7 @@ export const useSignin = () => {
                 if (response.status === 201) {
                     const user = response.data;
                     setProgress(60)
+                    console.log(response)
                     localStorage.setItem('vmuser', JSON.stringify(user));
                     setProgress(80)
                     dispatch({ type: 'signin', payload: user })
@@ -27,7 +28,7 @@ export const useSignin = () => {
                     setProgress(100)
                 }
             }).catch(err => {
-                setError(err.response.data.message);
+                setError(err.message);
                 setIsLoading(false);
                 setProgress(100);
             })

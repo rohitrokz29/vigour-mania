@@ -17,14 +17,14 @@ export const ChartState = ({ children }) => {
     const [isDeleting, setIsDeleting] = useState(false);
     const {setProgress,user}=useUserContext();
     useEffect(() => {
-        axios.defaults.headers.common['authorization'] = user.accesToken;
+        // axios.defaults.headers.common['authorization'] = user.accesToken;
         fetchTracks()
     }, [])
 
     const fetchTracks = async () => {
         setProgress(40);
         setIsLoading(true)
-        //HERE SOME PROBLEM WITH AUTH
+        //!HERE SOME PROBLEM WITH AUTH
         API.get('/api/charts/get-charts')
             .then(response => {
                 setProgress(70);

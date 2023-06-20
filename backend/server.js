@@ -15,23 +15,25 @@ const { checkUser } = require('./middlewares/checkUser');
 
 const app = express();
 app.use(cors({
-    // origin:"*",
-    origin: 'http://127.0.0.1:5173',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
+    origin:process.env.ACCESS_ORIGIN,
+    credentials: true,
+    sameSite: "none",
+    methods:["GET","POST","PUT","DELETE"]
 }
 ));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser())
 app.use(cookieParser(process.env.COOKIE_ENCRYPT_SECRET.toString()));
-// app.use(cookieEncrypter(process.env.COOKIE_ENCRYPT_SECRET.toString()));
+app.use(cookieEncrypter(process.env.COOKIE_ENCRYPT_SECRET.toString()));
 
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5173");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Credentials", "true");
+    // res.set('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Origin", process.env.ACCESS_ORIGIN.toString());
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    )
     next();
 });
 /*
@@ -58,8 +60,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 
     /*Starting the server below  */
 
-    app.listen(process.env.PORT, (success, error) => {
-        error ? console.log(error) : console.log("Running on Port ", process.env.PORT)
+    app.listen(process.env.SERVER_PORT, (success, error) => {
+        error ? console.log(error) : console.log("Running on Port ", process.env.SERVER_PORT)
     })
 
 }).catch(err => console.error(err))

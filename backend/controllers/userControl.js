@@ -11,14 +11,12 @@ const {
 } = require('./tokens/createTokens')
 
 /**Options */
-/*
-!When domain is set cookies  are not sent
- */
 const cookieOptions = {
-    // domain:".127.0.0.1",
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-
+    secure:true,
+    sameSite:"none",
+    // secure: process.env.NODE_ENV === 'production',
+    expires:new Date(Date.now()+24*3600*1000)
 };
 
 
@@ -40,8 +38,8 @@ const Signup = async (req, res) => {
 
         //*sending auth token and refresh token in the cookies
         res
-            .cookie('accessToken', accessToken, cookieOptions)
-            .cookie('refreshTokenId', newRefreshTokenId, cookieOptions)
+            .cookie("accessToken",  accessToken, cookieOptions)
+            .cookie("refreshTokenId", newRefreshTokenId, cookieOptions)
             .status(201)
             .json({ username: user.username, _id: user._id ,refreshTokenExpiry,authTokenExpiry});
 
@@ -64,6 +62,7 @@ const Signin = async (req, res) => {
 
         //*user found -302
         //*sending auth token and refresh token in the cookies
+        console.log(accessToken)
           res
             .cookie('accessToken', accessToken, cookieOptions)
             .cookie('refreshTokenId', newRefreshTokenId, cookieOptions)
@@ -80,14 +79,15 @@ const Signin = async (req, res) => {
 */
 const LogOut = async (req, res) => {
     try {
-
         const result = await RefreshToken.deleteToken(req.cookies.refreshTokenId);
+        console.log(result)
+
         //*checking if refresh token is deleted or not 
-        if (result.deletedCount == 1) {
+        if (result.acknowledged=== true) {
             //*if refresh token deleted clearing tokens in cookies
             return res
-                .clearCookie('accessToken')
-                .clearCookie('refreshTokenId')
+                .clearCookie('accessToken',cookieOptions)
+                .clearCookie('refreshTokenId',cookieOptions)
                 .status(200)
                 .json({ message: "Successfully Logged Out" })
         }

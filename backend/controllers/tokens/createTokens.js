@@ -9,7 +9,7 @@ const CreateAccessToken = (_id) => {
 
 //*Refresh Token to refresh auth token when expired
 const CreateRefreshToken = (_id) => {
-    const refreshToken = jwt.sign({ _id }, process.env.REFRESH_JWT_SECRET, { expiresIn: '5d' })
+    const refreshToken = jwt.sign({ _id }, process.env.REFRESH_JWT_SECRET, { expiresIn: '10d' })
     return refreshToken;
 }
 

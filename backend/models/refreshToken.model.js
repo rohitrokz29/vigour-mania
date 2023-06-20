@@ -30,6 +30,7 @@ refreshTokenSchema.statics.newRefreshToken = async function newRefreshToken(toke
  */
 refreshTokenSchema.statics.deleteToken = async function deleteToken(_id) {
     try {
+        console.log(_id)
         const result = await this.deleteOne({ _id });
         return result;
     } catch (error) {

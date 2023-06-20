@@ -3,19 +3,18 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
 const userAuth = async (req, res, next) => {
-    const { accessToken } = req.cookies;
+    const accessToken = req.cookies.accessToken;
     //reading jwt token
     console.log(accessToken)
+
     if (!accessToken) {
         return res.status(401).json({ message: "Token not found" });
     }
     try {
-        res.setHeader('Access-Control-Allow-Origin', 'http://http://127.0.0.1:5173/');
-        res.setHeader('Access-Control-Allow-Credentials', 'true');
         //finding if id obtained form token verification exists or not
         
 
-        const result = await jwt.verify(accessToken, process.env.ACCESS_JWT_SECRET, async (err, result) => {
+        const result =  jwt.verify(accessToken, process.env.ACCESS_JWT_SECRET, async (err, result) => {
             //*if accessToken is expired creating a new accessToken
             if (err?.name === "TokenExpiredError") {
                 const token = await refreshTokenModel.newAuthToken(req.cookies.refreshTokenId);

@@ -26,7 +26,6 @@ userRouter.post('/signin', Signin);
 // *LogOut Route 
 userRouter.post('/logout',userAuth,LogOut);
 
-//TODO : while fetching data if it is expired token you need to refresh token
 //*refresh auth token 
 userRouter.post('/refresh', refreshAuth, RefreshAuthToken);
 

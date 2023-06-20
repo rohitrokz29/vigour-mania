@@ -17,7 +17,6 @@ export const ChartState = ({ children }) => {
     const [isDeleting, setIsDeleting] = useState(false);
     const {setProgress,user}=useUserContext();
     useEffect(() => {
-        // axios.defaults.headers.common['authorization'] = user.accesToken;
         fetchTracks()
     }, [])
 
@@ -66,14 +65,14 @@ export const ChartState = ({ children }) => {
         setIsLoading(false)
     }
 
-    const addChartData = async (_id, createdAt, value, maxWeek) => {
+    const addChartData = async ({_id, createdAt, value, maxWeek}) => {
         setProgress(10);
         setisAdding(true)
         //calculating number of weeks from the time of creation
         const time = (new Date()).getTime() - (new Date(createdAt)).getTime()
-
+        //calculating milliseconds in one week
         const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
-
+        //calculating number of weeks in time chart created and current time
         const week = Math.floor(time / oneWeekInMilliseconds) + 1;
         setProgress(30);
         if (week <= maxWeek) {
@@ -85,7 +84,6 @@ export const ChartState = ({ children }) => {
         return API.put('/api/charts/update-chart-data', { chartId: _id, week, value })
             .then(res => {
                 setProgress(60);
-                console.log(res)
                 if (res.status === 200) {
                     setisAdding(false)
                     setProgress(100);

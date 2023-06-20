@@ -26,7 +26,12 @@ const TrackerGraph = ({ graph }) => {
 
 
     const sendReq = async () => {
-        let res = await addChartData(graph._id, createdAt, +value, maxWeek);
+        let maxWeek=data?.at(0).week;
+        data.forEach(item => {
+            maxWeek=Math.max(maxWeek,item.week)
+        });
+
+        let res = await addChartData({_id:graph._id, createdAt,value: +value,maxWeek});
         if (res) {
             setData([...data, res])
             setIsDataOpen(false)

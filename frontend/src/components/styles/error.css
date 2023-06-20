@@ -1,0 +1,98 @@
+.error {
+    display: grid;
+    align-items: center;
+    align-content: center;
+    height: 100vh;
+    text-align: center;
+
+    background-color: #ddd;
+}
+
+.error h1 {
+    font-size: 20rem;
+    color: #e95b5b85;
+
+}
+
+.error-tag {
+    color: #150f0f;
+    position: fixed;
+    width: 100vw;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.error a {
+    font-size: 1.5rem;
+    width: fit-content;
+    border: 2px solid #b80b0b;
+    border-radius: 5px;
+    padding-inline: 2rem;
+    padding-block: 1rem;
+
+        animation: erro-ani 1s infinite;
+        color: #ddd;
+        outline-offset: 3px;
+        outline: 3px solid #ff2200;
+}
+
+@keyframes erro-ani {
+
+    0% {
+        background-color: #ff2200;
+    }
+
+    50% {
+        background-color: #d79a17;
+    }
+
+    100% {
+        background-color: #ff2200;
+    }
+}
+
+
+.shaker {
+    animation: shake-animation 2s ease infinite;
+    transform-origin: 50% 50%;
+}
+
+.shake-element {
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+}
+
+@keyframes shake-animation {
+    0% {
+        transform: translate(0, 0)
+    }
+
+    2% {
+        transform: translate(10px, 0)
+    }
+
+    4% {
+        transform: translate(0, 0)
+    }
+
+    6% {
+        transform: translate(10px, 0)
+    }
+
+    8% {
+        transform: translate(0, 0)
+    }
+
+    10% {
+        transform: translate(10px, 0)
+    }
+
+    12% {
+        transform: translate(0, 0)
+    }
+
+    100% {
+        transform: translate(0, 0)
+    }
+}

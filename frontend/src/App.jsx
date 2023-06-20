@@ -14,6 +14,7 @@ const Tracks = lazy(() => import('./components/pages/user/graphs/Tracks'));
 import { useUserContext } from './components/hooks/useUserContext';
 //contexts
 import { ChartState } from './components/context/chartContext';
+import Error from './components/pages/ErrorPage/Error';
 
 
 
@@ -91,7 +92,7 @@ function App() {
                     : <Navigate to="/signin" replace />}
               />
             </Route>
-            <Route path="*" element={<h1>ERORR PAGE</h1>} />
+            <Route path="*" element={<Error/>} />
           </Route>
         </Routes>
       </BrowserRouter>

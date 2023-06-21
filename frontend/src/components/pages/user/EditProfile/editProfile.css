@@ -1,0 +1,156 @@
+.edit-box {
+    position: fixed;
+    top: 10vh;
+    z-index: 4;
+    width: 100vw;
+    background-color: #9d9595ac;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+}
+
+.edit-container {
+    margin-block: 1rem;
+    background-color: #fff;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+}
+
+.edit-topics {
+    background-color: #8a2be2;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.topic-item {
+    margin-block: 2px;
+    height: 4rem;
+    border-radius: 10px;
+    line-height: 4rem;
+    padding-inline: 20%;
+    width: 100%;
+    text-align: left;
+    align-items: center;
+    font-size: 115%;
+    cursor: pointer;
+    color: #fff;
+
+    &:hover {
+        color: #282626;
+        background-color: #fff;
+    }
+
+    &>i {
+        margin-inline: 0.5rem;
+    }
+}
+
+.editor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-block-end: 2rem;
+}
+
+.editor-head {
+    align-self: flex-start;
+    width: 90%;
+    margin-inline-start: 2%;
+    text-align: left;
+    padding-inline-start: 1rem;
+    align-items: center;
+    background-color: #b2959533;
+    border-radius: 10px;
+    margin-block: 0.5rem;
+    padding-block: 0.5rem;
+}
+
+.inputs {
+    width: 100%;
+    align-items: center;
+    margin-block-end: 1rem;
+}
+
+.input {
+    margin-inline-start: 2%;
+    margin-block-start: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.input label {
+    margin-inline-end: 2%;
+    width: 4rem;
+    font-size: 105%;
+    margin-inline-end: 1rem;
+
+}
+
+.input-style {
+    font-size: 110%;
+    width: 20rem;
+    border: 2px solid #0000006e;
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 5px;
+}
+
+.input-style:focus {
+    outline: none;
+    border: 2px solid #ff00d0a7;
+    background-color: #dddddd90;
+}
+
+.input .save-button {
+    cursor: pointer;
+    text-align: center;
+    line-height: 3rem;
+    width: 8rem;
+    height: 3rem;
+    background-color: #8a2be2;
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.pass-input {
+    margin-inline-start: 2%;
+    margin-block-start: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.pass-input label {
+    margin-inline-end: 2%;
+    width: 25%;
+    font-size: 105%;
+    margin-inline-end: 1rem;
+}
+
+.curr-visiblity {
+    width: 100%;
+    margin-inline-start: 2rem;
+    padding-block-start: 1rem;
+}
+.change-visiblity{
+    font-size: 1.25rem;
+    height: 2rem;
+    outline: none;
+    border: 1px solid rgba(255, 0, 0, 0.819);
+    border-radius: 5px;
+    color: #ff0000e0;
+    padding-inline: 1rem;
+ &:focus{
+    background-color: #ffeaea;
+ }
+}

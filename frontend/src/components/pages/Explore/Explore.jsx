@@ -1,6 +1,6 @@
 import React from 'react'
 import { Spots, Evolve } from '../../cards/Explore';
-import '../../styles/explore.css'
+import './explore.css'
 import { Link } from 'react-router-dom';
 
 const Head = ({ title, url }) => {

@@ -1,7 +1,7 @@
 /* Home Styles*/
 
 .main {
-	background: url('../../assets/1.jpg') no-repeat;
+	background: url('../../../assets/1.jpg') no-repeat;
 	background-size: 100vw;
 	display: flex;
 	height: 60vh;

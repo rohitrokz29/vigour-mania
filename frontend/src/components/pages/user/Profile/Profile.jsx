@@ -16,14 +16,16 @@ import {
 
 } from 'recharts';
 
+//components
+import EditProfile from '../EditProfile/EditProfile'
 
 //custom hooks
-import { useFetchUser } from '../../hooks/useFetchUser'
+import { useFetchUser } from '../../../hooks/useFetchUser';
 //styles
-import '../../styles/profile.css'
+import './profile.css'
 //assets
-import Image from '../../../assets/profile.webp'
-import Null from '../../../assets/null.png'
+import Image from '../../../../assets/profile.webp'
+import Null from '../../../../assets/null.png'
 
 const Profile = () => {
     const { userData, isLoading, error, fetchData } = useFetchUser();
@@ -109,7 +111,7 @@ const Profile = () => {
                     }
                 </div>
             </div>
-
+                <EditProfile />
             <div className="friends ">
                 <div className="friends-head dark-text">
                     <div >
@@ -175,7 +177,7 @@ const TrackerSummary = ({ charts, chartTypes }) => {
                 </ResponsiveContainer>
 
             </div>
-           
+
         </div>
 
     </>

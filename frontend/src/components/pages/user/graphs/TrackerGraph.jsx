@@ -11,9 +11,9 @@ import {
     AreaChart
 } from 'recharts'
 //styles
-import '../../../styles/trackers.css'
+import './trackers.css'
 //custom hooks
-import { useChartsContext } from '../../../hooks/useChartsContext';
+import {  useChartsContext} from "../../../hooks/useChartsContext";
 
 const TrackerGraph = ({ graph }) => {
 

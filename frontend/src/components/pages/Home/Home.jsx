@@ -1,11 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 //styles
-import '../../styles/home.css';
+import './home.css';
 //components
 import Features from './Features';
 import Contacts from './Contacts';
-import Lower from '../Lower';
+import Lower from './Lower';
 
 const Home = () => {
 	return (
@@ -18,7 +18,7 @@ const Home = () => {
 					<h1>Fitness & Sports</h1>
 				</div>
 				<div className="home-3">
-					<button>
+					<button href="/signup">
 						<Link to="/signup">Join Us</Link>
 						</button>
 				</div>

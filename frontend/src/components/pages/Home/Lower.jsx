@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link, animateScroll as scroll } from "react-scroll";
-import insta from '../../assets/instagram.png';
-import whatsapp from '../../assets/whatsapp.png';
-import gmail from '../../assets/gmail.png';
-import location from '../../assets/location.png';
-import { useSignin } from '../hooks/useSignin';
 
+import insta from '../../../assets/instagram.png';
+import whatsapp from '../../../assets/whatsapp.png';
+import gmail from '../../../assets/gmail.png';
+import location from '../../../assets/location.png';
+
+import { useSignin } from '../../hooks/useSignin';
 const Lower = () => {
 
 	const { signin, isLoading, error } = useSignin();

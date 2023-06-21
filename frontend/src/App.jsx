@@ -5,9 +5,9 @@ import LoadingBar from 'react-top-loading-bar'
 //Components
 const Home = lazy(() => import('./components/pages/Home/Home'));
 const Explore = lazy(() => import('./components/pages/Explore/Explore'));
-const Accounts = lazy(() => import('./components/pages/Accounts'));
-const Navbar = lazy(() => import('./components/Navbar'));
-const Profile = lazy(() => import('./components/pages/user/Profile'));
+const Accounts = lazy(() => import('./components/pages/Accounts/Accounts'));
+const Navbar = lazy(() => import('./components/Navbar/Navbar'));
+const Profile = lazy(() => import('./components/pages/user/Profile/Profile'));
 const Tracks = lazy(() => import('./components/pages/user/graphs/Tracks'));
 
 //custom hooks

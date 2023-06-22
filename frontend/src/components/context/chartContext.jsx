@@ -6,6 +6,7 @@ import {
 } from "react";
 import axios from "axios";
 import { useUserContext } from "../hooks/useUserContext";
+import { useLogout } from "../hooks/useLogout";
 export const chartContext = createContext();
 
 
@@ -16,6 +17,7 @@ export const ChartState = ({ children }) => {
     const [isAdding, setisAdding] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const {setProgress,user}=useUserContext();
+    const {logout}=useLogout();
     useEffect(() => {
         fetchTracks()
     }, [])
@@ -25,15 +27,21 @@ export const ChartState = ({ children }) => {
         setIsLoading(true)
         //!HERE SOME PROBLEM WITH AUTH
         API.get('/api/charts/get-charts')
-            .then(response => {
-                setProgress(70);
+            .then(async (response) => {
+                console.log(response)
                 if (response.status === 200) {
+                    setProgress(70);
                     setCharts(response.data.charts);
                     setIsLoading(false);
                     setProgress(100);
                 }
+                if(response.status===401){
+                    await logout()
+                }
+                
             })
-            .catch(err => {
+            .catch(async (err) => {
+            //    await  logout()
                 setError(err);
                 setIsLoading(false);
                 setProgress(100);

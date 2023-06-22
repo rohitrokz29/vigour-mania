@@ -16,7 +16,7 @@ const spotlights = [
 		title: "Starters Zone",
 		description: "Start the Journey of Vigour Mania",
 		icon: "play",
-		path:"/"
+		path:"/my-trackers"
 
 	},
 	{
@@ -24,14 +24,15 @@ const spotlights = [
 		//directc to exercised page
 		description: "Visit Vigour Mania's Gym Section",
 		icon: "dumbbell",
-		path:"/signin"
+		path:"/journals"
 
 	},
 	{
 		title: "Insights",
 		//direct to blogs if login
 		description: "Share your thoughts with others",
-		icon: "lightbulb"
+		icon: "lightbulb",
+		path:"journals"
 	}
 ]
 const evolve = [

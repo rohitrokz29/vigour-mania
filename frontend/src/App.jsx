@@ -36,7 +36,7 @@ function App() {
           <Route path="/" >
             <Route
               element={
-                isSignedIn ? <Navigate to="/my-trackers" replace />
+                isSignedIn ? <Navigate to="/explore" replace />
                   :
                   <Suspense>
                     <Navbar />

@@ -1,3 +1,5 @@
+import EditorHeading from './EditorHeading'
+
 const Visiblity = () => {
     return (
       <>

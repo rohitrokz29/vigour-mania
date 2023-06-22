@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
     XAxis,
@@ -21,6 +21,8 @@ import EditProfile from '../EditProfile/EditProfile'
 
 //custom hooks
 import { useFetchUser } from '../../../hooks/useFetchUser';
+import { useUserContext } from '../../../hooks/useUserContext';
+
 //styles
 import './profile.css'
 //assets
@@ -28,7 +30,9 @@ import Image from '../../../../assets/profile.webp'
 import Null from '../../../../assets/null.png'
 
 const Profile = () => {
+    const [editPage, setEditPage] = useState(false)
     const { userData, isLoading, error, fetchData } = useFetchUser();
+    const { isSignedIn, user, progress, setProgress } = useUserContext();
     const { username } = useParams();
 
     useEffect(() => {
@@ -55,9 +59,11 @@ const Profile = () => {
             name: "name abdnd"
         }
     ]
+
     return (
 
         !isLoading && <>
+        {editPage&&<EditProfile setEditPage={setEditPage} editPage={editPage}/>}
             <div className="profile">
                 <div className="user-details">
                     <div className="user-data">
@@ -71,11 +77,15 @@ const Profile = () => {
                         <div className="user-bio dark-text">
                             {userData.user.bio && userData.user.bio}
                         </div>
-                        <Link to="/update-profile" >
-                            <button className="edit-profile ">
-                                Edit Profile
-                            </button>
-                        </Link>
+                        {
+                            user?.username === username &&
+                            <Link  >
+                                <button className="edit-profile " onClick={()=>setEditPage(editPage=>!editPage)}>
+                                    Edit Profile
+                                </button>
+                            </Link>
+
+                        }
                     </div>
                     <ul className="conn-list">
                         <li className="conn-head dark-text">Connections</li>
@@ -111,7 +121,6 @@ const Profile = () => {
                     }
                 </div>
             </div>
-                <EditProfile />
             <div className="friends ">
                 <div className="friends-head dark-text">
                     <div >

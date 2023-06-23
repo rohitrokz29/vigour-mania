@@ -10,7 +10,6 @@ Configure dotenv to access the anvironment variables (Secret Variables) like Mon
 require('dotenv').config();
 const cors = require('cors');
 const { userAuth } = require('./middlewares/userAuth');
-const { checkUser } = require('./middlewares/checkUser');
 
 
 const app = express();

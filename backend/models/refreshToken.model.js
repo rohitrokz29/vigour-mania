@@ -46,6 +46,7 @@ refreshTokenSchema.statics.newAuthToken = async function newAuthToken(refreshTok
     if (!refreshTokenId) {
         return null;
     }
+    console.log({refreshTokenId})
     try {
 
         /*
@@ -55,19 +56,23 @@ refreshTokenSchema.statics.newAuthToken = async function newAuthToken(refreshTok
         *} 
          */
         const refreshToken = await this.findOne({ _id: refreshTokenId });
-        return jwt.verify(refreshToken.refreshToken, process.env.REFRESH_JWT_SECRET, async (err, result) => {
+        console.log({refreshToken})
+        if(refreshToken){
+            return await jwt.verify(refreshToken.refreshToken, process.env.REFRESH_JWT_SECRET, async (err, result) => {
 
-            if (err?.name === "TokenExpiredError") {
-                //*if refresh token expired we delete the token
-               await  this.deleteOne({ _id: refreshToken })
-                return null;
-            }
-            //* if refresh token exists/not expired creating a new auth token
-            const newAccessToken = CreateAccessToken(result._id);
-            return { refreshTokenId: refreshToken?._id, newAccessToken};
-        })
+                if (err?.name === "TokenExpiredError") {
+                    //*if refresh token expired we delete the token
+                   await  this.deleteOne({ _id: refreshTokenId })
+                    return null;
+                }  
+                //* if refresh token exists/not expired creating a new auth token
+                const newAccessToken = CreateAccessToken(result._id);
+                return { refreshTokenId: refreshToken?._id, newAccessToken};
+            })
+        }
+        return null;
     } catch (error) {
-        throw Error(error)
+        throw Error(error.message)
     }
 }
 

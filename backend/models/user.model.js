@@ -16,7 +16,7 @@ const chartSchema = new mongoose.Schema({
     createdAt: { type: Date },
     minValue: { type: Number },
     maxValue: { type: Number },
-    unit:{type:String},
+    unit: { type: String },
     data: {
         type: [{ week: { type: Number, unique: true }, value: { type: Number, required: true } }],
         default: []
@@ -30,13 +30,15 @@ const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true, immutable: true },
     password: { type: String, required: true },
     user: {
-        name: { type: String },
+        name: { type: String,default:"" },
         username: { type: String, unique: true, required: true, immutable: true },
         email: { type: String, immutable: true },
         facebook: { type: String, default: "" },
         instagram: { type: String, default: "" },
         bio: { type: String, default: "" },
-        twitter: { type: String, default: "" }
+        twitter: { type: String, default: "" },
+        gender: { type: String, default: "" },
+        visiblity: { type: String, default: "public" },
     },
     charts: {
         type: [chartSchema],
@@ -100,7 +102,6 @@ userSchema.statics.signin = async function signin({ email, password }) {
     try {
         //finging user
         const user = await this.findOne({ email: email }).select('_id password user.username');
-
         if (!user) {
             //user doesnot exist 
             throw new Error("User doesn't Exist", { statusCode: 404 });
@@ -120,7 +121,7 @@ userSchema.statics.signin = async function signin({ email, password }) {
 userSchema.statics.findUser = async function findUser({ username }) {
     try {
         return this
-            .findOne({ username }, { _id: 0, password: 0, email: 0, username: 0, __v: 0, 'user._id': 0, 'charts._id': 0, 'charts.data._id': 0,'charts.createdAt':0 })
+            .findOne({ username }, { _id: 0, password: 0, email: 0, username: 0, __v: 0, 'user._id': 0, 'charts._id': 0, 'charts.data._id': 0, 'charts.createdAt': 0 })
             .exec()
 
     } catch (error) {
@@ -130,14 +131,17 @@ userSchema.statics.findUser = async function findUser({ username }) {
 /* findUser function for updating user from DB */
 userSchema.statics.updateUser = async function updateUser({ body, _id }) {
     try {
-        const { username, facebook, instagram, twitter, bio } = body;
+        const {  facebook, instagram, twitter, bio,name,visiblity,gender } = body;
         return this
             .updateOne({ _id }, {
                 $set: {
                     'user.facebook': facebook,
                     'user.instagram': instagram,
                     'user.twitter': twitter,
-                    'user.bio': bio
+                    'user.bio': bio,
+                    'user.name':name,
+                    'user.gender':gender,
+                    'user.visiblity':visiblity
                 }
             }, { upsert: true })
             .lean()
@@ -163,7 +167,7 @@ userSchema.statics.addChart = async function addChart({ body, _id }) {
             chartType: body.chartType,
             createdAt: new Date(),
             minValue: body.minValue,
-            unit:body.unit,
+            unit: body.unit,
             maxValue: body.maxValue,
             data: [{ week: body.week, value: body.value }]
         }
@@ -232,21 +236,21 @@ userSchema.statics.deleteChart = async function deleteChart({ _id, chartId }) {
         { $pull: { charts: { _id: chartId } } }
     ).lean()
 }
-userSchema.statics.getOneChart=async function getOneChart({_id,chartId}){
+userSchema.statics.getOneChart = async function getOneChart({ _id, chartId }) {
     try {
-        const res=await this.findOne({_id},{
-            charts:{
-                $elemMatch:{
-                    _id:chartId
+        const res = await this.findOne({ _id }, {
+            charts: {
+                $elemMatch: {
+                    _id: chartId
                 }
             }
         })
 
 
-        
+
         return res.charts[0];
     } catch (error) {
-        
+
     }
 }
 //exporting user schema

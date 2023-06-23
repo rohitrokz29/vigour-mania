@@ -2,10 +2,7 @@
 contains the user routes
  */
 const express = require('express');
-const {
-    userAuth,
-    refreshAuth
-} = require('../middlewares/userAuth');
+const {userAuth} = require('../middlewares/userAuth');
 const { Signup,
     Signin,
     GetUser,
@@ -14,7 +11,7 @@ const { Signup,
     LogOut
 } = require('../controllers/userControl');
 
-
+const {refreshAuth} =require('../middlewares/refreshAuth')
 const userRouter = express.Router();
 
 //*SIGNUP ROUTE
@@ -24,7 +21,7 @@ userRouter.post('/signup', Signup);
 userRouter.post('/signin', Signin);
 
 // *LogOut Route 
-userRouter.post('/logout',userAuth,LogOut);
+userRouter.post('/logout',LogOut);
 
 //*refresh auth token 
 userRouter.post('/refresh', refreshAuth, RefreshAuthToken);
@@ -33,7 +30,7 @@ userRouter.post('/refresh', refreshAuth, RefreshAuthToken);
 userRouter.get('/:username', GetUser)
 
 //* updating user details  with granting access
-userRouter.put('/edit-details', userAuth, UpdateUser);
+userRouter.put('/edit/details', userAuth, UpdateUser);
 
 //*Exporting router 
 module.exports = userRouter

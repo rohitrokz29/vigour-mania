@@ -53,16 +53,17 @@ const Signin = async (req, res) => {
     try {
         //*below User.signin function exists in user model
         const user = await User.signin(req.body);
-
+console.log({user})
         const accessToken = CreateAccessToken(user._id);
         const refreshToken = CreateRefreshToken(user._id);
         const newRefreshTokenId = await RefreshToken.newRefreshToken(refreshToken)
+
         const refreshTokenExpiry=Date.now()+ 5 * 24 * 60 * 60 * 1000;
         const authTokenExpiry=Date.now()+ 24 * 60 * 60 * 1000
 
         //*user found -302
         //*sending auth token and refresh token in the cookies
-        console.log(accessToken)
+        console.log({accessToken})
           res
             .cookie('accessToken', accessToken, cookieOptions)
             .cookie('refreshTokenId', newRefreshTokenId, cookieOptions)
@@ -71,7 +72,7 @@ const Signin = async (req, res) => {
     }
     catch (error) {
         //*internal server error
-        res.status(500).json({ message: error });
+        res.status(500).json({ message:error.message });
     }
 }
 /*

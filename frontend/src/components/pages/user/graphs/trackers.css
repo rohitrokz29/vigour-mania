@@ -1,15 +1,4 @@
-.trackers-head {
-    color: var(--dark-text-lt);
-    max-width: 500px;
-    padding-block: 0.5rem;
-    margin-block: 1rem;
-    margin-inline: 2%;
-    padding-inline: 1rem;
-    font-size: 2rem;
-    box-shadow: var(--light-box-shadow);
-    border-radius: 10px;
 
-}
 
 .no-tracker {
     box-shadow: var(--light-box-shadow);
@@ -26,15 +15,7 @@
 
         font-size: 3rem;
         font-style: oblique;
-        text-shadow: 0px 1px 0px #c7c8ca,
-            0px 2px 0px #b1b3b6,
-            0px 3px 0px #9d9fa2,
-            0px 4px 0px #8a8c8e,
-            0px 5px 0px #77787b,
-            0px 6px 0px #636466,
-            0px 7px 0px #4d4d4f,
-            0px 8px 7px #001135;
-        ;
+        text-shadow:var(--3d-text);
         color: #977d7d;
     }
 
@@ -43,24 +24,20 @@
 .graphs {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    padding-inline: 3%;
+    justify-content: space-evenly;
 }
 
 .trackers {
     overflow-x: hidden;
     overflow-y: auto;
     width: fit-content;
-    min-width: 30rem;
+    min-width: 20rem;
     padding-block: 0.5rem;
-    margin-block: 1rem;
-    margin-inline: 2%;
+    margin-block: 0.5rem;
+    /* margin-inline: 2%; */
     padding-inline: 1rem;
     height: 75vh;
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }
 
 .track-forms {
@@ -71,7 +48,7 @@
 }
 
 .tracker {
-    width: 50vw;
+    width: 60vw;
     height: 50vh;
     margin-block: 1rem;
     padding-block-start: 1rem;
@@ -96,7 +73,7 @@
 .chartAction {
     padding-block: 0.5rem;
     margin-block-end: 3px;
-    margin-inline: 1rem;
+    /* margin-inline: 1rem; */
     padding-inline: 1rem;
     font-size: 1.5rem;
     display: grid;
@@ -209,11 +186,21 @@
     padding-inline-start: 0.5rem;
     border: 1px solid #97f70f;
     background-color: #83f35d5c;
-    /* box-shadow: 2px 2px 5px #b4ff11fc; */
     box-shadow: 0px 0px 5px #73ff00c2;
     cursor: pointer;
-
-
-
- 
+}
+@media (max-width:800px) {
+    .chartType{
+        font-size: 90%;
+    }
+    .tracker,.track-forms form{
+        width: 90vw;
+    }
+    .tracker{
+        height: 40vh;
+        padding-block-end:4rem ;
+    }
+    .no-tracker{
+        width: 90%;
+    }
 }

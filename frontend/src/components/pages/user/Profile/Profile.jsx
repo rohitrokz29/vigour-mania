@@ -63,7 +63,7 @@ const Profile = () => {
     return (
 
         !isLoading && <>
-        {editPage&&<EditProfile setEditPage={setEditPage} editPage={editPage}/>}
+        {editPage&&<EditProfile setEditPage={setEditPage} user={userData.user}/>}
             <div className="profile">
                 <div className="user-details">
                     <div className="user-data">

@@ -15,11 +15,13 @@ import { useUserContext } from './components/hooks/useUserContext';
 //contexts
 import { ChartState } from './components/context/chartContext';
 import Error from './components/pages/ErrorPage/Error';
+import { NotebookState } from './components/context/notebookContext';
+import Notebook from './components/pages/user/Notebook/Notebook';
 
 
 
 function App() {
-  const { isSignedIn, user,progress,setProgress } = useUserContext();
+  const { isSignedIn, user, progress, setProgress } = useUserContext();
   return (
     <>
       <LoadingBar
@@ -30,72 +32,69 @@ function App() {
           boxShadow: '2px 2px 5px #000'
         }}
         progress={progress}
-     />
+      />
       <BrowserRouter>
         <Routes>
           <Route path="/" >
-            <Route
-              element={
-                isSignedIn ? <Navigate to="/explore" replace />
-                  :
-                  <Suspense>
-                    <Navbar />
-                  </Suspense>}
-            >
-              <Route
-                exact path="/"
-                element={
-                  <Suspense>
-                    <Home />
-                  </Suspense>}
-              />
+            <Route element={isSignedIn ? <Navigate to="/explore" replace /> :
+              <Suspense>
+                <Navbar />
+              </Suspense>} >
+              <Route exact path="/" element={
+                <Suspense>
+                  <Home />
+                </Suspense>} />
 
-              <Route
-                path="/signin"
-                element={
-                  <Suspense>
-                    <Accounts />
-                  </Suspense>}
-              />
-              <Route
-                path="/signup"
-                element={
-                  <Suspense>
-                    <Accounts />
-                  </Suspense>}
-              />
+              <Route path="/signin" element={
+                <Suspense>
+                  <Accounts />
+                </Suspense>} />
+
+              <Route path="/signup" element={
+                <Suspense>
+                  <Accounts />
+                </Suspense>} />
             </Route>
-            <Route
-              element={
-                <Navbar
-                  isSignedIn={isSignedIn}
-                  username={user ? user.username : null} />}
+            <Route element={
+              <Navbar
+                isSignedIn={isSignedIn}
+                username={user ? user.username : null} />}
             >
-              <Route exact path='/explore'
-                element={
+              <Route exact path='/explore' element={
+                <Suspense>
+                  <Explore />
+                </Suspense>} />
+              <Route path='/user/:username' element={
+                <Suspense>
+                  <Profile />
+                </Suspense>} />
+
+              <Route path='/my-trackers' element={
+                isSignedIn ? <Suspense>
+                  <ChartState>
+                    <Tracks />
+                  </ChartState>
+                </Suspense>
+                  : <Navigate to='/signin' replace />
+              } />
+
+              <Route path='my-notebooks' element={
+                isSignedIn ?
                   <Suspense>
-                    <Explore />
-                  </Suspense>} />
-              <Route path='/user/:username'
-                element={
-                  <Suspense>
-                    <Profile />
-                  </Suspense>} />
-              <Route path='/my-trackers'
-                element={
-                  isSignedIn ?
-                    <Suspense>
-                      <ChartState>
-                        <Tracks />
-                      </ChartState>
-                    </Suspense>
-                    : <Navigate to="/signin" replace />}
-              />
+                    <NotebookState>
+                      <Notebook />
+                    </NotebookState>
+                  </Suspense>
+                  : <Navigate to='/signin' replace />
+              } />
+
+
+
             </Route>
-            <Route path="*" element={<Error/>} />
+            <Route path="*" element={<Error />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter >
     </>
   )
 }

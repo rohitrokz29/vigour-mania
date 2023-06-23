@@ -68,7 +68,7 @@ const TrackerGraph = ({ graph }) => {
                         </Link>
                     </div>
                     <div className="buttons">
-                        <button className='add-data '  onClick={addData}><Link>{isAdding ? "Adding" : "Add Data"}</Link></button>
+                        <button className='add-data '  onClick={addData}><Link>{isAdding ? "Adding" :isDataOpen?"Click Here": "Add Data"}</Link></button>
                         {
                             isDataOpen ?
                                 <input type="number" name="data" value={value} onChange={(e) => setValue(e.target.value)} placeholder={placeholder} className='data-input' />

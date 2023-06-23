@@ -35,9 +35,6 @@ export const ChartState = ({ children }) => {
                     setIsLoading(false);
                     setProgress(100);
                 }
-                if(response.status===401){
-                    await logout()
-                }
                 
             })
             .catch(async (err) => {

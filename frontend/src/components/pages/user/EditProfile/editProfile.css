@@ -111,16 +111,7 @@
     background-color: #dddddd90;
 }
 
-.input .save-button {
-    cursor: pointer;
-    text-align: center;
-    line-height: 3rem;
-    width: 8rem;
-    height: 3rem;
-    background-color: #8a2be2;
-    font-size: 1.25rem;
-    color: #fff;
-}
+
 
 .pass-input {
     margin-inline-start: 2%;

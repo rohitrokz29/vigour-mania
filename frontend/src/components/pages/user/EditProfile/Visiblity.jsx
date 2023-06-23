@@ -1,6 +1,9 @@
 import EditorHeading from './EditorHeading'
 
-const Visiblity = () => {
+const Visiblity = ({newData,setNewData}) => {
+  const handleChange=(e)=>{
+    setNewData({...newData,[e.target.name]:e.target.value})
+  }
     return (
       <>
         <EditorHeading heading="Account Privacy" />
@@ -14,8 +17,8 @@ const Visiblity = () => {
   
           <div className=" ">
             <label htmlFor="visibity">Change Visiblity:&nbsp;</label>
-            <select name='visiblity' id="visiblity" className="change-visiblity ">
-              <option value="public" disabled selected hidden>Public </option>
+            <select name='visiblity' id="visiblity" defaultValue={newData.visiblity} onChange={handleChange} className="change-visiblity ">
+              <option value="public" >Public </option>
               <option value="private">Private</option>
             </select>
           </div>

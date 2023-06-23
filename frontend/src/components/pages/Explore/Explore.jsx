@@ -61,9 +61,15 @@ const evolve = [
 		title: "Health Guidence",
 		description: "Take a look at lates and Scientific Health Recommendations"
 		, icon: "play"
-	}, {
+	},
+	 {
 		title: " Nutritional Programs",
 		description: "Explore the Nutritional Programs from Research and Experiences "
+		, icon: "play"
+	},
+	{
+		title: "Save Your Notes",
+		description: "Save your thoughts as notes to get help in future "
 		, icon: "play"
 	}
 

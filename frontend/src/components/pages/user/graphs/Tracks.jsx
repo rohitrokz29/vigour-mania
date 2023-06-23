@@ -35,7 +35,7 @@ const Tracks = () => {
     }
     return (
         <>
-            <div className="trackers-head">
+            <div className="comp-head">
                 Your Trackers
             </div>
             <div className="graphs">
@@ -63,26 +63,26 @@ const Tracks = () => {
                 <div className="track-forms trackers">
                     <form onSubmit={handleSubmit} >
                         <div className="add-chart ">Add Tracker</div>
-                        <div className="input-field chart ">
+                        <div className="chart ">
                             <label htmlFor="trackerName">Tracker Name</label>
                             <br />
                             <input type="text" name='chartType' className="chart-name" id='trackerName' placeholder='Tracker Name' value={chartType} onChange={(e) => setChartType(e.target.value)} />
                         </div>
-                        <div className="input-field chart">
+                        <div className=" chart">
                             <label htmlFor="firstValue">First Value</label>
                             <br />
                             <input type="number" name="value" className="chart-value" id='firstValue' placeholder='Trackers First Value' value={value} onChange={(e) => setValue(e.target.value)} />
                         </div>
-                        <div className="input-field chart">
+                        <div className=" chart">
                             <label htmlFor="unit">Unit</label>
                             <br />
                             <input type="text" name="unit" className="chart-value" id='unit' placeholder='Unit of value(optional)' value={unit} onChange={(e) => setUnit(e.target.value)} />
                         </div>
-                        <div className="input-field chart">
+                        <div className="chart">
                             <label htmlFor="minValue">Minimum Value</label>
                             <br />
                             <input type="number" name="min" className="chart-value" id='minValue' placeholder='Set Mimimum Value' value={min} onChange={(e) => setMin(e.target.value)} />
-                        </div><div className="input-field chart">
+                        </div><div className=" chart">
                             <label htmlFor="maxValue">Maximum Value</label>
                             <br />
                             <input type="number" name='max' className="chart-value" id='maxValue' placeholder='Set Maximum Value' value={max} onChange={(e) => setMax(e.target.value)} />

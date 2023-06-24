@@ -1,7 +1,7 @@
+const userRouter = require('express').Router();
 /*
 contains the user routes
  */
-const express = require('express');
 const {userAuth} = require('../middlewares/userAuth');
 const { Signup,
     Signin,
@@ -9,10 +9,9 @@ const { Signup,
     UpdateUser,
     RefreshAuthToken,
     LogOut
-} = require('../controllers/userControl');
+} = require('../controllers/user.control');
 
 const {refreshAuth} =require('../middlewares/refreshAuth')
-const userRouter = express.Router();
 
 //*SIGNUP ROUTE
 userRouter.post('/signup', Signup);

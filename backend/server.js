@@ -2,22 +2,31 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cookieEncrypter = require('cookie-encrypter');
+const cors = require('cors');
 
 /*
 Configure dotenv to access the anvironment variables (Secret Variables) like MongoDB URI and JWT Secrets
 */
 
 require('dotenv').config();
-const cors = require('cors');
-const { userAuth } = require('./middlewares/userAuth');
-
 
 const app = express();
+
+/**
+ * importing routers 
+ */
+const userRouter = require('./routes/user.router');
+const chartsRouter = require('./routes/charts.router');
+const commentRouter = require('./routes/comment.router');
+const journalRouter = require('./routes/journal.router');
+const notesRouter = require('./routes/notes.router');
+
+
 app.use(cors({
-    origin:process.env.ACCESS_ORIGIN,
+    origin: process.env.ACCESS_ORIGIN,
     credentials: true,
     sameSite: "none",
-    methods:["GET","POST","PUT","DELETE"]
+    methods: ["GET", "POST", "PUT", "DELETE"]
 }
 ));
 app.use(express.json());
@@ -39,15 +48,25 @@ app.use(function (req, res, next) {
     using router for user methods like signup, signin,etc
  */
 
-app.use('/api/user', require('./routes/userRoutes'));
-
-app.use('/api/charts', require('./routes/chartsRouter'));
+app.use('/api/user', userRouter);
+/**
+ * charts router
+ */
+app.use('/api/charts', chartsRouter);
 /**
  * Router to control all request related to Journal and its comments
  */
-app.use('/api/journal', require('./routes/journalRoutes'));
-
+app.use('/api/journals', journalRouter);
+/**
+ * user notes router
+ */
+app.use('/api/notes', notesRouter);
+/**
+ * Comments router
+ */
+app.use('/api/comments', commentRouter);
 /*
+
 connecting server to mongodb database and starting the server after connection made succesfully
 */
 mongoose.connect(process.env.MONGODB_URI, {

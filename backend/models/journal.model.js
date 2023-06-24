@@ -18,10 +18,6 @@ const journalSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    dislike: {
-        type: Number,
-        default: 0
-    },
     postedAt: {
         type: Date,
         default: Date.now
@@ -41,9 +37,6 @@ const journalSchema = new mongoose.Schema({
                 default: Date.now
             },
             likes: {
-                type: Number
-            },
-            dislikes: {
                 type: Number
             }
 
@@ -95,7 +88,6 @@ journalSchema.statics.getJournal = function getJournal({ page }) {
                     -title
                     -description
                     -likes
-                    -dislikes
                     -postedAt 
         
             process goes with-->find-->sort(likes,postedAt)-->limit->select 
@@ -105,7 +97,7 @@ journalSchema.statics.getJournal = function getJournal({ page }) {
             .sort({ likes: -1, postedAt: -1 })
             .skip((page - 1) * journalsLength)
             .limit(journalsLength)
-            .select('title description likes dislikes postedAt');
+            .select('title description likes  postedAt');
 
     } catch (error) {
         throw new Error("Internal Server Error", { statusCode: 500 });

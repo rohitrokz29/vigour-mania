@@ -8,7 +8,8 @@
 .notes {
     margin-inline: 1rem;
     padding-inline: 1rem;
-    width: 60vw;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .note-item {
@@ -24,21 +25,28 @@
     color: var(--dark-text-lt);
     background-color: #d5d5d5;
     padding-inline: 1rem;
-    cursor: pointer;
     line-height: 2rem;
     padding-block: 0.5rem;
     margin-block-start: 1rem;
+}
+.icons{
+    width: 5rem;
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+
 }
 
 .note-desc {
     padding-inline: 1rem;
     padding-block: 0.5rem;
     margin-inline: 0.5rem;
-    position: relative;
-    transform: translateY(-300);
+    max-height: 30vh;
+    overflow-y: auto;    
 }
 
 .add-note {
+    background-color: #dfdfdf;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -84,7 +92,8 @@
     background-color: #f5eded;
 }
 
-.buttons {
+.note-buttons {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -96,4 +105,15 @@
     &:hover{
         background-color: #2023e6;
     }
+}
+
+
+@media (max-width:700px) {
+    .add-note{
+        display: none;
+    }
+    .note-container{
+        grid-template-columns:  1fr;
+    }
+
 }

@@ -18,7 +18,8 @@
     "react-scroll": "^1.8.9",
     "react-top-loading-bar": "^2.3.1",
     "recharts": "^2.6.2",
-    "remove": "^0.1.5"
+    "remove": "^0.1.5",
+    "semver": "^7.5.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

@@ -17,7 +17,7 @@ import {  useChartsContext} from "../../../hooks/useChartsContext";
 
 const TrackerGraph = ({ graph }) => {
 
-    const { addChartData, error, isLoading, deleteChart, isDeleting, isAdding } = useChartsContext();
+    const { addChartData, error, isLoading, deleteChart, isAdding } = useChartsContext();
     const { chartType, createdAt, minValue, maxValue, unit } = graph;
     const [data, setData] = useState(graph.data)
     const [isDataOpen, setIsDataOpen] = useState(false)
@@ -72,7 +72,7 @@ const TrackerGraph = ({ graph }) => {
                         {
                             isDataOpen ?
                                 <input type="number" name="data" value={value} onChange={(e) => setValue(e.target.value)} placeholder={placeholder} className='data-input' />
-                                : <button className='delete-graph ' onClick={deleteTrack}><Link>{isDeleting ? "Deleting" : "Delete"}</Link></button>
+                                : <button className='delete-graph ' onClick={deleteTrack}><Link>  Delete</Link></button>
                         }
                     </div>
                 </div>

@@ -5,6 +5,7 @@ import TrackerGraph from './TrackerGraph'
 import { useChartsContext } from '../../../hooks/useChartsContext'
 //assets
 import Null from '../../../../assets/null.png'
+import CompHead from '../../../cards/CompHead'
 
 const Tracks = () => {
 
@@ -14,7 +15,7 @@ const Tracks = () => {
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(0);
     const [unit, setUnit] = useState("")
-
+const [isOpen, setIsOpen] = useState(false)
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {
@@ -30,14 +31,14 @@ const Tracks = () => {
             setMax(0);
             setValue(0);
             setMin(0);
-            setUnit("")
+            setUnit("");
+            setIsOpen(isOpen=>!isOpen)
         }
     }
     return (
         <>
-            <div className="comp-head">
-                Your Trackers
-            </div>
+
+<CompHead heading="Your Trackers" isOpen={isOpen} setIsOpen={setIsOpen}/>
             <div className="graphs">
 
                 {
@@ -53,14 +54,14 @@ const Tracks = () => {
                             }
                         </div>
                         :
-                        <div className=" no-tracker">
+                        <div className=" tracker no-tracker">
                             <h1>
-                                {isLoading?"Loading...":"No Active Trackers"}
+                                {isLoading ? "Loading..." : "No Active Trackers"}
                             </h1>
                         </div>
                 }
 
-                <div className="track-forms trackers">
+                <div className="track-forms trackers add-form" >
                     <form onSubmit={handleSubmit} >
                         <div className="add-chart ">Add Tracker</div>
                         <div className="chart ">

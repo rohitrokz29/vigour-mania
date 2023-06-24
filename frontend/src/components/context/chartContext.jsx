@@ -15,7 +15,6 @@ export const ChartState = ({ children }) => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isAdding, setisAdding] = useState(false);
-    const [isDeleting, setIsDeleting] = useState(false);
     const {setProgress,user}=useUserContext();
     const {logout}=useLogout();
     useEffect(() => {
@@ -23,10 +22,10 @@ export const ChartState = ({ children }) => {
     }, [])
 
     const fetchTracks = async () => {
-        setProgress(40);
+        setProgress(30);
         setIsLoading(true)
         //!HERE SOME PROBLEM WITH AUTH
-        API.get('/api/charts/get-charts')
+        API.get('/api/charts/get')
             .then(async (response) => {
                 console.log(response)
                 if (response.status === 200) {
@@ -38,7 +37,6 @@ export const ChartState = ({ children }) => {
                 
             })
             .catch(async (err) => {
-            //    await  logout()
                 setError(err);
                 setIsLoading(false);
                 setProgress(100);
@@ -46,11 +44,11 @@ export const ChartState = ({ children }) => {
 
     }
     const addTracker = async (data) => {
-        setProgress(10);
+        setProgress(30);
         setIsLoading(true);
-        return await API.put('api/charts/add-chart', data)
+        return await API.put('api/charts/add', data)
             .then(response => {
-                setProgress(50);
+                setProgress(60);
                 if (response.status === 200) {
                     setError('')
                     setIsLoading(false)
@@ -86,7 +84,7 @@ export const ChartState = ({ children }) => {
             setProgress(0)
             return false;
         }
-        return API.put('/api/charts/update-chart-data', { chartId: _id, week, value })
+        return API.put('/api/charts/update', { chartId: _id, week, value })
             .then(res => {
                 setProgress(60);
                 if (res.status === 200) {
@@ -104,22 +102,19 @@ export const ChartState = ({ children }) => {
 
     }
     const deleteChart = async (_id) => {
-        setProgress(10);
-        setIsDeleting(true)
+        setProgress(30);
         console.log(charts)
         API.delete(`/api/charts/${_id}`)
             .then(res => {
-                setProgress(50);
+                setProgress(60);
                 if (res.data.acknowledged) {
                     const newCharts = charts.filter(chart => chart._id !== _id)
                     setCharts(prevCharts => newCharts)
                     setProgress(80);
-                    setIsDeleting(false);
                     setProgress(100);
                 }
             })
             .catch(err => {
-                setIsDeleting(false);
                 setError(err)
                 setProgress(100);
                 return false;
@@ -130,7 +125,6 @@ export const ChartState = ({ children }) => {
             charts,
             fetchTracks,
             isLoading,
-            isDeleting,
             isAdding,
             deleteChart,
             addChartData,

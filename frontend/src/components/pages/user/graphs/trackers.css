@@ -4,13 +4,9 @@
     box-shadow: var(--light-box-shadow);
     border: 5px solid #e5a4a4;
     background-color: #473b3b;
-    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    width: 50%;
-
     &>h1 {
 
         font-size: 3rem;
@@ -34,7 +30,6 @@
     min-width: 20rem;
     padding-block: 0.5rem;
     margin-block: 0.5rem;
-    /* margin-inline: 2%; */
     padding-inline: 1rem;
     height: 75vh;
 

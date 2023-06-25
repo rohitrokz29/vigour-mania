@@ -1,0 +1,140 @@
+.journal-container {
+    height: 90vh;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+
+
+.main-journal,
+.side-journals {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-inline: 0.5rem;
+    box-shadow: var(--light-box-shadow);
+}
+
+.journal-title {
+    padding: 0 0 0.5rem 0.5rem;
+    gap: 2rem;
+
+    &>h2 {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+
+    }
+
+    &>.posted {
+        font-style: italic;
+        padding-inline-start: 0.5rem;
+    }
+}
+
+.journal-image img {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+}
+
+.journal-desc {
+    padding-inline: 0.5rem;
+}
+
+.side-journals {
+    &>h2 {
+        width: 100%;
+        text-align: center;
+        text-transform: uppercase;
+        padding-block: 1rem;
+    }
+}
+
+.small-journal {
+    display: flex;
+    margin-block: 0.5rem;
+    box-shadow: var(--light-box-shadow);
+}
+
+.small-journal img {
+    width: 10rem;
+    height: 100%;
+    object-fit: cover;
+    padding-inline: 0.5rem;
+}
+
+.small-journal-title {
+    grid-area: title;
+    font-size: 110%;
+}
+
+.journal-date {
+    grid-area: date;
+    font-size: 95%;
+    font-style: italic;
+}
+
+.journal-desc {
+    grid-area: desc;
+}
+
+.journal-data {
+    display: grid;
+    grid-template-areas: " title date"
+        "desc desc ";
+}
+
+.load-more {
+    background: linear-gradient(#17111128 10%, #1711117f 40%, #171111c1 77%);
+    height: 5rem;
+    width: 100%;
+    margin-inline: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    &>a {
+        color: #ffffff;
+        text-align: center;
+        font-size: 110%;
+    }
+
+    &>a:hover {
+        color: #e0e0e0;
+    }
+
+}
+
+.journal-actions {
+    display: flex;
+    justify-content: center;
+    padding-block: 0.5rem;
+
+    &>div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #cdcdcd;
+        width: 95%;
+        height: 2.5rem;
+        border: 1px solid #ff3a3a;
+        border-radius: 10px;
+        align-items: center;
+        padding-inline: 1rem;
+    }
+}
+
+.comments,
+.actions {
+    font-size: 110%;
+    &>i {
+        align-items: center;
+        cursor: pointer;
+        font-size: 120%;
+        padding-inline: 0.5rem;
+        &>span{
+            padding-inline: 0.25rem;
+            font-weight: 100;
+            font-size: 80%;
+        }
+    }
+}

@@ -9,14 +9,15 @@ const Accounts = lazy(() => import('./components/pages/Accounts/Accounts'));
 const Navbar = lazy(() => import('./components/Navbar/Navbar'));
 const Profile = lazy(() => import('./components/pages/user/Profile/Profile'));
 const Tracks = lazy(() => import('./components/pages/user/graphs/Tracks'));
+const Error = lazy(() => import('./components/pages/ErrorPage/Error'));
+const Notebook = lazy(() => import('./components/pages/user/Notebook/Notebook'));
+const Journals = lazy(() => import('./components/pages/journals/Journals'));
 
 //custom hooks
 import { useUserContext } from './components/hooks/useUserContext';
 //contexts
-import { ChartState } from './components/context/chartContext';
-import Error from './components/pages/ErrorPage/Error';
-import { NotebookState } from './components/context/notebookContext';
-import Notebook from './components/pages/user/Notebook/Notebook';
+const { ChartState } = lazy(() => import('./components/context/chartContext'))
+const { NotebookState } = lazy(() => import('./components/context/notebookContext'))
 
 
 
@@ -55,6 +56,7 @@ function App() {
                   <Accounts />
                 </Suspense>} />
             </Route>
+
             <Route element={
               <Navbar
                 isSignedIn={isSignedIn}
@@ -78,12 +80,19 @@ function App() {
                   : <Navigate to='/signin' replace />
               } />
 
-              <Route path='my-notebooks' element={
+              <Route path='/my-notebooks' element={
                 isSignedIn ?
                   <Suspense>
                     <NotebookState>
                       <Notebook />
                     </NotebookState>
+                  </Suspense>
+                  : <Navigate to='/signin' replace />
+              } />
+              <Route path='/journals' element={
+                isSignedIn ?
+                  <Suspense>
+                      <Journals/>
                   </Suspense>
                   : <Navigate to='/signin' replace />
               } />

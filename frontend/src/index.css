@@ -3,7 +3,6 @@
   padding: 0;
   align-items: center;
   --light-box-shadow: 2px 2px 5px #8b0e0ecb;
-  --dark-text-lt: #000000e6;
   --3d-text: 0px 1px 0px #c7c8ca,
     0px 2px 0px #b1b3b6,
     0px 3px 0px #9d9fa2,
@@ -19,7 +18,7 @@
 }
 
 .dark-text {
-  color: #000000f2;
+  color: #101010;
 }
 
 .bold {
@@ -49,7 +48,7 @@
 
 a {
   color: #030300d6;
-  font-size: 110%;
+  /* font-size: 110%; */
   align-items: center;
   text-decoration: none;
 }
@@ -141,10 +140,12 @@ a {
   display: flex;
   justify-content: space-between;
 }
-.plus-button{
+
+.plus-button {
   display: none;
   padding-bottom: 0%;
-  &>i{
+
+  &>i {
     cursor: pointer;
     height: 50px;
     width: 50px;
@@ -158,18 +159,81 @@ a {
 }
 
 
+/* Head styles */
+
+.head {
+  margin-block: 1rem;
+  margin-inline: 2%;
+  font-size: 140%;
+  display: flex;
+
+}
+
+.dash {
+  width: 10vw;
+  margin-inline-end: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.line {
+  grid-area: line;
+  width: 10vw;
+  border: 2px solid #000000;
+  margin-inline: 2px;
+
+  background: -webkit-linear-gradient(#090808, #f50303);
+  /* -webkit-background-clip: border; */
+  -webkit-text-fill-color: transparent;
+
+
+}
+
+.dots {
+  align-items: center;
+  /*	margin-top: 2%;*/
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+
+
+}
+
+
+.dot {
+  width: 5px;
+  border: 2px solid #000000;
+  border-radius: 100%;
+  margin-inline: 2px;
+}
+
+.heading {
+  font-size: -webkit-xxx-large;
+  font-variant-caps: all-petite-caps;
+  font-style: oblique;
+  background: -webkit-linear-gradient(#090808 40%, #f50303 67%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
 
 @media (max-width:700px) {
-main{
-  font-size: 90%;
-}
-.comp-head{
-  max-width: 100vw;
-}
-.plus-button{
-  display: inline-block;
+  main {
+    font-size: 90%;
+  }
 
-}
+  .comp-head {
+    max-width: 100vw;
+  }
+
+  .plus-button {
+    display: inline-block;
+
+  }
+
   .navbar {
     height: 10vh;
     font-size: 95%;
@@ -202,22 +266,23 @@ main{
     justify-content: center;
   }
 
-.add-form{
-  margin-inline: 0;
-  position: fixed;
-  top: 25vh;
-  z-index: 4;
-  width: 90vw;
-  left: 5vw;
-  background-color: #dfdfdf;
-  height: fit-content;
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-.rotate{
-  rotate:45deg;
-}
+  .add-form {
+    margin-inline: 0;
+    position: fixed;
+    top: 25vh;
+    z-index: 4;
+    width: 90vw;
+    left: 5vw;
+    background-color: #dfdfdf;
+    height: fit-content;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .rotate {
+    rotate: 45deg;
+  }
 
 }

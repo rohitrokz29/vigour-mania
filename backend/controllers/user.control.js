@@ -72,7 +72,7 @@ console.log({user})
     }
     catch (error) {
         //*internal server error
-        res.status(500).json({ message:error.message });
+        res.json({ message:error.message });
     }
 }
 /*

@@ -2,7 +2,9 @@ const userRouter = require('express').Router();
 /*
 contains the user routes
  */
-const {userAuth} = require('../middlewares/userAuth');
+const {userAuth} = require('../middlewares/user.auth');
+const {refreshAuth} =require('../middlewares/refresh.auth')
+
 const { Signup,
     Signin,
     GetUser,
@@ -11,7 +13,6 @@ const { Signup,
     LogOut
 } = require('../controllers/user.control');
 
-const {refreshAuth} =require('../middlewares/refreshAuth')
 
 //*SIGNUP ROUTE
 userRouter.post('/signup', Signup);

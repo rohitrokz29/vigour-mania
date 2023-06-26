@@ -1,13 +1,17 @@
-const { UpdateNotes, GetNotes, DeleteNote } = require('../controllers/notes.control');
-const { userAuth } = require('../middlewares/userAuth');
+const { userAuth } = require('../middlewares/user.auth');
+const {
+    GetNotes,
+    DeleteNote,
+    AddNote
+} = require('../controllers/notes.control');
 
-const notesRouter=require('express').Router();
+const notesRouter = require('express').Router();
 
 //Add new note
-notesRouter.put("/",userAuth,UpdateNotes);
+notesRouter.put("/", userAuth, AddNote);
 //get all notes
-notesRouter.get("/",userAuth,GetNotes);
+notesRouter.get("/", userAuth, GetNotes);
 //delete a note
-notesRouter.delete("/:chartId",userAuth,DeleteNote);
+notesRouter.delete("/:noteId", userAuth, DeleteNote);
 
-module.exports=notesRouter
+module.exports = notesRouter

@@ -1,15 +1,19 @@
-const { getComments, addComment, likeComment } = require('../controllers/journal.control');
-const { userAuth } = require('../middlewares/userAuth');
+const {
+    getComments,
+    addComment,
+    likeComment
+} = require('../controllers/journal.control');
+const { userAuth } = require('../middlewares/user.auth');
 
-const commentRouter=require('express').Router()
+const commentRouter = require('express').Router()
 
 //get comments
-commentRouter.get('',getComments);
+commentRouter.get('', getComments);
 
 //add comment
-commentRouter.put('/add',userAuth,addComment);
+commentRouter.put('/add', userAuth, addComment);
 
 //like comment
-commentRouter.put('/like/:commentId',likeComment);
+commentRouter.put('/like/:commentId', likeComment);
 
-module.exports=commentRouter;
+module.exports = commentRouter;

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { Link, redirect } from 'react-router-dom'
-import {useSignin} from '../../../hooks/useSignin'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useSignin } from '../../../hooks/useSignin'
 
 const Signin = () => {
 

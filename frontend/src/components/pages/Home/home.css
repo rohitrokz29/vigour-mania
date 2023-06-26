@@ -2,7 +2,8 @@
 
 .main {
 	background: url('../../../assets/1.jpg') no-repeat;
-	background-size: 100vw;
+	background-size: cover;
+	/* background-size: 100vw; */
 	display: flex;
 	height: 60vh;
 	flex-direction: column;
@@ -35,21 +36,17 @@
 }
 
 .home-3 {
-	&>button {
+	margin-top: 2rem;
+
+	&>a {
 		cursor: pointer;
-		background-image: linear-gradient(to right, #F00000 0%, #DC281E 51%, #F00000 100%);
-		font-size: 125%;
+		background: linear-gradient(to right, #F00000 0%, #DC281E 51%, #F00000 100%);
+		font-size: 1.25rem;
 		border: 2px solid transparent;
-		height: 150%;
-		width: 15vw;
+		padding-inline: 4rem;
+		padding-block: 1rem;
+		color: #ddd;
 
-		&>a {
-			color: #ddd;
-
-			&:hover {
-				color: #fff;
-			}
-		}
 	}
 }
 
@@ -184,13 +181,14 @@
 	box-shadow: inset 0 0 0 5px #fff;
 
 	&>li img {
-		width: 10%;
+		width: 2rem;
 	}
 
 	&>li {
 		background: -webkit-linear-gradient(#f3eeee, #ff4d4d);
-		padding: 4.5%;
-		margin: 1.5%;
+		padding-inline: 10%;
+		margin-inline: 2%;
+		margin-block: 2%;
 	}
 
 }
@@ -208,6 +206,10 @@
 	&>h3 {
 		margin-block: 5%;
 	}
+
+	&>.btn {
+		min-width: 8rem;
+	}
 }
 
 
@@ -223,7 +225,7 @@
 	grid-template-areas:
 		"lBrand lBrand lBrand form"
 		"Linfo Linfo Linfo form"
-		"contact contact contact form"
+		"contact contact contact form";
 
 }
 
@@ -269,7 +271,7 @@
 		flex-shrink: 2;
 
 		&>li {
-			width: 5%;
+			width: 2rem;
 			margin-inline: 1%;
 			align-items: center;
 		}
@@ -299,3 +301,31 @@
 	margin-block: 0%;
 }
 
+
+
+@media (max-width:900px) {
+
+	.contact-box,
+	.lower {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.contact-box {
+		margin-inline: 2%;
+	}
+
+}
+
+@media (max-width:650px) {
+
+	.box-0,
+	.box-1 {
+		margin-inline: 0;
+		width: 90vw;
+	}
+
+	.info {
+		font-size: 95%;
+	}
+}

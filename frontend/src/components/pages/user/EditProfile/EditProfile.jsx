@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 //components
 import BasicInfo from './BasicInfo'
 import AccountInfo from './AccountInfo'
@@ -14,6 +15,7 @@ const EditProfile = ({ setEditPage, user }) => {
 
   const SubmitData = async () => {
     console.log(newData)
+    //TODO Move this request to user context
     const result = await API.put('/api/user/edit/details', newData)
       .then((response) => {
         if (response.status === 200) {
@@ -21,10 +23,12 @@ const EditProfile = ({ setEditPage, user }) => {
           // setNewData(response.data);
         }
       })
-      .catch((error)=>{
+      .catch((error) => {
         console.log(error)
       })
   }
+
+  // to change the edit page current type like basic info /account info / account visiblity
   const resetEditPage = () => {
     switch (page) {
       case "info":
@@ -76,5 +80,8 @@ const EditProfile = ({ setEditPage, user }) => {
     </section>
   )
 }
-
+EditProfile.propTypes = {
+  setEditPage: PropTypes.func,
+  user: PropTypes.object
+}
 export default EditProfile

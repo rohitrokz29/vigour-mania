@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+//assets
 import Image from '../../../assets/1.jpg'
 const MainJournal = ({ title, description, postedAt }) => {
     return (
@@ -41,5 +43,9 @@ const MainJournal = ({ title, description, postedAt }) => {
         </>
     )
 }
-
+MainJournal.propTypes={
+    title:PropTypes.string,
+    description:PropTypes.string,
+    postedAt:PropTypes.instanceOf(Date)
+}
 export default MainJournal

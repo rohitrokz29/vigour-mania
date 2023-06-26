@@ -15,7 +15,7 @@ export const ChartState = ({ children }) => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isAdding, setisAdding] = useState(false);
-    const {setProgress,user}=useUserContext();
+    const {setProgress}=useUserContext();
     const {logout}=useLogout();
     useEffect(() => {
         fetchTracks()

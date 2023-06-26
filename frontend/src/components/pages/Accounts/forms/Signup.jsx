@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useUserContext } from '../../../hooks/useUserContext'
-import {useSignup} from '../../../hooks/useSignup'
+import { useSignup } from '../../../hooks/useSignup'
 
 const Signup = () => {
 	const [data, setData] = useState({ username: "", email: "", password: '' })

@@ -1,21 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react';
+
 //components
 import TrackerGraph from './TrackerGraph'
+import CompHead from '../../../cards/CompHead'
 //custom hooks
 import { useChartsContext } from '../../../hooks/useChartsContext'
 //assets
 import Null from '../../../../assets/null.png'
-import CompHead from '../../../cards/CompHead'
 
 const Tracks = () => {
 
+    //accessing charts state
     const { charts, error, isLoading, fetchTracks, addTracker } = useChartsContext();
+    // data states to add new tracker graph
     const [chartType, setChartType] = useState("");
     const [value, setValue] = useState(0);
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(0);
-    const [unit, setUnit] = useState("")
-const [isOpen, setIsOpen] = useState(false)
+    const [unit, setUnit] = useState("");
+    // set the model open /close
+    const [isOpen, setIsOpen] = useState(false)
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {
@@ -32,13 +37,13 @@ const [isOpen, setIsOpen] = useState(false)
             setValue(0);
             setMin(0);
             setUnit("");
-            setIsOpen(isOpen=>!isOpen)
+            setIsOpen(isOpen => !isOpen)
         }
     }
     return (
         <>
 
-<CompHead heading="Your Trackers" isOpen={isOpen} setIsOpen={setIsOpen}/>
+            <CompHead heading="Your Trackers" isOpen={isOpen} setIsOpen={setIsOpen} />
             <div className="graphs">
 
                 {
@@ -61,7 +66,7 @@ const [isOpen, setIsOpen] = useState(false)
                         </div>
                 }
 
-                <div className="track-forms trackers add-form" >
+                <div className={`track-forms  ${isOpen ? " " : "form-display "} add-form`}  >
                     <form onSubmit={handleSubmit} >
                         <div className="add-chart ">Add Tracker</div>
                         <div className="chart ">

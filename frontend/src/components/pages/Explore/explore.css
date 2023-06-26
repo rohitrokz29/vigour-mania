@@ -32,6 +32,18 @@
     flex-direction: column;
 }
 
+.bg-0 {
+    background: linear-gradient(45deg, rgba(164, 83, 53, 1) 1%, rgba(207, 82, 26, 1) 25%, rgba(231, 22, 35, 1) 49%, rgba(194, 30, 107, 1) 74%, rgba(162, 31, 73, 1) 89%);
+}
+
+.bg-1 {
+    background: linear-gradient(45deg, rgba(236, 169, 64, 1) 0%, rgba(246, 57, 57, 1) 64%, rgba(140, 40, 45, 1) 100%);
+}
+
+.bg-2 {
+    background: linear-gradient(45deg, rgba(203, 172, 65, 1) 0%, rgba(247, 55, 55, 1) 56%, rgba(156, 45, 81, 1) 78%);
+}
+
 .exp-head {
     display: flex;
     padding-block-start: 2%;

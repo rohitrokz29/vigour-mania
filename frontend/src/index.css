@@ -239,29 +239,6 @@ a {
     font-size: 95%;
   }
 
-  .main {
-    background-size: 100vh;
-    height: 43vh;
-  }
-
-  .home-1 {
-    font-size: 110%;
-  }
-
-  .home-2 {
-    font-size: 350%;
-  }
-
-  .home-3 button {
-    width: 20%;
-    font-size: 120%;
-  }
-
-  .box-1 .info {
-    margin-block: 0;
-    font-size: 125%;
-  }
-
   .evo-area {
     justify-content: center;
   }

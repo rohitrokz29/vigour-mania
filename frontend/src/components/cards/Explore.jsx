@@ -1,23 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+//custom hooks
 import { useUserContext } from '../hooks/useUserContext';
 
-const bg = [
-  "linear-gradient(45deg, rgba(164,83,53,1) 1%, rgba(207,82,26,1) 25%, rgba(231,22,35,1) 49%, rgba(194,30,107,1) 74%, rgba(162,31,73,1) 89%)",
-  "linear-gradient(45deg, rgba(236,169,64,1) 0%, rgba(246,57,57,1) 64%, rgba(140,40,45,1) 100%)",
-  "linear-gradient(45deg, rgba(203,172,65,1) 0%, rgba(247,55,55,1) 56%, rgba(156,45,81,1) 78%)"
-]
+//component for spotlight section 
 export const Spots = ({ title, description, path, index, icon }) => {
-	const {isSignedIn}=useUserContext();
+  //user state -isSignedIn
+  const { isSignedIn } = useUserContext();
 
   return (<>
-    <div className="spot" style={{ background: bg[index % 3] }}>
+    <div className={`spot bg-${index % 3}`} >
       <div className="spot-info" >
         <div className="spot-title  ">{title}</div>
         <div className="spot-desc ">{description}</div>
       </div>
       <div className="spot-redir">
-        <Link to={isSignedIn?path:'/signin'}>
+        <Link to={isSignedIn ? path : '/signin'}>
           <i className={`fa fa-${icon}`}></i>
         </Link>
       </div>
@@ -26,8 +25,17 @@ export const Spots = ({ title, description, path, index, icon }) => {
   )
 }
 
+Spots.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  path: PropTypes.string,
+  index: PropTypes.number,
+  icon: PropTypes.string
+}
+
+//component for evolve section
 export const Evolve = ({ title, description, index, icon, path }) => {
-  const {isSignedIn}=useUserContext();
+  const { isSignedIn } = useUserContext();
   return (
     <>
       <div className='evolve'>
@@ -36,10 +44,17 @@ export const Evolve = ({ title, description, index, icon, path }) => {
           <div className="evolve-desc">{description}</div>
         </div>
         <div className="blank">
-          <Link to={isSignedIn?path:'/signin'} className='dark-text '>Utilize Here</Link>
+          <Link to={isSignedIn ? path : '/signin'} className='dark-text '>Utilize Here</Link>
         </div>
       </div>
 
     </>
   )
+}
+Evolve.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  path: PropTypes.string,
+  index: PropTypes.number,
+  icon: PropTypes.string
 }

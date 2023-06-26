@@ -2,22 +2,23 @@
 import React from 'react';
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import { Outlet, NavLink, Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types'
 //styles
 import './navbar.css';
 //components
 import Profile from '../../assets/profile.webp'
 //custom hooks
-import {useLogout} from '../hooks/useLogout'
+import { useLogout } from '../hooks/useLogout'
 
 
 
 const Navbar = ({ isSignedIn, username }) => {
+	//retrieving browser path  using useLocation hook
 	const { pathname } = useLocation();
 	const { logout } = useLogout();
 
 	return (
-
-<>
+		<>
 			<nav className="navbar">
 				{pathname === "/" ?
 					<ScrollLink className="brand"
@@ -95,10 +96,13 @@ const Navbar = ({ isSignedIn, username }) => {
 					}
 				</ul>
 			</nav>
-		
+
 			<Outlet />
 		</>
 	)
 }
-
+Navbar.propTypes = {
+	isSignedIn: PropTypes.bool,
+	username: PropTypes.string
+}
 export default Navbar

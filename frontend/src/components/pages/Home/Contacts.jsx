@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-
+//components
 import Heads from '../../cards/Heads';
+//assets 
 import whatsapp from '../../../assets/whatsapp.png';
 import insta from '../../../assets/instagram.png';
 import gmail from '../../../assets/gmail.png';
@@ -8,14 +9,19 @@ import location from '../../../assets/location.png';
 
 const Contacts = () => {
 
+	//contct form data
 	const [data, setData] = useState({ name: "", email: "", mobile: "" });
+	
+	// on change event on inputs
 	const handleChange = (e) => {
 		const { name, value } = e.target
 		setData({ ...data, [name]: value });
 	}
+	
+	//on sending contact request
 	const sendRequest = (e) => {
 		e.preventDefault();
-		console.log(e.target.name.value);
+//TODO sending the response to server is remaining
 	}
 
 	return (

@@ -18,9 +18,9 @@ const Home = () => {
 					<h1>Fitness & Sports</h1>
 				</div>
 				<div className="home-3">
-					<button href="/signup">
-						<Link to="/signup">Join Us</Link>
-						</button>
+					<Link to="/signup">
+					Join Us
+						</Link>
 				</div>
 			</main>
 			<Features />

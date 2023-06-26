@@ -34,7 +34,9 @@
     display: flex;
     justify-content: space-around;
     cursor: pointer;
-
+    &>.fa-trash-can{
+        color: rgb(185, 31, 31);
+    }
 }
 
 .note-desc {

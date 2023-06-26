@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+//chart components
 import {
     ResponsiveContainer,
     CartesianGrid,
@@ -13,25 +15,33 @@ import {
 //styles
 import './trackers.css'
 //custom hooks
-import {  useChartsContext} from "../../../hooks/useChartsContext";
+import { useChartsContext } from "../../../hooks/useChartsContext";
 
 const TrackerGraph = ({ graph }) => {
 
     const { addChartData, error, isLoading, deleteChart, isAdding } = useChartsContext();
+    //destructuring data from graph data props
     const { chartType, createdAt, minValue, maxValue, unit } = graph;
     const [data, setData] = useState(graph.data)
+
+    /**
+     * to add the new data to a specific graph data ->is data open , value , placeholder
+     */
+
     const [isDataOpen, setIsDataOpen] = useState(false)
     const [value, setValue] = useState("");
     const [placeholder, setPlaceholder] = useState("Enter Data")
 
 
     const sendReq = async () => {
-        let maxWeek=data?.at(0).week;
+        let maxWeek = data?.at(0).week;
+        //finding maximum value of week from all data of points on graph 
         data.forEach(item => {
-            maxWeek=Math.max(maxWeek,item.week)
+            maxWeek = Math.max(maxWeek, item.week)
         });
 
-        let res = await addChartData({_id:graph._id, createdAt,value: +value,maxWeek});
+        //+value -> converts string to number 
+        let res = await addChartData({ _id: graph._id, createdAt, value: +value, maxWeek });
         if (res) {
             setData([...data, res])
             setIsDataOpen(false)
@@ -68,7 +78,7 @@ const TrackerGraph = ({ graph }) => {
                         </Link>
                     </div>
                     <div className="buttons">
-                        <button className='add-data '  onClick={addData}><Link>{isAdding ? "Adding" :isDataOpen?"Click Here": "Add Data"}</Link></button>
+                        <button className='add-data ' onClick={addData}><Link>{isAdding ? "Adding" : isDataOpen ? "Click Here" : "Add Data"}</Link></button>
                         {
                             isDataOpen ?
                                 <input type="number" name="data" value={value} onChange={(e) => setValue(e.target.value)} placeholder={placeholder} className='data-input' />
@@ -106,5 +116,7 @@ const TrackerGraph = ({ graph }) => {
         </>
     )
 }
-
+TrackerGraph.propTypes = {
+    graph: PropTypes.object
+}
 export default TrackerGraph

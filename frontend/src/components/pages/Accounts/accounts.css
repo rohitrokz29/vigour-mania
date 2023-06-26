@@ -1,4 +1,3 @@
-
 /* Accounts.js */
 
 .accounts {
@@ -14,12 +13,15 @@
 .signin-box {
 	background: #00000026;
 	margin-block: 7%;
-
 	width: 80%;
 	display: flex;
 	flex-wrap: wrap-reverse;
 	align-items: center;
 	justify-content: center;
+}
+
+.signin-box a {
+	font-size: 110%;
 }
 
 .signin-form,
@@ -58,4 +60,38 @@
 	border: 2px solid #e82222;
 	border-radius: 5px;
 	background-color: #f1eff4;
+}
+
+@media (max-width:700px) {
+	.signin-box {
+		width: 100%;
+	}
+}
+
+@media (max-width:600px) {
+
+	.signin-side,
+	.signup-side {
+		width: 80%;
+		margin-block: 0;
+	}
+
+	.signin-form,
+	.signup-form {
+		margin-block: 0;
+
+		&>* {
+			width: 90%;
+			text-align: center;
+		}
+		&>button{
+			width: 60%;
+		}
+	}
+}
+
+@media (min-width:1200px) {
+	.accounts {
+		font-size:  110%;
+	}
 }

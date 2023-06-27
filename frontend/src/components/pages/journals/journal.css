@@ -12,8 +12,12 @@
     overflow-x: hidden;
     padding-inline: 0.5rem;
     box-shadow: var(--light-box-shadow);
-}
+    padding-bottom: 2rem;
 
+}
+.main-journal{
+
+}
 .journal-title {
     padding: 0 0 0.5rem 0.5rem;
     gap: 2rem;
@@ -84,7 +88,7 @@
 
 .load-more {
     background: linear-gradient(#17111128 10%, #1711117f 40%, #171111c1 77%);
-    height: 5rem;
+    height: 3rem;
     width: 100%;
     margin-inline: 0.5rem;
     display: flex;
@@ -92,13 +96,14 @@
     justify-content: center;
     align-items: center;
 
-    &>a {
+    &>span {
+        cursor: pointer;
         color: #ffffff;
         text-align: center;
         font-size: 110%;
     }
 
-    &>a:hover {
+    &>span:hover {
         color: #e0e0e0;
     }
 
@@ -107,7 +112,7 @@
 .journal-actions {
     display: flex;
     justify-content: center;
-    padding-block: 0.5rem;
+    padding-block-start: 0.5rem;
 
     &>div {
         display: flex;
@@ -126,15 +131,75 @@
 .comments,
 .actions {
     font-size: 110%;
+
     &>i {
         align-items: center;
         cursor: pointer;
         font-size: 120%;
         padding-inline: 0.5rem;
-        &>span{
+
+        &>span {
             padding-inline: 0.25rem;
             font-weight: 100;
             font-size: 80%;
         }
+    }
+}
+
+.comments-box {
+    margin-inline: 2rem;
+    /* border: 2px solid #ddd; */
+
+}
+.parent-comment{
+    margin-block: .75rem;
+}
+.comment {
+    padding-block: 0.5rem;
+    margin-block: 0.25rem;
+    padding-inline: 0.5rem;
+    background-color: #ddd;
+    border-radius: 1rem;
+
+    &>.comment-name {
+        align-items: center;
+        display: flex;
+        margin: 0rem 0rem 0.15rem 0.25rem;
+
+        &>.username {
+            align-items: baseline;
+            margin-inline: 0.5rem;
+            font-size: 110%;
+        }
+    }
+
+    &>.comment-desc {
+        margin-inline-start: 1.25rem;
+        margin-block: 0.5rem;
+    }
+
+    &>.comment-details {
+        margin-inline: 0.75rem;
+        width: 10rem;
+        display: flex;
+        font-size: 98%;
+        justify-content: space-between;
+
+        &>i {
+            cursor: pointer;
+        }
+    }
+}
+
+.replies {
+    display: flex;
+    flex-direction: column;
+    margin-inline-start: 1rem;
+    border-left: 4px solid #bbbbbb;
+    &>blockquote {
+        display: flex;
+        align-items: center;
+       margin-inline: 0.25rem;
+        padding-inline: 0.25rem;
     }
 }

@@ -3,9 +3,8 @@
 .main {
 	background: url('../../../assets/1.jpg') no-repeat;
 	background-size: cover;
-	/* background-size: 100vw; */
 	display: flex;
-	height: 60vh;
+	height: 60dvh;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;

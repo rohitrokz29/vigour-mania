@@ -39,7 +39,7 @@ export const Evolve = ({ title, description, index, icon, path }) => {
   return (
     <>
       <div className='evolve'>
-        <div className="evolve-info " style={{ background: bg[index % 3] }}>
+        <div className={`evolve-info bg-${(index%3)}`}  >
           <div className="evolve-title spot-title ">{title}</div>
           <div className="evolve-desc">{description}</div>
         </div>

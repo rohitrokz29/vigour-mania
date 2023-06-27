@@ -37,6 +37,12 @@
 .fa-solid {
   align-items: center;
 
+  &>span {
+    background-color: #ddd;
+    font-weight: 300;
+    text-align: center;
+    padding-inline-start: 0.5rem;
+  }
 }
 
 * {
@@ -222,7 +228,7 @@ a {
 
 @media (max-width:700px) {
   main {
-    font-size: 90%;
+    font-size: 95%;
   }
 
   .comp-head {

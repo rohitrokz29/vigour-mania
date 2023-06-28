@@ -1,5 +1,5 @@
 .journal-container {
-    height: 90vh;
+    height: 90dvh;
     display: grid;
     grid-template-columns: 2fr 1fr;
 }
@@ -15,9 +15,7 @@
     padding-bottom: 2rem;
 
 }
-.main-journal{
 
-}
 .journal-title {
     padding: 0 0 0.5rem 0.5rem;
     gap: 2rem;
@@ -55,14 +53,16 @@
 .small-journal {
     display: flex;
     margin-block: 0.5rem;
+    align-items: center;
     box-shadow: var(--light-box-shadow);
 }
 
 .small-journal img {
     width: 10rem;
     height: 100%;
+    height: 6rem;
     object-fit: cover;
-    padding-inline: 0.5rem;
+    padding-inline: 0.25rem;
 }
 
 .small-journal-title {
@@ -81,9 +81,9 @@
 }
 
 .journal-data {
-    display: grid;
-    grid-template-areas: " title date"
-        "desc desc ";
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
 }
 
 .load-more {
@@ -151,9 +151,11 @@
     /* border: 2px solid #ddd; */
 
 }
-.parent-comment{
+
+.parent-comment {
     margin-block: .75rem;
 }
+
 .comment {
     padding-block: 0.5rem;
     margin-block: 0.25rem;
@@ -196,10 +198,30 @@
     flex-direction: column;
     margin-inline-start: 1rem;
     border-left: 4px solid #bbbbbb;
+
     &>blockquote {
         display: flex;
         align-items: center;
-       margin-inline: 0.25rem;
+        margin-inline: 0.25rem;
         padding-inline: 0.25rem;
+    }
+}
+
+@media (max-width:1000px) and (min-width:800px) {
+    .journal-container {
+        grid-template-columns: 3fr 2fr;
+    }
+}
+
+@media (max-width:800px) {
+    .journal-container {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .side-journals,
+    .main-journal {
+        overflow: inherit;
     }
 }

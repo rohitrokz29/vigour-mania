@@ -17,6 +17,7 @@ import { useUserContext } from './components/hooks/useUserContext';
 //contexts to store chart and notes state
 import { ChartState } from './components/context/chartContext';
 import { NotebookState } from './components/context/notebookContext';
+import { JournalState } from './components/context/JournalsContext';
 
 
 function App() {
@@ -108,9 +109,11 @@ function App() {
 
               <Route path='/journals' element={
                 isSignedIn ?
-                  <Suspense>
-                    <Journals />
-                  </Suspense>
+                  <JournalState>
+                    <Suspense>
+                      <Journals />
+                    </Suspense>
+                  </JournalState>
                   : <Navigate to='/signin' replace />
               } />
 

@@ -3,67 +3,20 @@ import PropTypes from 'prop-types'
 //assets
 import Image from '../../../assets/1.jpg'
 import { ParentComment } from './Comments'
-const MainJournal = ({ title, description, postedAt }) => {
-    const comments = [
-        {
-            username: "jackJill",
-            comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-            commentedAt: new Date(),
-            likes: 0,
-            replies: [
-                {
-                    username: "Jack daniel",
-                    comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-                    commentedAt: new Date(),
-                    likes: 0
-                },
-
-                {
-                    username: "Jack daniel",
-                    comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-                    commentedAt: new Date(),
-                    likes: 0
-                },
-                {
-                    username: "Jack daniel",
-                    comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-                    commentedAt: new Date(),
-                    likes: 0
-                },
-                {
-                    username: "Jack daniel",
-                    comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-                    commentedAt: new Date(),
-                    likes: 0
-                }
-            ]
-        },
-        {
-            username: "jackJill",
-            comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-            commentedAt: new Date(),
-            likes: 0
-        }, {
-            username: "jackJill",
-            comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-            commentedAt: new Date(),
-            likes: 0
-        }, {
-            username: "jackJill",
-            comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-            commentedAt: new Date(),
-            likes: 0
-        }
-    ]
+import { useJournalContext } from '../../hooks/useJournalContext'
+const MainJournal = () => {
+    const { mainJournal, fetchComments, comments } = useJournalContext();
     const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false)
-    const openComments = () => {
+
+    const openComments = async () => {
+        !isCommentBoxOpen && fetchComments({ journalId: mainJournal._id });
         setIsCommentBoxOpen(prevState => !prevState);
     }
     return (
         <>
             <div className="journal-title">
-                <h2>{title}</h2>
-                <span className="posted light-text">{postedAt.toString().slice(4, 16)}</span>
+                <h2>{mainJournal.title}</h2>
+                <span className="posted light-text">{mainJournal.postedAt.toString().slice(4, 16)}</span>
             </div>
             <div className="journal-image">
                 <img src={Image} alt="" />
@@ -71,11 +24,11 @@ const MainJournal = ({ title, description, postedAt }) => {
             <div className="journal-desc">
                 {
                     //TODO here use expression to destructure description with \n \t and other shorts
-                    `${description.slice(0, 900)}`
+                    `${mainJournal.description.slice(0, 900)}`
                 }
                 <br />
                 {
-                    `    ${description.slice(100)}`
+                    `    ${mainJournal.description.slice(100)}`
                 }
             </div>
             <div className="journal-actions">
@@ -100,11 +53,11 @@ const MainJournal = ({ title, description, postedAt }) => {
                 isCommentBoxOpen &&
                 <div className="comments-box "  >
                     {
-                        comments.map((comment, index) => <ParentComment key={index} username={comment.username} comment={comment.comment} commentedAt={comment.commentedAt} likes={comment.likes} replies={comment.replies} />)
+                        comments.map((comment, index) => <ParentComment key={index} commentId={comment._id} username={comment.username} comment={comment.comment} commentedAt={comment.commentedAt} likes={comment.likes}  />)
                     }
                     <div className="load-more">
                         <span>
-                            <i className="fa fa-angle-down"></i>
+                            <i className="fa fa-angle-down">Load More</i>
                         </span>
                     </div>
                 </div>

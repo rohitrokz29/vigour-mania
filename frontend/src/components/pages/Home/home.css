@@ -36,17 +36,17 @@
 
 .home-3 {
 	margin-top: 2rem;
+}
 
-	&>a {
-		cursor: pointer;
-		background: linear-gradient(to right, #F00000 0%, #DC281E 51%, #F00000 100%);
-		font-size: 1.25rem;
-		border: 2px solid transparent;
-		padding-inline: 4rem;
-		padding-block: 1rem;
-		color: #ddd;
+.home-3 a {
+	cursor: pointer;
+	background: linear-gradient(to right, #F00000 0%, #DC281E 51%, #F00000 100%);
+	font-size: 1.25rem;
+	border: 2px solid transparent;
+	padding-inline: 4rem;
+	padding-block: 1rem;
+	color: #ddd;
 
-	}
 }
 
 
@@ -91,11 +91,7 @@
 	background-color: #fff;
 	height: 100%;
 
-	&>img {
-		margin-inline: 0;
-		width: 100%;
-		height: 100%;
-	}
+
 
 	&>.image-0 {
 		border-top-left-radius: 100px;
@@ -104,6 +100,12 @@
 	&>.image-1 {
 		border-top-right-radius: 100px;
 	}
+}
+
+.image img {
+	margin-inline: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .info {
@@ -156,19 +158,21 @@
 	justify-content: center;
 	align-items: center;
 
-	&>h2 {
-		font-family: cursive;
-		margin-block-end: 3%;
-		text-align: center;
-	}
 
-	&>p {
-		padding-block: 3%;
-		margin-block: 2%;
-		margin-inline: 1%;
-		padding-inline: 4%;
-		border-bottom: 2px solid red;
-	}
+}
+
+.contacts h2 {
+	font-family: cursive;
+	margin-block-end: 3%;
+	text-align: center;
+}
+
+.contacts>p {
+	padding-block: 3%;
+	margin-block: 2%;
+	margin-inline: 1%;
+	padding-inline: 4%;
+	border-bottom: 2px solid red;
 }
 
 .ways {
@@ -178,18 +182,17 @@
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 1fr 1fr;
 	box-shadow: inset 0 0 0 5px #fff;
+}
 
-	&>li img {
-		width: 2rem;
-	}
+.ways li img {
+	width: 2rem;
+}
 
-	&>li {
-		background: -webkit-linear-gradient(#f3eeee, #ff4d4d);
-		padding-inline: 10%;
-		margin-inline: 2%;
-		margin-block: 2%;
-	}
-
+.ways li {
+	background: -webkit-linear-gradient(#f3eeee, #ff4d4d);
+	padding-inline: 10%;
+	margin-inline: 2%;
+	margin-block: 2%;
 }
 
 .contact-form {
@@ -201,14 +204,14 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
 
-	&>h3 {
-		margin-block: 5%;
-	}
+.contact-form h3 {
+	margin-block: 5%;
+}
 
-	&>.btn {
-		min-width: 8rem;
-	}
+.contact-form .btn {
+	min-width: 8rem;
 }
 
 
@@ -232,21 +235,20 @@
 	margin-inline: 1%;
 	grid-area: lBrand;
 	margin-block-end: 1%;
+}
 
-	&>p {
-		width: 30%;
-	}
+.lower-brand p {
+	width: 30%;
 }
 
 .lower-brand-item {
 	display: flex;
 	color: white;
+}
 
-	&>h2 {
-		cursor: pointer;
-
-		font-family: cursive;
-	}
+.lower-brand h2 {
+	cursor: pointer;
+	font-family: cursive;
 }
 
 .Linfo {
@@ -265,17 +267,18 @@
 .lower-contact {
 	grid-area: contact;
 
-	&>ul {
-		display: flex;
-		flex-shrink: 2;
 
-		&>li {
-			width: 2rem;
-			margin-inline: 1%;
-			align-items: center;
-		}
+}
 
-	}
+.lower-contact ul {
+	display: flex;
+	flex-shrink: 2;
+}
+
+.lower-contact ul li {
+	width: 2rem;
+	margin-inline: 1%;
+	align-items: center;
 }
 
 .grid-fill {

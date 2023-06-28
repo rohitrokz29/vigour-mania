@@ -48,28 +48,31 @@
     display: flex;
     padding-block-start: 2%;
     justify-content: space-between;
-
-    &>button {
-        background-color: #fffffff5;
-        font-size: 100%;
-        align-items: center;
-        text-align: center;
-        height: auto;
-        padding-inline: 1%;
-        border-radius: 50px;
-        border: 0px solid #000;
-        box-shadow: 2px 2px 5px #00000069;
-
-        &:hover {
-            box-shadow: 2px 2px 8px black;
-
-        }
-
-        &>a:hover {
-            color: blue;
-        }
-    }
 }
+
+.exp-head>button {
+    background-color: #fffffff5;
+    font-size: 100%;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    padding-inline: 1%;
+    border-radius: 50px;
+    border: 0px solid #000;
+    box-shadow: 2px 2px 5px #00000069;
+
+
+
+}
+
+.exp-head>button:hover {
+    box-shadow: 2px 2px 8px black;
+}
+
+.exp-head>button>a:hover {
+    color: blue;
+}
+
 
 .spot-area {
     padding-block-start: 1%;

@@ -2,7 +2,7 @@
     display: grid;
     align-items: center;
     align-content: center;
-    height: 100vh;
+    height: 100dvh;
     text-align: center;
 
     background-color: #ddd;
@@ -95,4 +95,9 @@
     100% {
         transform: translate(0, 0)
     }
+}
+@media (max-width:800px) {
+ .error h1{
+    font-size: 50vw;
+ }   
 }

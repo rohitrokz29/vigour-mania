@@ -4,7 +4,6 @@ import {
     useState,
     useEffect,
 } from "react";
-import axios from "axios";
 import { useUserContext } from "../hooks/useUserContext";
 import { useLogout } from "../hooks/useLogout";
 export const chartContext = createContext();
@@ -53,7 +52,7 @@ export const ChartState = ({ children }) => {
                     setError('')
                     setIsLoading(false)
                     setProgress(70);
-                    charts.unshift(response.data)
+                    setCharts([response.data,...charts]);
                     setProgress(100);
                     return true;
                 }
@@ -65,7 +64,6 @@ export const ChartState = ({ children }) => {
                 setProgress(100);
                 return false
             })
-        setIsLoading(false)
     }
 
     const addChartData = async ({_id, createdAt, value, maxWeek}) => {

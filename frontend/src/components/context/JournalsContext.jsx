@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-
+import API from "../api/api";
 export const JournalContext = createContext();
 const date = new Date();
 const journals = [
@@ -19,23 +19,23 @@ const newComments = [
         username: "jackJill",
         comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
         commentedAt: new Date(),
-        likes: 0,
+        likes: { count: 3, isLiked: true },
     },
     {
         username: "jackJill",
         comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
         commentedAt: new Date(),
-        likes: 0
+        likes: { count: 3, isLiked: false },
     }, {
         username: "jackJill",
         comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
         commentedAt: new Date(),
-        likes: 0
+        likes: { count: 3, isLiked: false },
     }, {
         username: "jackJill",
         comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
         commentedAt: new Date(),
-        likes: 0
+        likes: { count: 3, isLiked: true },
     }
 ]
 const replies = [
@@ -44,7 +44,7 @@ const replies = [
         username: "Jack daniel",
         comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
         commentedAt: date,
-        likes: 0
+        likes: { count: 3, isLiked: true },
     },
 
     {
@@ -52,21 +52,21 @@ const replies = [
         username: "Jack daniel",
         comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
         commentedAt: date,
-        likes: 0
+        likes: { count: 3, isLiked: true },
     },
     {
         _id: "ekjbkjbwe232se",
         username: "Jack daniel",
         comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
         commentedAt: date,
-        likes: 0
+        likes: { count: 3, isLiked: false },
     },
     {
         _id: "ekjbkjbwe232w",
         username: "Jack daniel",
         comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
         commentedAt: date,
-        likes: 0
+        likes: { count: 3, isLiked: false },
     }
 ]
 
@@ -82,18 +82,43 @@ export const JournalState = ({ children }) => {
 
 
     const fetchJournals = async () => {
-        setMainJournal({ _id: "92099", title: "This is title", description: desc, postedAt: date })
-        setAllJournals(journals)
+        // try {
+        //     API.get(`/api/journals/all/${journalPage + 1}`)
+        //         .then(response => {
+        //             setMainJournal(response.data.mainJournal);
+        //             setAllJournals([...allJournals, ...response.data.allJournals]);
+        //             setJournalPage(page => page + 1);
+
+        //         })
+        // } catch (error) {
+
+            setMainJournal({ _id: "92099", title: "This is title", description: desc, postedAt: date, likes: { count: 5, isLiked: true } })
+            setAllJournals(journals)
+        // }
     }
     useEffect(() => {
         fetchJournals()
     }, [])
 
     const changeMainJournal = async ({ journalId }) => {
-
-        setComments([]);
+        API.get(`/api/journals/1/${journalId}`)
+            .then(response => {
+                setMainJournal(response.data);
+                setComments([])
+            })
+            .catch(error=>{
+                
+            })
     }
 
+    const likeJournal=async ({journalId})=>{
+        console.log(journalId)
+
+        API.put(`/api/journals/like/${journalId}`)
+        .then(response=>{
+
+        })
+    }
     const fetchComments = async ({ journalId }) => {
 
         setComments(newComments)
@@ -104,6 +129,7 @@ export const JournalState = ({ children }) => {
         return replies;
     }
 
+    
 
     return (
         <JournalContext.Provider
@@ -113,6 +139,7 @@ export const JournalState = ({ children }) => {
                 comments,
                 fetchJournals,
                 changeMainJournal,
+                likeJournal,
                 fetchComments,
                 fetchReplies
             }}

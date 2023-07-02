@@ -104,9 +104,9 @@ export const ChildComment = ({ username, comment, commentedAt, likes, isChild, o
                 </div>
                 <div className="comment-desc">{comment}</div>
                 <div className="comment-details">
-                    <i className="fa fa-heart" onClick={like}><span>{likes} likes</span> </i>
+                    <i className="fa fa-heart" onClick={like} style={{color:likes.isLiked?"#ff2424":"#000"}}><span  >{likes.count} </span> </i>
                     {!isChild &&
-                        <i className="fa fa-heart" onClick={openReplies}><span>Replies</span></i>
+                        <i className="fa fa-comment" onClick={openReplies}><span>Replies</span></i>
                     }
                 </div>
             </div>

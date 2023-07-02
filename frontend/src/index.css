@@ -36,9 +36,10 @@
 .fa,
 .fa-solid {
   align-items: center;
+  color: #363333;
 
   &>span {
-    background-color: #ddd;
+    color: #363333;
     font-weight: 300;
     text-align: center;
     padding-inline-start: 0.5rem;

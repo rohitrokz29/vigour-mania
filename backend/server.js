@@ -15,11 +15,12 @@ const app = express();
 /**
  * importing routers 
  */
-const userRouter = require('./routes/user.router');
-const chartsRouter = require('./routes/charts.router');
-const commentRouter = require('./routes/comment.router');
-const journalRouter = require('./routes/journal.router');
-const notesRouter = require('./routes/notes.router');
+const {userRouter} = require('./routes/user.router');
+const {chartsRouter} = require('./routes/charts.router');
+const {commentRouter} = require('./routes/comment.router');
+const {journalRouter} = require('./routes/journal.router');
+const {notesRouter} = require('./routes/notes.router');
+const { repliesRouter } = require('./routes/replies.router');
 
 
 app.use(cors({
@@ -65,8 +66,13 @@ app.use('/api/notes', notesRouter);
  * Comments router
  */
 app.use('/api/comments', commentRouter);
-/*
+/**
+ * replies router for comments
+ */
+app.use('/api/replies',repliesRouter);
 
+
+/*
 connecting server to mongodb database and starting the server after connection made succesfully
 */
 mongoose.connect(process.env.MONGODB_URI, {

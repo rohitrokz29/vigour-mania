@@ -2,17 +2,22 @@ const journalRouter = require('express').Router();
 const {
     addJournal,
     getJournals,
-    likeJournal
+    likeJournal,
+    getMainJournal
 } = require('../controllers/journal.control');
 
 const { userAuth } = require('../middlewares/user.auth');
 //journal ROUTER
 
 //add journal route controlled by admin
-journalRouter.post('/add', addJournal)
+journalRouter.post('/', addJournal)
 
 //get all journals route
-journalRouter.get('/', getJournals);
+//if pageNo ===1 then give main journal and side else only side
+journalRouter.get('/all/:pageNo', getJournals);
+
+//get one journal
+journalRouter.get('/1/:journalId', getMainJournal);
 
 //like a journal
 journalRouter.put('/like/:journalId', userAuth, likeJournal);
@@ -20,4 +25,4 @@ journalRouter.put('/like/:journalId', userAuth, likeJournal);
 
 
 //Exporting journalRouter
-module.exports = journalRouter
+module.exports = {journalRouter}

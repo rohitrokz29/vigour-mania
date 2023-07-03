@@ -8,7 +8,7 @@ const { userAuth } = require('../middlewares/user.auth');
 const commentRouter = require('express').Router()
 
 //get comments
-commentRouter.get('', getComments);
+commentRouter.get('/:pageNo', getComments);
 
 //add comment
 commentRouter.put('/add', userAuth, addComment);
@@ -16,4 +16,4 @@ commentRouter.put('/add', userAuth, addComment);
 //like comment
 commentRouter.put('/like/:commentId', likeComment);
 
-module.exports = commentRouter;
+module.exports = {commentRouter};

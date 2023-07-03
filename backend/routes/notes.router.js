@@ -10,8 +10,8 @@ const notesRouter = require('express').Router();
 //Add new note
 notesRouter.put("/", userAuth, AddNote);
 //get all notes
-notesRouter.get("/", userAuth, GetNotes);
+notesRouter.get("/:pageNo", userAuth, GetNotes);
 //delete a note
 notesRouter.delete("/:noteId", userAuth, DeleteNote);
 
-module.exports = notesRouter
+module.exports = {notesRouter}

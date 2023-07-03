@@ -24,4 +24,4 @@ chartsRouter.put('/update', userAuth, UpdateCharts);
 // remain to add chart delete route
 chartsRouter.delete('/:chartId', userAuth, DeleteChart)
 
-module.exports = chartsRouter
+module.exports = {chartsRouter}

@@ -9,8 +9,10 @@ const MainJournal = () => {
     const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false)
 
     const openComments = async () => {
-        !isCommentBoxOpen && fetchComments({ journalId: mainJournal._id });
-        setIsCommentBoxOpen(prevState => !prevState);
+        if (comments.length===0) {
+            await fetchComments({ journalId: mainJournal._id });
+        }
+        setIsCommentBoxOpen(isCommentBoxOpen => !isCommentBoxOpen);
     }
     return (
         <>
@@ -23,7 +25,6 @@ const MainJournal = () => {
             </div>
             <div className="journal-desc">
                 {
-                    //TODO here use expression to destructure description with \n \t and other shorts
                     `${mainJournal.description.slice(0, 900)}`
                 }
                 <br />
@@ -33,14 +34,14 @@ const MainJournal = () => {
             </div>
             <div className="journal-actions">
                 <div>
-                    <div className="dark-text comments">
+                    <div className="dark-text comments" >
                         <span>Comments</span>
-                        <i className={`fa fa-angle-${isCommentBoxOpen ? "up" : "down"} bold`} onClick={()=>openComments}></i>
+                        <i className={`fa fa-angle-${isCommentBoxOpen ? "up" : "down"} bold`} onClick={openComments} ></i>
                     </div>
                     <div className="actions">
                         {/* TODO Replace angle down to like 1=>thumb 2=> share 3=>download  */}
 
-                        <i className="fa fa-heart   " style={{ color: mainJournal.likes.isLiked ? "#ff0000" : "#000" }} onClick={()=>likeJournal({journalId:mainJournal._id})}>
+                        <i className="fa fa-heart   " style={{ color: mainJournal.likes.isLiked ? "#ff0000" : "#000" }} onClick={() => likeJournal({ journalId: mainJournal._id })}>
                             <span style={{ fontSize: "100%" }}>{mainJournal.likes.count}</span>
 
                         </i>
@@ -58,7 +59,7 @@ const MainJournal = () => {
                     }
                     <div className="load-more">
                         <span>
-                            <i className="fa fa-angle-down">Load More</i>
+                            <i className="fa fa-angle-down" onClick={()=>fetchComments({journalId:mainJournal._id})}>Load More</i>
                         </span>
                     </div>
                 </div>

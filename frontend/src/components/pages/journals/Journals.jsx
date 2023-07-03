@@ -13,7 +13,10 @@ import { useJournalContext } from '../../hooks/useJournalContext'
 
 
 const Journals = () => {
-    const { allJournals,  mainJournal } = useJournalContext();
+    const { allJournals, mainJournal, fetchJournals } = useJournalContext();
+    const getJournals = async () => {
+        await fetchJournals();
+    }
 
     return (
         <>
@@ -28,9 +31,9 @@ const Journals = () => {
                     {
                         allJournals.map((item, index) => <SideJournal key={index} journalId={item._id} title={item.title} description={item.description} postedAt={item.postedAt} />)
                     }
-                    <div className="load-more ">
+                    <div className="load-more " onClick={getJournals}>
                         <span>
-                            <i className="fa fa-angle-down">Load More</i>
+                            <i className="fa fa-angle-down" >Load More</i>
                         </span>
                     </div>
                 </div>

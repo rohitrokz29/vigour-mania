@@ -17,6 +17,7 @@ const exp = [
 ]
 export const NotebookState = ({ children }) => {
     const { setProgress } = useUserContext();
+    const [notebookPage, setNotebookPage] = useState(1);
     const [error, setError] = useState("");
     const [notes, setNotes] = useState([]);
 
@@ -25,43 +26,51 @@ export const NotebookState = ({ children }) => {
 
         try {
             setProgress(40);
-            API.get('/api/notes/')
+            API.get(`/api/notes/${notebookPage}`)
                 .then(response => {
                     setNotes(response.data);
                     setProgress(90);
                     setError("");
+                    setNotebookPage(page => page + 1);
                     setProgress(100);
 
                 })
         } catch (error) {
+            setProgress(100);
         }
 
     }
-    useEffect(() => {
+    useEffect(() => { 
         fetchNotes()
 
     }, [])
 
     const deleteNote = async ({ noteId }) => {
         try {
-
+            setProgress(40);
             API.delete(`/api/notes/${noteId}`)
                 .then(response => {
+                    setProgress(40);
                     setNotes(notes => notes.filter(note => note._id != noteId));
                 })
+            setProgress(100);
         } catch (error) {
-
+            setProgress(100);
         }
     }
     const addNote = async ({ title, description }) => {
 
         try {
+            setProgress(40);
             API.put('/api/notes/', { title, description })
                 .then(response => {
+                    setProgress(70);
                     setNotes([{ _id: "fu3iugh", title, description }, ...notes])
                 })
-        } catch (error) {
+            setProgress(100);
 
+        } catch (error) {
+            setProgress(100);
         }
     }
     return (

@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import API from "../api/api";
+import { useUserContext } from "../hooks/useUserContext";
 export const JournalContext = createContext();
 const date = new Date();
 const journals = [
@@ -75,29 +76,33 @@ enim ad minima veniam, quis nostrum exercitationem ullam sit aspernatur aut odit
 
 export const JournalState = ({ children }) => {
 
+    const { setProgress } = useUserContext();
     const [mainJournal, setMainJournal] = useState(null);
     const [allJournals, setAllJournals] = useState([]);
-    const [journalPage, setJournalPage] = useState(0)
+    const [journalPage, setJournalPage] = useState(1)
     const [comments, setComments] = useState([]);
-
+    const [commentsPage, setCommentsPage] = useState(1);
 
     const fetchJournals = async () => {
-        // try {
-        //     API.get(`/api/journals/all/${journalPage + 1}`)
-        //         .then(response => {
-        //             setMainJournal(response.data.mainJournal);
-        //             setAllJournals([...allJournals, ...response.data.allJournals]);
-        //             setJournalPage(page => page + 1);
+        try {
+            API.get(`/api/journals/all/${journalPage}`)
+                .then(response => {
+                    setMainJournal(response.data.mainJournal);
+                    setAllJournals([...allJournals, ...response.data.allJournals]);
+                    setJournalPage(page => page + 1);
 
-        //         })
-        // } catch (error) {
+                })
+        } catch (error) {
+            console.log(error)
+        }
 
-            setMainJournal({ _id: "92099", title: "This is title", description: desc, postedAt: date, likes: { count: 5, isLiked: true } })
-            setAllJournals(journals)
-        // }
     }
     useEffect(() => {
-        fetchJournals()
+        return async () => {
+            setProgress(40);
+            await fetchJournals();
+            setProgress(100)
+        }
     }, [])
 
     const changeMainJournal = async ({ journalId }) => {
@@ -106,30 +111,38 @@ export const JournalState = ({ children }) => {
                 setMainJournal(response.data);
                 setComments([])
             })
-            .catch(error=>{
-                
+            .catch(error => {
+
             })
     }
 
-    const likeJournal=async ({journalId})=>{
-        console.log(journalId)
-
+    const likeJournal = async ({ journalId }) => {
         API.put(`/api/journals/like/${journalId}`)
-        .then(response=>{
+            .then(response => {
 
-        })
+            })
     }
     const fetchComments = async ({ journalId }) => {
+        setComments([...comments, ...newComments])
+        try {
+            API.get(`/api/comments/${commentsPage}`)
+                .then(response => {
+                    setComments([...comments, ...response.data]);
+                })
+        }
+        catch (error) {
 
-        setComments(newComments)
+        }
     }
 
-    const fetchReplies = ({ commentId, repliesPage }) => {
-
-        return replies;
+    const fetchReplies = async ({ commentId, repliesPage }) => {
+        return await API.get(`/api/replies/${commentId}/${repliesPage}`)
+            .then(response => {
+                return response.data
+            })
     }
 
-    
+
 
     return (
         <JournalContext.Provider

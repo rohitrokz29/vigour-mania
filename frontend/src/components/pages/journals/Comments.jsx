@@ -5,49 +5,22 @@ import { useJournalContext } from '../../hooks/useJournalContext'
 
 export const ParentComment = ({ username, comment, commentedAt, likes, commentId }) => {
     const date = new Date()
-    const commentReplies = [
-        {
-            _id: "ekjbkjbwe",
-            username: "Jack daniel",
-            comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-            commentedAt: date,
-            likes: 0
-        },
-
-        {
-            _id: "ekjbkjbwe232",
-            username: "Jack daniel",
-            comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-            commentedAt: date,
-            likes: 0
-        },
-        {
-            _id: "ekjbkjbwe232se",
-            username: "Jack daniel",
-            comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-            commentedAt: date,
-            likes: 0
-        },
-        {
-            _id: "ekjbkjbwe232w",
-            username: "Jack daniel",
-            comment: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, sequi odit, explicabo, eos voluptatem non quaerat labore aut laudantium nihil natus molestiae adipisci illo? Delectus quidem velit ad necessitatibus consectetur?",
-            commentedAt: date,
-            likes: 0
-        }
-    ]
+ 
     const { fetchReplies } = useJournalContext();
     const [isOpenReplies, setIsOpenReplies] = useState(false);
-    const [repliespage, setRepliespage] = useState(0)
-    const [replies, setReplies] = useState(commentReplies)
+    const [repliespage, setRepliespage] = useState(1);
+    const [replies, setReplies] = useState([]);
 
     const getReplies = async () => {
-        const result = fetchReplies({ commentId, repliespage: repliespage + 1 })
+        const result =await fetchReplies({ commentId, repliespage })
+        setRepliespage(page=>page+1);
         setReplies([...replies,...result]);
 
     }
-    const openReplies = () => {
-        getReplies()
+    const openReplies =async  () => {
+        if(repliespage===1) {
+            await getReplies();
+        }
         setIsOpenReplies(prevReplies => !prevReplies)
     }
 
@@ -104,7 +77,7 @@ export const ChildComment = ({ username, comment, commentedAt, likes, isChild, o
                 </div>
                 <div className="comment-desc">{comment}</div>
                 <div className="comment-details">
-                    <i className="fa fa-heart" onClick={like} style={{color:likes.isLiked?"#ff2424":"#000"}}><span  >{likes.count} </span> </i>
+                    <i className="fa fa-heart" onClick={like} style={{color:likes.isLiked?"#ff2424":"#000"}}><span  >{likes.count} </span> Like</i>
                     {!isChild &&
                         <i className="fa fa-comment" onClick={openReplies}><span>Replies</span></i>
                     }

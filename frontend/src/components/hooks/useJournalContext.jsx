@@ -3,6 +3,6 @@ import { JournalContext } from '../context/JournalsContext'
 
 export const useJournalContext = () => {
     const context = useContext(JournalContext);
-    if (!context) return null;
+    if (!context) throw Error("Context Not Found");
     return context;
 }

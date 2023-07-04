@@ -84,6 +84,9 @@ export const JournalState = ({ children }) => {
     const [commentsPage, setCommentsPage] = useState(1);
 
     const fetchJournals = async () => {
+
+        setMainJournal({title:"This is title",description:desc,postedAt:date,likes:{count:5,isLiked:true}});
+        setAllJournals([...allJournals]);
         try {
             API.get(`/api/journals/all/${journalPage}`)
                 .then(response => {
@@ -134,12 +137,23 @@ export const JournalState = ({ children }) => {
 
         }
     }
+    const addComment=async ({comment})=>{
+        try {
+            API.put(`/api/comments/add`,{comment })
+            .then(response=>{
+                comments.unshift(response.data)
+            })
+        } catch (error) {
+            
+        }
+    }
 
     const fetchReplies = async ({ commentId, repliesPage }) => {
-        return await API.get(`/api/replies/${commentId}/${repliesPage}`)
-            .then(response => {
-                return response.data
-            })
+        return replies;
+        // return await API.get(`/api/replies/${commentId}/${repliesPage}`)
+        //     .then(response => {
+        //         return response.data
+        //     })
     }
 
 
@@ -154,6 +168,7 @@ export const JournalState = ({ children }) => {
                 changeMainJournal,
                 likeJournal,
                 fetchComments,
+                addComment,
                 fetchReplies
             }}
         >

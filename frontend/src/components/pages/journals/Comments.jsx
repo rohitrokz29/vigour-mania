@@ -5,20 +5,20 @@ import { useJournalContext } from '../../hooks/useJournalContext'
 
 export const ParentComment = ({ username, comment, commentedAt, likes, commentId }) => {
     const date = new Date()
- 
+
     const { fetchReplies } = useJournalContext();
     const [isOpenReplies, setIsOpenReplies] = useState(false);
     const [repliespage, setRepliespage] = useState(1);
     const [replies, setReplies] = useState([]);
-
+    const [reply, setReply] = useState('');
     const getReplies = async () => {
-        const result =await fetchReplies({ commentId, repliespage })
-        setRepliespage(page=>page+1);
-        setReplies([...replies,...result]);
+        const result = await fetchReplies({ commentId, repliespage })
+        setRepliespage(page => page + 1);
+        setReplies([...replies, ...result]);
 
     }
-    const openReplies =async  () => {
-        if(repliespage===1) {
+    const openReplies = async () => {
+        if (repliespage === 1) {
             await getReplies();
         }
         setIsOpenReplies(prevReplies => !prevReplies)
@@ -29,24 +29,32 @@ export const ParentComment = ({ username, comment, commentedAt, likes, commentId
         <>
             <div className="parent-comment">
                 <ChildComment key={commentId} username={username} comment={comment} commentedAt={commentedAt} likes={likes} openReplies={openReplies} />
-                {isOpenReplies && <div className="replies" style={{ display: isOpenReplies ? "flex" : "none" }}>
-                    {
-                        replies[0] && replies.map(reply =>
-                            <blockquote key={reply._id}>
-                                <ChildComment username={reply.username} comment={reply.comment} commentedAt={reply.commentedAt} likes={reply.likes} isChild={true} />
-                            </blockquote>
-                        )
+                {isOpenReplies &&
+                    <div className="replies" style={{ display: isOpenReplies ? "flex" : "none" }}>
+                        <div className="add-comment">
+                            <input name="reply" id="add-comment" placeholder='Reply Here' value={reply} onChange={(e)=>setReply(e.target.value)}></input>
+                            <button id='add-comment-button' >
+                                Add
+                                {/* <i className="fa fa-angle-right"></i> */}
+                            </button>
+                        </div>
+                        {
+                            replies[0] && replies.map(reply =>
+                                <blockquote key={reply._id}>
+                                    <ChildComment username={reply.username} comment={reply.comment} commentedAt={reply.commentedAt} likes={reply.likes} isChild={true} />
+                                </blockquote>
+                            )
 
-                        ||
-                        <div style={{ textAlign: 'center' }}>No Replies</div>
-                    }
+                            ||
+                            <div style={{ textAlign: 'center' }}>No Replies</div>
+                        }
 
-                    <div className="load-more">
-                        <span>
-                            <i className="fa fa-angle-down" onClick={getReplies}>Load More</i>
-                        </span>
+                        <div className="load-more">
+                            <span>
+                                <i className="fa fa-angle-down" onClick={getReplies}>Load More</i>
+                            </span>
+                        </div>
                     </div>
-                </div>
                 }
             </div>
         </>
@@ -77,7 +85,7 @@ export const ChildComment = ({ username, comment, commentedAt, likes, isChild, o
                 </div>
                 <div className="comment-desc">{comment}</div>
                 <div className="comment-details">
-                    <i className="fa fa-heart" onClick={like} style={{color:likes.isLiked?"#ff2424":"#000"}}><span  >{likes.count} </span> Like</i>
+                    <i className="fa fa-heart" onClick={like} style={{ color: likes.isLiked ? "#ff2424" : "#000" }}><span  >{likes.count} </span> Like</i>
                     {!isChild &&
                         <i className="fa fa-comment" onClick={openReplies}><span>Replies</span></i>
                     }

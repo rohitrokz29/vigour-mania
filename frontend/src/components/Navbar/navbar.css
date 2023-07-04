@@ -7,7 +7,6 @@
 .navbar {
 	position: sticky;
 	top: 0;
-	background-color: #fff;
 	height: 10vh;
 	padding-inline: 2%;
 	border-bottom: 1px solid #ddd;
@@ -21,7 +20,7 @@
 
 	align-items: center;
 	width: 30vw;
-	background-color: #fff;
+	/* background-color: #fff; */
 
 }
 
@@ -61,7 +60,6 @@ ul {
 .list-item a {
 	cursor: pointer;
 
-	color: #090000c2;
 	font-size: 102%;
 	transition: border-bottom 0.5 ease-in;
 	width: 6vw;
@@ -88,7 +86,6 @@ ul {
 
 .list-item a:hover {
 	border-bottom: 2px solid red;
-	color: #020000;
 }
 
 

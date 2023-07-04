@@ -1,3 +1,11 @@
+
+
+* {
+  font-family: Calibri, Verdana;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 :root {
   margin: 0;
   padding: 0;
@@ -13,14 +21,31 @@
     0px 8px 7px #001135;
 }
 
-.light-text {
+.light-text-light {
   color: #330000d9;
 }
 
-.dark-text {
+.dark-text-light {
   color: #101010;
 }
-
+.light-text-dark{
+  color: #f6f4f4;
+}
+.dark-text-dark{
+  color: #c4c4c4;
+}
+.bg-lighter{
+  background-color: s;
+}
+.bg-light{
+  background-color: #f2f2f2;
+}
+.bg-darker{
+  background-color: #212020;
+}
+.bg-dark{
+  background-color: #585858;
+}
 .bold {
   font-weight: 600;
 }
@@ -44,13 +69,6 @@
     text-align: center;
     padding-inline-start: 0.5rem;
   }
-}
-
-* {
-  font-family: Calibri, Verdana;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 a {

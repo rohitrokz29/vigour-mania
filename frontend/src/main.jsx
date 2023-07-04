@@ -7,12 +7,15 @@ import App from './App.jsx';
 import './index.css';
 //user context to save state of user in app
 import { UserState } from './components/context/userContext.jsx';
+import { ThemeState } from './components/context/themeContext.jsx';
 
 // creating react element and rendering in html page with html element of  id "root"
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UserState>
-      <App />
+      <ThemeState>
+        <App />
+      </ThemeState>
     </UserState>
   </React.StrictMode>
 )

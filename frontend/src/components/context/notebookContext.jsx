@@ -23,7 +23,6 @@ export const NotebookState = ({ children }) => {
 
 
     const fetchNotes = async () => {
-
         try {
             setProgress(40);
             API.get(`/api/notes/${notebookPage}`)
@@ -40,7 +39,7 @@ export const NotebookState = ({ children }) => {
         }
 
     }
-    useEffect(() => { 
+    useEffect(() => {
         fetchNotes()
 
     }, [])

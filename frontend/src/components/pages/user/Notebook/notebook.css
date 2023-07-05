@@ -12,30 +12,31 @@
     overflow-y: auto;
 }
 
+
+
 .note-item {
     box-shadow: var(--light-box-shadow);
     border-radius: 5px;
 }
-
 .note-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 120%;
-    color: var(--dark-text-lt);
-    background-color: #d5d5d5;
     padding-inline: 1rem;
     line-height: 2rem;
     padding-block: 0.5rem;
     margin-block-start: 1rem;
 }
-.icons{
+
+.icons {
     width: 5rem;
     display: flex;
     justify-content: space-around;
     cursor: pointer;
-    &>.fa-trash-can{
-        color: rgb(185, 31, 31);
+
+    &>.fa-trash-can {
+        color: rgb(214, 41, 41);
     }
 }
 
@@ -44,11 +45,10 @@
     padding-block: 0.5rem;
     margin-inline: 0.5rem;
     max-height: 30vh;
-    overflow-y: auto;    
+    overflow-y: auto;
 }
 
 .add-note {
-    background-color: #dfdfdf;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -104,18 +104,20 @@
 .add-note-button {
     display: inline-block;
     align-items: center;
-    &:hover{
+
+    &:hover {
         background-color: #2023e6;
     }
 }
 
 
 @media (max-width:700px) {
-    .add-note{
+    .add-note {
         display: none;
     }
-    .note-container{
-        grid-template-columns:  1fr;
+
+    .note-container {
+        grid-template-columns: 1fr;
     }
 
 }

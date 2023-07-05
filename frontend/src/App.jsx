@@ -107,7 +107,7 @@ function App() {
               } />
 
 
-              <Route path='/journals' element={
+              <Route exact path='/journals' element={
                 isSignedIn ?
                   <JournalState>
                     <Suspense>

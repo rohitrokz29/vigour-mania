@@ -1,11 +1,8 @@
 .explore-box {
     display: flex;
     flex-direction: column;
-    margin-inline: 8%;
-    margin-block: 1%;
-    padding-inline: 2%;
-    padding-block: 1%;
-    /* background-color: #00000012; */
+    padding-inline: 10%;
+    padding-block: 2%;
     border-radius: 5px;
 }
 
@@ -59,14 +56,11 @@
     padding-inline: 1%;
     border-radius: 50px;
     border: 0px solid #000;
-    box-shadow: 2px 2px 5px #00000069;
-
-
-
+    box-shadow: 2px 2px 5px #97909069;
 }
 
 .exp-head>button:hover {
-    box-shadow: 2px 2px 8px black;
+    box-shadow: 2px 2px 8px rgb(125, 115, 115);
 }
 
 .exp-head>button>a:hover {
@@ -151,6 +145,8 @@
 }
 
 .evolve-info {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     padding: 2%;
     height: 80%;
     color: #f6eded;
@@ -166,6 +162,6 @@
     text-align: center;
 
     &>a:hover {
-        color: #000;
+        color: #878787;
     }
 }

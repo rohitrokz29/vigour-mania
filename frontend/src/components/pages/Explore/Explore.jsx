@@ -6,11 +6,15 @@ import { Spots, Evolve } from '../../cards/Explore';
 //styles  of  page
 import './explore.css'
 
+import { useThemeContext } from '../../hooks/useThemeContext';
+
+
 // Headings used in explore page
 const Head = ({ title, url }) => {
+	const { theme } = useThemeContext();
 	return (
 		<div className="exp-head">
-			<h1 className='dark-text' >{title}</h1>
+			<h1 className={`dark-text-${theme}`} >{title}</h1>
 			<button  ><Link to={url}>See All</Link></button>
 		</div>
 	)
@@ -20,7 +24,7 @@ Head.propTypes = {
 	url: PropTypes.string
 }
 const Explore = () => {
-
+	const { theme } = useThemeContext();
 	const spotlights = [
 		{
 			title: "Starters Zone",
@@ -42,7 +46,7 @@ const Explore = () => {
 			//direct to blogs if login
 			description: "Share your thoughts with others",
 			icon: "lightbulb",
-			path: "journals"
+			path: "/journals"
 		}
 	]
 	const evolve = [
@@ -84,13 +88,14 @@ const Explore = () => {
 		}
 
 	]
+
 	return (
 		<>
-			<div className="explore-box">
+			<div className={`explore-box bg-${theme}er`}>
 				<div className="explore-head">
-					<span className='light-text first-span'>Welcome to&nbsp; </span>
-					<h1 className='dark-text'>Vigour Mania</h1><br />
-					<span className='light-text'>Explore the world of Fitness and Sports</span>
+					<span className={`light-text-${theme} first-span`}>Welcome to&nbsp; </span>
+					<h1 className={`dark-text-${theme}`}>Vigour Mania</h1><br />
+					<span className={`light-text-${theme} first-span`}>Explore the world of Fitness and Sports</span>
 				</div>
 				<div className="spotlight">
 					<Head title="SpotLight" url="/spotlight" />

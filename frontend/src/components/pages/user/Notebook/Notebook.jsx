@@ -3,8 +3,10 @@ import { useNotebookContext } from '../../../hooks/useNotebookContext';
 import './notebook.css';
 import Note from './Note';
 import CompHead from '../../../cards/CompHead';
+import { useThemeContext } from '../../../hooks/useThemeContext';
 
 const Notebook = () => {
+  const {theme} =useThemeContext();
   const { notes, addNote } = useNotebookContext();
   const [isOpen, setIsOpen] = useState(false);
   const [note, setNote] = useState({ title: "", description: "" });
@@ -20,22 +22,22 @@ const Notebook = () => {
   return (
     <>
       <CompHead heading="Your Notes" isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div className="note-container">
+      <div className={`note-container bg-${theme}er`}>
         <div className="notes">
           {
             notes.map(item => <Note key={item._id} noteId={item._id} notedAt={item.notedAt} title={item.title} description={item.description} />)
           }
         </div>
-        <form onSubmit={handleSubmit} className={`note-item ${isOpen ? "add-form" : "add-note"}`} >
-          <div className="add-note-head dark-text large-text">New Note</div>
+        <form onSubmit={handleSubmit} className={`note-item ${isOpen ? "add-form" : "add-note"} bg-${theme} `} >
+          <div className={`add-note-head dark-text-${theme} large-text `}>New Note</div>
           <ul>
             <li className="note-input">
-              <label htmlFor='title'>Title:</label>
+              <label htmlFor='title' className={`dark-text-${theme}`}>Title:</label>
               <br />
               <input type="text" className='input' name='title' id='title' placeholder='Title' value={note.title} onChange={handleChange}/>
             </li>
             <li className="note-input ">
-              <label htmlFor="description">Description:</label>
+              <label htmlFor="description" className={`dark-text-${theme}`}>Description:</label>
               <br />
               <textarea name="description" className='input' id="description" placeholder='Description' value={note.description} onChange={handleChange} ></textarea>
             </li>

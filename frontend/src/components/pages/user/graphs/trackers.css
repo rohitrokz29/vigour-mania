@@ -21,6 +21,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    height: 80vh;
 }
 
 .trackers {
@@ -159,7 +160,6 @@
 .chart {
     margin-block: 0.5rem;
     width: 90%;
-
     &>label {
         cursor: pointer;
     }
@@ -175,7 +175,6 @@
 }
 
 .data-input {
-
     width: 5rem;
     height: 2rem;
     font-size: 1rem;

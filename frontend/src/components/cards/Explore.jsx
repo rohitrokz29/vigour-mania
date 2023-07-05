@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 //custom hooks
 import { useUserContext } from '../hooks/useUserContext';
+import { useThemeContext } from '../hooks/useThemeContext';
 
 //component for spotlight section 
 export const Spots = ({ title, description, path, index, icon }) => {
@@ -16,7 +17,7 @@ export const Spots = ({ title, description, path, index, icon }) => {
         <div className="spot-desc ">{description}</div>
       </div>
       <div className="spot-redir">
-        <Link to={isSignedIn ? path : '/signin'}>
+        <Link  to={isSignedIn ? path : '/signin'}>
           <i className={`fa fa-${icon}`}></i>
         </Link>
       </div>
@@ -36,6 +37,7 @@ Spots.propTypes = {
 //component for evolve section
 export const Evolve = ({ title, description, index, icon, path }) => {
   const { isSignedIn } = useUserContext();
+  const {theme}=useThemeContext();
   return (
     <>
       <div className='evolve'>
@@ -44,7 +46,7 @@ export const Evolve = ({ title, description, index, icon, path }) => {
           <div className="evolve-desc">{description}</div>
         </div>
         <div className="blank">
-          <Link to={isSignedIn ? path : '/signin'} className='dark-text '>Utilize Here</Link>
+          <Link to={isSignedIn ? path : '/signin'} className={`dark-text-${theme}`}>Utilize Here</Link>
         </div>
       </div>
 

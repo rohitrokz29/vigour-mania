@@ -22,7 +22,6 @@
 
     &>h2 {
         font-family: Georgia, 'Times New Roman', Times, serif;
-
     }
 
     &>.posted {
@@ -87,7 +86,7 @@
 }
 
 .load-more {
-    background: linear-gradient(#17111128 10%, #1711117f 40%, #171111c1 77%);
+    background: linear-gradient(#c3b1b1c1 10%, #8073737f 40%, #4f474728 77%);
     height: 3rem;
     width: 100%;
     margin-inline: 0.5rem;
@@ -95,18 +94,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
-    &>span {
-        cursor: pointer;
-        color: #ffffff;
-        text-align: center;
-        font-size: 110%;
-    }
-
-    &>span:hover {
-        color: #e0e0e0;
-    }
-
 }
 
 .journal-actions {
@@ -186,7 +173,8 @@
     outline: 1px solid #5460e8;
     background-color: #ccd6ed;
 }
-.add-comment #add-comment-button:hover{
+
+.add-comment #add-comment-button:hover {
     outline: 1px solid #0f1db7;
     background-color: #a9beee;
 

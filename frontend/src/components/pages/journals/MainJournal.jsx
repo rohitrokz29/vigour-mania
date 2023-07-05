@@ -4,10 +4,12 @@ import PropTypes from 'prop-types'
 import Image from '../../../assets/1.jpg'
 import { ParentComment } from './Comments'
 import { useJournalContext } from '../../hooks/useJournalContext'
+import { useThemeContext } from '../../hooks/useThemeContext'
 const MainJournal = () => {
     const { mainJournal, fetchComments, comments, likeJournal, addComment } = useJournalContext();
     const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false)
-    const [comment, setComment] = useState("")
+    const [comment, setComment] = useState("");
+    const {theme}=useThemeContext();
     const openComments = async () => {
         if (comments.length === 0) {
             await fetchComments({ journalId: mainJournal._id });
@@ -19,14 +21,14 @@ const MainJournal = () => {
     }
     return (
         <>
-            <div className="journal-title">
-                <h2>{mainJournal.title}</h2>
-                <span className="posted light-text">{mainJournal.postedAt.toString().slice(4, 16)}</span>
+            <div className="journal-title ">
+                <h2 className={`dark-text-${theme}`}>{mainJournal.title}</h2>
+                <span className={`posted light-text-${theme} `}>{mainJournal.postedAt.toString().slice(4, 16)}</span>
             </div>
             <div className="journal-image">
                 <img src={Image} alt="" />
             </div>
-            <div className="journal-desc">
+            <div className={`journal-desc dark-text-${theme}`}>
                 {
                     `${mainJournal.description.slice(0, 900)}`
                 }

@@ -49,7 +49,6 @@ export const UserState = ({ children }) => {
             }
         }
 
-
     }, []);
 
     return (

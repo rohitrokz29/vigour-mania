@@ -1,11 +1,10 @@
-
-
 * {
   font-family: Calibri, Verdana;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 :root {
   margin: 0;
   padding: 0;
@@ -28,24 +27,31 @@
 .dark-text-light {
   color: #101010;
 }
-.light-text-dark{
-  color: #f6f4f4;
-}
-.dark-text-dark{
+
+.light-text-dark {
   color: #c4c4c4;
 }
-.bg-lighter{
-  background-color: s;
+
+.dark-text-dark {
+  color: #f6f4f4;
 }
-.bg-light{
-  background-color: #f2f2f2;
+
+.bg-lighter {
+  background-color: #fff;
 }
-.bg-darker{
+
+.bg-light {
+  background-color: #ead9d9;
+}
+
+.bg-darker {
   background-color: #212020;
 }
-.bg-dark{
-  background-color: #585858;
+
+.bg-dark {
+  background-color: #454545;
 }
+
 .bold {
   font-weight: 600;
 }
@@ -63,12 +69,6 @@
   align-items: center;
   color: #363333;
 
-  &>span {
-    color: #363333;
-    font-weight: 300;
-    text-align: center;
-    padding-inline-start: 0.5rem;
-  }
 }
 
 a {
@@ -80,7 +80,6 @@ a {
 
 .active {
   border-bottom: 2px solid red;
-  color: #020000;
 }
 
 
@@ -156,14 +155,17 @@ a {
   align-items: center;
   max-width: 500px;
   padding-block: 0.5rem;
-  margin-block: 1rem;
-  margin-inline: 2%;
+
   padding-inline: 1rem;
   font-size: 2rem;
   box-shadow: var(--light-box-shadow);
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+.comp-head-outer {
+  padding: 2%;
 }
 
 .plus-button {
@@ -206,11 +208,7 @@ a {
 .line {
   grid-area: line;
   width: 10vw;
-  border: 2px solid #000000;
   margin-inline: 2px;
-
-  background: -webkit-linear-gradient(#090808, #f50303);
-  /* -webkit-background-clip: border; */
   -webkit-text-fill-color: transparent;
 
 
@@ -218,7 +216,6 @@ a {
 
 .dots {
   align-items: center;
-  /*	margin-top: 2%;*/
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-content: center;
@@ -226,19 +223,29 @@ a {
 
 }
 
-
 .dot {
   width: 5px;
-  border: 2px solid #000000;
   border-radius: 100%;
   margin-inline: 2px;
 }
 
+.dot-dark {
+  border: 2px solid #fff;
+}
+
+.dot-light {
+  border: 2px solid #000000;
+}
+.heading-light{
+  background: linear-gradient(#090808 40%, #f50303 67%);
+}
+.heading-dark{
+  background: linear-gradient(#f0f0f0 40%, #f50303 67%);
+}
 .heading {
   font-size: -webkit-xxx-large;
   font-variant-caps: all-petite-caps;
   font-style: oblique;
-  background: -webkit-linear-gradient(#090808 40%, #f50303 67%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 

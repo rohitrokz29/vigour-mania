@@ -8,32 +8,33 @@ import MainJournal from './MainJournal'
 import SideJournal from './SideJournal'
 //styles
 import './journal.css'
-import { useJournalContext } from '../../hooks/useJournalContext'
-
+import { useJournalContext } from '../../hooks/useJournalContext';
+import {useThemeContext} from '../../hooks/useThemeContext';
 
 
 const Journals = () => {
     const { allJournals, mainJournal, fetchJournals } = useJournalContext();
+    const {theme}=useThemeContext();
     const getJournals = async () => {
         await fetchJournals();
     }
 
     return (
         <>
-            <div className="journal-container">
+            <div className={`journal-container bg-${theme}er`}>
                 <div className="main-journal">
                     <Heads heading="Weekly Journal" />
                     {mainJournal && <MainJournal />
                     }
                 </div>
-                <div className="side-journals">
-                    <h2>Previous Journals</h2>
+                <div className="side-journals ">
+                    <h2 className={`dark-text-${theme}`}>Previous Journals</h2>
                     {
                         allJournals.map((item, index) => <SideJournal key={index} journalId={item._id} title={item.title} description={item.description} postedAt={item.postedAt} />)
                     }
                     <div className="load-more " onClick={getJournals}>
                         <span>
-                            <i className="fa fa-angle-down" >Load More</i>
+                            <i className="fa fa-angle-down " ><span className={`dark-text-${theme}`}>Load More</span></i>
                         </span>
                     </div>
                 </div>

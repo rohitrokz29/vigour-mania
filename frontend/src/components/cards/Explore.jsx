@@ -9,7 +9,7 @@ import { useThemeContext } from '../hooks/useThemeContext';
 export const Spots = ({ title, description, path, index, icon }) => {
   //user state -isSignedIn
   const { isSignedIn } = useUserContext();
-
+  const {theme}=useThemeContext()
   return (<>
     <div className={`spot bg-${index % 3}`} >
       <div className="spot-info" >
@@ -18,7 +18,7 @@ export const Spots = ({ title, description, path, index, icon }) => {
       </div>
       <div className="spot-redir">
         <Link  to={isSignedIn ? path : '/signin'}>
-          <i className={`fa fa-${icon}`}></i>
+          <i className={`fa fa-${icon} dark-text-${theme}`}></i>
         </Link>
       </div>
     </div>

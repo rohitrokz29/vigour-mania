@@ -86,7 +86,7 @@ export const JournalState = ({ children }) => {
     const fetchJournals = async () => {
 
         setMainJournal({title:"This is title",description:desc,postedAt:date,likes:{count:5,isLiked:true}});
-        setAllJournals([...allJournals]);
+        setAllJournals([...allJournals,...journals]);
         try {
             API.get(`/api/journals/all/${journalPage}`)
                 .then(response => {

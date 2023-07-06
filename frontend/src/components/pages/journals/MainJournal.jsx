@@ -9,14 +9,14 @@ const MainJournal = () => {
     const { mainJournal, fetchComments, comments, likeJournal, addComment } = useJournalContext();
     const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false)
     const [comment, setComment] = useState("");
-    const {theme}=useThemeContext();
+    const { theme } = useThemeContext();
     const openComments = async () => {
         if (comments.length === 0) {
             await fetchComments({ journalId: mainJournal._id });
         }
         setIsCommentBoxOpen(isCommentBoxOpen => !isCommentBoxOpen);
     }
-    const handleAddComment =async  () => {
+    const handleAddComment = async () => {
         await addComment({ comment })
     }
     return (
@@ -28,7 +28,7 @@ const MainJournal = () => {
             <div className="journal-image">
                 <img src={Image} alt="" />
             </div>
-            <div className={`journal-desc dark-text-${theme}`}>
+            <div className={`journal-desc-main dark-text-${theme}`}>
                 {
                     `${mainJournal.description.slice(0, 900)}`
                 }
@@ -39,7 +39,7 @@ const MainJournal = () => {
             </div>
             <div className="journal-actions">
                 <div>
-                    <div className="dark-text comments" >
+                    <div className="dark-text-light comments" >
                         <span>Comments</span>
                         <i className={`fa fa-angle-${isCommentBoxOpen ? "up" : "down"} bold`} onClick={openComments} ></i>
                     </div>
@@ -71,7 +71,7 @@ const MainJournal = () => {
                     }
                     <div className="load-more">
                         <span>
-                            <i className="fa fa-angle-down" onClick={() => fetchComments({ journalId: mainJournal._id })}>Load More</i>
+                            <i className="fa fa-angle-down " ><span className={`dark-text-${theme}`}>Load More</span></i>
                         </span>
                     </div>
                 </div>

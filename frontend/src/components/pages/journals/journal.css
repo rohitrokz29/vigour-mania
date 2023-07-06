@@ -16,6 +16,10 @@
 
 }
 
+.journal-desc-main {
+    padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+}
+
 .journal-title {
     padding: 0 0 0.5rem 0.5rem;
     gap: 2rem;
@@ -94,6 +98,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .journal-actions {
@@ -188,7 +193,7 @@
     padding-block: 0.5rem;
     margin-block: 0.25rem;
     padding-inline: 0.5rem;
-    background-color: #ddd;
+    background-color: #b7b6b6;
     border-radius: 1rem;
 
     &>.comment-name {
@@ -219,6 +224,10 @@
             cursor: pointer;
         }
     }
+}
+.fa span{
+    margin-inline: 0.25rem;
+    font-weight: normal;
 }
 
 .replies {

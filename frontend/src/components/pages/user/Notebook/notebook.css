@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
-
+    height: 75vh;
 }
 
 .notes {
@@ -18,6 +18,7 @@
     box-shadow: var(--light-box-shadow);
     border-radius: 5px;
 }
+
 .note-title {
     display: flex;
     justify-content: space-between;
@@ -34,10 +35,10 @@
     display: flex;
     justify-content: space-around;
     cursor: pointer;
+}
 
-    &>.fa-trash-can {
-        color: rgb(214, 41, 41);
-    }
+.fa-trash-can {
+    color: #fe3434;
 }
 
 .note-desc {

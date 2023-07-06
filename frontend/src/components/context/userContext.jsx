@@ -25,14 +25,14 @@ export const UserState = ({ children }) => {
     const [state, dispatch] = useReducer(userReducer, { user: null })
     const [progress, setProgress] = useState(0)
     useEffect(() => {
-        const user=JSON.parse(localStorage.getItem('vmuser'))
+        const user = JSON.parse(localStorage.getItem('vmuser'))
         console.log(user)
         if (user) {
             if (user.authTokenExpiry <= Date.now()) {
                 API.post('/api/user/refresh')
                     .then((result) => {
                         console.log(result)
-                        user.authTokenExpiry=result.authTokenExpiry
+                        user.authTokenExpiry = result.authTokenExpiry
                         localStorage.setItem('vmuser', user)
                         dispatch({ type: 'signin', payload: user })
                         setIsSignedIn(true);
@@ -48,7 +48,7 @@ export const UserState = ({ children }) => {
                 setIsSignedIn(true)
             }
         }
-
+        setIsSignedIn(true);
     }, []);
 
     return (

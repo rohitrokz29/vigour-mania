@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { useJournalContext } from '../../hooks/useJournalContext'
+import { useThemeContext } from '../../hooks/useThemeContext'
 
 export const ParentComment = ({ username, comment, commentedAt, likes, commentId }) => {
-    const date = new Date()
 
+    const { theme } = useThemeContext();
     const { fetchReplies } = useJournalContext();
     const [isOpenReplies, setIsOpenReplies] = useState(false);
     const [repliespage, setRepliespage] = useState(1);
@@ -18,6 +19,7 @@ export const ParentComment = ({ username, comment, commentedAt, likes, commentId
 
     }
     const openReplies = async () => {
+
         if (repliespage === 1) {
             await getReplies();
         }
@@ -32,7 +34,7 @@ export const ParentComment = ({ username, comment, commentedAt, likes, commentId
                 {isOpenReplies &&
                     <div className="replies" style={{ display: isOpenReplies ? "flex" : "none" }}>
                         <div className="add-comment">
-                            <input name="reply" id="add-comment" placeholder='Reply Here' value={reply} onChange={(e)=>setReply(e.target.value)}></input>
+                            <input name="reply" id="add-comment" placeholder='Reply Here' value={reply} onChange={(e) => setReply(e.target.value)}></input>
                             <button id='add-comment-button' >
                                 Add
                                 {/* <i className="fa fa-angle-right"></i> */}
@@ -51,7 +53,7 @@ export const ParentComment = ({ username, comment, commentedAt, likes, commentId
 
                         <div className="load-more">
                             <span>
-                                <i className="fa fa-angle-down" onClick={getReplies}>Load More</i>
+                                <i className="fa fa-angle-down " ><span className={`dark-text-${theme}`}>Load More</span></i>
                             </span>
                         </div>
                     </div>
@@ -78,14 +80,14 @@ export const ChildComment = ({ username, comment, commentedAt, likes, isChild, o
     return (
         <>
 
-            <div className="comment">
+            <div className="comment ">
                 <div className="comment-name">
                     <Link to={`/user/${username}`} className="username">{username}</Link>
                     <div className="journal-date light-text">{commentedAt.toString().slice(4, 16)}</div>
                 </div>
                 <div className="comment-desc">{comment}</div>
                 <div className="comment-details">
-                    <i className="fa fa-heart" onClick={like} style={{ color: likes.isLiked ? "#ff2424" : "#000" }}><span  >{likes.count} </span> Like</i>
+                    <i className="fa fa-heart" onClick={like} style={{ color: likes.isLiked ? "#ff2424" : "#000" }}><span  >{likes.count} </span> </i>
                     {!isChild &&
                         <i className="fa fa-comment" onClick={openReplies}><span>Replies</span></i>
                     }
@@ -96,7 +98,6 @@ export const ChildComment = ({ username, comment, commentedAt, likes, isChild, o
     )
 }
 ChildComment.propTypes = {
-
     username: PropTypes.string.isRequired,
     comment: PropTypes.string.isRequired,
     commentedAt: PropTypes.instanceOf(Date).isRequired,

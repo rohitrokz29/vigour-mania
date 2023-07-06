@@ -23,14 +23,14 @@ const Journals = () => {
         <>
             <div className={`journal-container bg-${theme}er`}>
                 <div className="main-journal">
-                    <Heads heading="Weekly Journal" />
+                    <Heads heading="Weekly Journal" /> 
                     {mainJournal && <MainJournal />
                     }
                 </div>
                 <div className="side-journals ">
                     <h2 className={`dark-text-${theme}`}>Previous Journals</h2>
                     {
-                        allJournals.map((item, index) => <SideJournal key={index} journalId={item._id} title={item.title} description={item.description} postedAt={item.postedAt} />)
+                        allJournals.map((item, index) => <SideJournal key={item._id} journalId={item._id} title={item.title} description={item.description} postedAt={item.postedAt} />)
                     }
                     <div className="load-more " onClick={getJournals}>
                         <span>

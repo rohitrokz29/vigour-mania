@@ -12,6 +12,7 @@ const Tracks = lazy(() => import('./components/pages/user/graphs/Tracks'));
 const Error = lazy(() => import('./components/pages/ErrorPage/Error'));
 const Notebook = lazy(() => import('./components/pages/user/Notebook/Notebook'));
 const Journals = lazy(() => import('./components/pages/journals/Journals'));
+const Report = lazy(() => import('./components/pages/Report/Report'))
 //custom hooks  
 import { useUserContext } from './components/hooks/useUserContext';
 //contexts to store chart and notes state
@@ -117,7 +118,9 @@ function App() {
                   : <Navigate to='/signin' replace />
               } />
 
-
+              <Route exact path='/report' element={
+                <Report />
+              } />
 
             </Route>
             <Route path="*" element={<Error />} />

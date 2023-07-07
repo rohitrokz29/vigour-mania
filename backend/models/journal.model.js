@@ -14,10 +14,7 @@ const journalSchema = new mongoose.Schema({
         required: true,
         minlength: 50
     },
-    likes: {
-        type: Number,
-        default: 0
-    },
+    likes: [{ type: mongoose.Types.ObjectId }],
     postedAt: {
         type: Date,
         default: Date.now
@@ -36,10 +33,7 @@ const journalSchema = new mongoose.Schema({
                 type: Date,
                 default: Date.now
             },
-            likes: {
-                type: Number
-            }
-
+            likes: [{ type: mongoose.Types.ObjectId }]
         }
     ]
 
@@ -65,7 +59,7 @@ journalSchema.statics.addJournal = async function addJournal({ title, descriptio
 /*
 fetching Journals from  the database---  to be used in controller function for journalRouter
 */
-journalSchema.statics.getJournal = function getJournal({ page }) {
+journalSchema.statics.getJournals = function getJournals({ page }) {
     try {
         /*
          journalsLength=== Number of journals to fetch per page i.sent every time user scrolls
@@ -92,11 +86,15 @@ journalSchema.statics.getJournal = function getJournal({ page }) {
         
             process goes with-->find-->sort(likes,postedAt)-->limit->select 
              */
-        const journalsLength = 5;
+        /**
+         * Todo for   ->page ===1 give mainJournal with list not containing main journal as latest journal
+         *Todo          ->page>1 give only list of other journals
+         *  
+         */
         return this.find({})
-            .sort({ likes: -1, postedAt: -1 })
+            .sort({  postedAt: -1 })
             .skip((page - 1) * journalsLength)
-            .limit(journalsLength)
+            .limit(10)
             .select('title description likes  postedAt');
 
     } catch (error) {
@@ -105,11 +103,14 @@ journalSchema.statics.getJournal = function getJournal({ page }) {
 }
 
 //adding comment to the journal
-journalSchema.statics.addComment=function addComment({blog_id,username,comment}){
+journalSchema.statics.addComment = function addComment({ blog_id, username, comment }) {
 
-//REMAINING TO COMPLETE
+    //REMAINING TO COMPLETE
 
-    console.log({blog_id,username,comment});
+    console.log({ blog_id, username, comment });
 }
 
+journalSchema.statics.getComments=function getComments({journalId,page}){
+    
+}
 module.exports = mongoose.model('journals', journalSchema);

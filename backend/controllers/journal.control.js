@@ -14,18 +14,22 @@ const addJournal = async (req, res) => {
 //to get journals contigously
 const getJournals = async (req, res) => {
     try {
-        const data = await Journal.getJournal({ page } = req.body);
+        const { pageNo } = req.params;
+        const data = await Journal.getJournals({ page: pageNo });
         /*hasMore sends
          true -->  if more journals are present in database 
          and
          false --> if no more data is present
         */
-        res.status(200).json({ data, hasMore: data.length < 5 ? false : true });
+        res.status(200).json({ data, hasMore: data.length === 10 });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 }
+//get one journal (main Journal)
+const getMainJournal = async (req, res) => {
 
+}
 const addComment = async (req, res) => {
     //Remaining to complete
     try {
@@ -41,18 +45,19 @@ const getComments = async (req, res) => {
 
 }
 
-const likeJournal=async (req,res)=>{
+const likeJournal = async (req, res) => {
 
 }
 
 
-const likeComment=async(req,res)=>{
+const likeComment = async (req, res) => {
 
 }
 //exporting controller methods
 module.exports = {
     addJournal,
     getJournals,
+    getMainJournal,
     addComment,
     getComments,
     likeJournal,

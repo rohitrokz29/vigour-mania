@@ -6,7 +6,7 @@
     height: 90dvh;
 }
 
-.report-form .report-side,
+/* .report-form .report-side, */
 .report-form .form {
     height: 70vh;
 }
@@ -16,8 +16,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    padding-inline: 1rem;
+    text-align: center;
 }
 
 .report-side h2,
@@ -27,10 +27,10 @@
 
 .report-form .form {
     display: flex;
+    padding-inline: 0.5rem;
     flex-direction: column;
     justify-content: space-around;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    padding-block-end: 1rem;
 }
 
 .report-input {
@@ -63,4 +63,23 @@
 
 .report-check input {
     height: 1rem;
+}
+
+@media (min-width:700px) {
+    .report-form .report-side{
+        height: 70vh;
+    }
+}
+@media (max-width:700px) {
+    .report-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        height: inherit;
+    }
+    .report-side{
+        height: 30vh;
+        margin: 0;
+        /* padding: 0; */
+    }
 }

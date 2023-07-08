@@ -63,6 +63,9 @@
 .large-text {
   font-size: 1.5rem;
 }
+.mid-text{
+  font-size: 110%;
+}
 
 .fa,
 .fa-solid {
@@ -152,7 +155,7 @@ a {
 .comp-head {
   color: var(--dark-text-lt);
   align-items: center;
-  max-width: 500px;
+  /* max-width: 500px; */
   padding-block: 0.5rem;
 
   padding-inline: 1rem;

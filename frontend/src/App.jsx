@@ -19,6 +19,7 @@ import { useUserContext } from './components/hooks/useUserContext';
 import { ChartState } from './components/context/chartContext';
 import { NotebookState } from './components/context/notebookContext';
 import { JournalState } from './components/context/JournalsContext';
+import FallbackComp from './components/cards/FallbackComp';
 
 
 function App() {
@@ -46,28 +47,28 @@ function App() {
         <Routes>
           <Route path="/" >
             <Route element={isSignedIn ? <Navigate to="/explore" replace /> :
-              <Suspense>
+              <Suspense fallback={<FallbackComp />}>
                 <Navbar />
               </Suspense>} >
 
               <Route exact path="/" element={
-                <Suspense>
+                <Suspense fallback={<FallbackComp />}>
                   <Home />
                 </Suspense>} />
 
               <Route path="/signin" element={
-                <Suspense>
+                <Suspense fallback={<FallbackComp />}>
                   <Accounts />
                 </Suspense>} />
 
               <Route path="/signup" element={
-                <Suspense>
+                <Suspense fallback={<FallbackComp />}>
                   <Accounts />
                 </Suspense>} />
             </Route>
 
             <Route element={
-              <Suspense>
+              <Suspense fallback={<FallbackComp />}>
                 <Navbar
                   isSignedIn={isSignedIn}
                   username={user ? user.username : null} />
@@ -75,20 +76,20 @@ function App() {
             }
             >
               <Route exact path='/explore' element={
-                <Suspense>
+                <Suspense fallback={<FallbackComp />}>
                   <Explore />
                 </Suspense>} />
 
 
               <Route path='/user/:username' element={
-                <Suspense>
+                <Suspense fallback={<FallbackComp />}>
                   <Profile />
                 </Suspense>} />
 
 
               <Route path='/my-trackers' element={
                 isSignedIn ?
-                  <Suspense>
+                  <Suspense fallback={<FallbackComp />}>
                     <ChartState>
                       <Tracks />
                     </ChartState>
@@ -99,7 +100,7 @@ function App() {
 
               <Route path='/my-notebooks' element={
                 isSignedIn ?
-                  <Suspense>
+                  <Suspense fallback={<FallbackComp />}>
                     <NotebookState>
                       <Notebook />
                     </NotebookState>
@@ -111,7 +112,7 @@ function App() {
               <Route exact path='/journals' element={
                 isSignedIn ?
                   <JournalState>
-                    <Suspense>
+                    <Suspense fallback={<FallbackComp />}>
                       <Journals />
                     </Suspense>
                   </JournalState>
@@ -119,16 +120,23 @@ function App() {
               } />
 
               <Route exact path='/report' element={
-                <Report />
+                <Suspense fallback={<FallbackComp />}>
+                  <Report />
+                </Suspense>
               } />
 
             </Route>
-            <Route path="*" element={<Error />} />
+            <Route path="*" element={
+              <Suspense fallback={<FallbackComp />} >
+                <Error/>
+              </Suspense>
+            } />
           </Route>
         </Routes>
       </BrowserRouter >
     </>
   )
+
 }
 
 export default App

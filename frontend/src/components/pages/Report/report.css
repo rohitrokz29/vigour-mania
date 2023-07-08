@@ -1,0 +1,66 @@
+.report-form {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    padding-inline: 20vw;
+    height: 90dvh;
+}
+
+.report-form .report-side,
+.report-form .form {
+    height: 70vh;
+}
+
+.report-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.report-side h2,
+.report-side h4 {
+    margin-block: 0.5rem;
+}
+
+.report-form .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.report-input {
+    margin-block: 0.5rem;
+}
+
+.report-input input,
+.report-input select,
+.report-input textarea {
+    width: 90%;
+    padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+    font-size: 110%;
+    align-self: flex-end;
+}
+
+.report-input-button {
+    display: flex;
+    justify-content: center;
+}
+
+.report-input label {
+    display: block;
+}
+
+.report-check {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 5fr;
+}
+
+.report-check input {
+    height: 1rem;
+}

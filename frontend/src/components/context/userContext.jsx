@@ -48,7 +48,6 @@ export const UserState = ({ children }) => {
                 setIsSignedIn(true)
             }
         }
-        setIsSignedIn(true);
     }, []);
 
     return (

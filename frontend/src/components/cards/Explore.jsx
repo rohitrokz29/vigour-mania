@@ -16,9 +16,9 @@ export const Spots = ({ title, description, path, index, icon }) => {
         <div className="spot-title  ">{title}</div>
         <div className="spot-desc ">{description}</div>
       </div>
-      <div className="spot-redir">
+      <div className="spot-redir ">
         <Link  to={isSignedIn ? path : '/signin'}>
-          <i className={`fa fa-${icon} dark-text-${theme}`}></i>
+          <i className={`fa fa-${icon} }`}></i>
         </Link>
       </div>
     </div>

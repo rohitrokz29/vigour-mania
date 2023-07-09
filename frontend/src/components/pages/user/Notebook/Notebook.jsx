@@ -6,15 +6,15 @@ import CompHead from '../../../cards/CompHead';
 import { useThemeContext } from '../../../hooks/useThemeContext';
 
 const Notebook = () => {
-  const {theme} =useThemeContext();
-  const { notes, addNote } = useNotebookContext();
+  const { theme } = useThemeContext();
+  const { notes, addNote, fetchNotes , hasMoreNotes } = useNotebookContext();
   const [isOpen, setIsOpen] = useState(false);
   const [note, setNote] = useState({ title: "", description: "" });
 
   const handleChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   }
-  const handleSubmit =async  (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await addNote(note)
 
@@ -25,8 +25,20 @@ const Notebook = () => {
       <div className={`note-container bg-${theme}er`}>
         <div className="notes">
           {
-            notes.map(item => <Note key={item._id} noteId={item._id} notedAt={item.notedAt} title={item.title} description={item.description} />)
+            //TODO All notes are not mapped properly
+           notes.length>0&& notes.map(item => <Note key={item._id} noteId={item._id} notedAt={item.notedAt} title={item.title} description={item.description} />)
           }
+          {
+            hasMoreNotes
+            &&
+            <div className="load-more " onClick={fetchNotes}>
+              <span>
+                <i className="fa fa-angle-down " ><span className={`dark-text-${theme}`}>Load More</span></i>
+              </span>
+            </div>
+
+          }
+
         </div>
         <form onSubmit={handleSubmit} className={`note-item ${isOpen ? "add-form" : "add-note"} bg-${theme} `} >
           <div className={`add-note-head dark-text-${theme} large-text `}>New Note</div>
@@ -34,7 +46,7 @@ const Notebook = () => {
             <li className="note-input">
               <label htmlFor='title' className={`dark-text-${theme}`}>Title:</label>
               <br />
-              <input type="text" className='input' name='title' id='title' placeholder='Title' value={note.title} onChange={handleChange}/>
+              <input type="text" className='input' name='title' id='title' placeholder='Title' value={note.title} onChange={handleChange} />
             </li>
             <li className="note-input ">
               <label htmlFor="description" className={`dark-text-${theme}`}>Description:</label>
@@ -45,7 +57,7 @@ const Notebook = () => {
           <div className="note-buttons">
 
             <button type='submit' className="add-button  add-note-button" >Add Note</button>
-            <button type='reset' className="add-button  add-note-button" onClick={()=>setNote({title:"",description:""})}>Reset</button>
+            <button type='reset' className="add-button  add-note-button" onClick={() => setNote({ title: "", description: "" })}>Reset</button>
           </div>
         </form>
       </div>

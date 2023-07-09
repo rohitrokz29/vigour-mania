@@ -33,4 +33,4 @@ userRouter.get('/:username', GetUser)
 userRouter.put('/edit/details', userAuth, UpdateUser);
 
 //*Exporting router 
-module.exports = userRouter
+module.exports = {userRouter}

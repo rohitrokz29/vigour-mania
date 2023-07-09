@@ -9,6 +9,7 @@ const validator = require("validator");
 
 //bcryptjs for password hashing
 const bcryptjs = require('bcryptjs');
+const notesModel = require('./notes.model');
 
 const chartSchema = new mongoose.Schema({
 
@@ -52,7 +53,7 @@ const userSchema = new mongoose.Schema({
 userSchema.statics.signup = async function signup({ email, password, username }) {
     //validating email,password and username
 
-
+console.log({email,password,username})
     try {
         if (!validator.isEmail(email)) {
             throw new Error("Invalid Email", { statusCode: 406 });
@@ -84,6 +85,8 @@ userSchema.statics.signup = async function signup({ email, password, username })
         //creating user and saving in DB
         const user = new this({ email, username, password: hashPassword, user: { username, email } });
         user.save();
+        const newNotes=new notesModel({userId:user._id});
+        newNotes.save();
         return { username: user.user.username, _id: user._id };
     }
     catch (err) {

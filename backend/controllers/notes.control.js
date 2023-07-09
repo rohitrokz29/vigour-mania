@@ -1,28 +1,31 @@
 const Notes = require('../models/notes.model')
 const GetNotes = async (req, res) => {
     try {
-        const notesData = await Notes.getNotes({ userId: req._id })
+        const { pageNo } = req.params;
+        const notesData = await Notes.getNotes({ userId: req._id, pageNo })
+        return res.status(200).json(notesData)
     } catch (error) {
-        return res.json({ message: error.message })
+        return res.status(500).json({ message: error.message })
     }
 }
 
 const AddNote = async (req, res) => {
     try {
-        // req.body={
-        //     title,data
-        //     }
-        const result = await Notes.addNote({ userId: req._id, body: req.body })
-    } catch (error) {
 
+        const result = await Notes.addNote({ userId: req._id, body: req.body })
+        return res.status(200).json(result);
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
     }
 }
 
 const DeleteNote = async (req, res) => {
     try {
-        const result = await Notes.deleteNote({ userId: req._id, noteId: req.params.noteId })
+        const {noteId}=req.params;
+        const result = await Notes.deleteNote({ userId: req._id, noteId });
+        return res.status(200).json(result)
     } catch (error) {
-
+        return res.status(500).json({ message: error.message })
     }
 }
 

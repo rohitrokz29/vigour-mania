@@ -25,7 +25,8 @@ const Signup = async (req, res) => {
     try {
         //*Signing up user //
         //*below User.signup function exists in user model
-        const user = await User.signup(req.body);
+        const {body}=req;
+        const user = await User.signup(body);
         //*user found -302
         
         const accessToken = CreateAccessToken(user._id);
@@ -34,7 +35,7 @@ const Signup = async (req, res) => {
         const newRefreshTokenId = await RefreshToken.newRefreshToken(refreshToken)
         //*refreshToken  stored
         const refreshTokenExpiry=Date.now()+5*24*60*60*1000;
-        const authTokenExpiry=Date.now()+24 * 60 * 60 * 1000
+        const authTokenExpiry=Date.now()+24 * 60 * 60 * 1000;
 
         //*sending auth token and refresh token in the cookies
         res

@@ -9,12 +9,20 @@ const notesSchema = new mongoose.Schema({
             notedAt: { type: Date, default: new Date(), immutable: true }
         }
     ],
-    _id: false
 })
 
-notesSchema.statics.getNotes = async function getNotes({ userId }) {
+notesSchema.statics.getNotes = async function getNotes({ userId, pageNo }) {
     try {
-        return await this.findOne({ userId }).select("notes").sort({ "notes.notedAt": -1 })
+        const notes = await this.findOne({ userId })
+            // .select('notes ')
+            .select("notes ")
+            .sort({ "notes.notedAt": -1 })
+            .slice('notes', [(pageNo - 1) * 10, (pageNo - 1) * 10 + 10])
+            .lean()
+            .exec()
+
+        return { notes: notes.notes, hasMore: notes.notes.length === 10 }
+
     } catch (error) {
 
     }
@@ -24,10 +32,15 @@ notesSchema.statics.addNote = async function addNote({ userId, body }) {
     try {
         const result = await this.updateOne({ userId }, {
             $push: {
-                notes: { $each: [{ body }], $position: 0 }
+                notes: { $each: [body], $position: 0 }
             }
-        }, { new: true }).select('notes')
-        return result[0];
+        }, { new: true })
+            .lean()
+            .exec()
+        const {notes} = await this.findOne({ userId })
+            .select({ notes: { $slice: [0, 1] } })
+            .exec()
+        return notes[0];
 
     } catch (error) {
 
@@ -36,8 +49,14 @@ notesSchema.statics.addNote = async function addNote({ userId, body }) {
 notesSchema.statics.deleteNote = async function ({ userId, noteId }) {
     try {
         const result = await this.updateOne({ userId }, {
-             $pull: { charts: { _id: chartId } } }
-        )
+            $pull: {
+                notes: { _id: noteId }
+            }
+        })
+            .lean()
+            .exec()
+
+        return result;
     } catch (error) {
 
     }

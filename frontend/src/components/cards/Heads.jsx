@@ -4,7 +4,7 @@ import { useThemeContext } from '../hooks/useThemeContext';
 const Heads = ({ heading, id }) => {
 	const { theme } = useThemeContext();
 	return (
-		<div className="head" id={id}>
+		<div className="head" id={id} >
 			<div className="dash ">
 				<div className="dots">
 					<div className={`dot dot-${theme}`}></div>

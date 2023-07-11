@@ -71,6 +71,12 @@ app.use('/api/comments', commentRouter);
  */
 app.use('/api/replies',repliesRouter);
 
+/**
+ * report
+ */
+app.post('/contact',(req,res)=>{
+
+})
 
 /*
 connecting server to mongodb database and starting the server after connection made succesfully

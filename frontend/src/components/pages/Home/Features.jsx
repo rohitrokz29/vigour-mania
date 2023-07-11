@@ -28,7 +28,7 @@ const Features = () => {
 			"image": diets
 		},
 		{
-			"heading": "	Receive top-notch health recommendations",
+			"heading": "Receive top-notch health recommendations",
 			"description": "Elevate your well-being with premier health recommendations. Unlock your potential, embrace vitality, and thrive with our top-notch guidance. Your journey to optimal health starts here, with us by your side.",
 			"image": advices
 		},
@@ -48,7 +48,7 @@ const Features = () => {
 	return (
 		<>
 			<Heads heading={"Features"} id={"features"} />
-			<div className="box">
+			<div className="box" role='features' >
 				{cards.map((ele, index) => {
 					return (
 						<div key={index} className={`box-${index % 2}`} >
@@ -56,7 +56,7 @@ const Features = () => {
 								<img className={`image-${index % 2} img-0`} src={ele.image} alt="image" />
 							</div>
 							<div className={`info info-${index % 2}`}>
-								<h2>{ele.heading}</h2>
+								<h2 >{ele.heading}</h2>
 								<p>{ele.description}</p>
 							</div>
 						</div>

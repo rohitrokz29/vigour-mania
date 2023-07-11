@@ -6,6 +6,7 @@ import whatsapp from '../../../assets/whatsapp.png';
 import insta from '../../../assets/instagram.png';
 import gmail from '../../../assets/gmail.png';
 import location from '../../../assets/location.png';
+import API from '../../api/api';
 
 const Contacts = () => {
 
@@ -21,7 +22,7 @@ const Contacts = () => {
 	//on sending contact request
 	const sendRequest = (e) => {
 		e.preventDefault();
-//TODO sending the response to server is remaining
+		API.post('/contact',data);
 	}
 
 	return (
@@ -35,24 +36,24 @@ const Contacts = () => {
 					</p>
 					<ul className="ways">
 						<li>
-							<img src={location} alt="L" />
+							<img src={location} alt="Location" />
 							<p className="location">
 								Vigour Mania,134 Fitness Park,near City Mall, Dummy City, 443412
 							</p>
 						</li>
 						<li>
-							<img src={whatsapp} alt="L" />
+							<img src={whatsapp} alt="whatsapp" />
 							<p className="whatsapp">
 								+91 987654321
 							</p>
 						</li>
 						<li>
-							<img src={gmail} alt="L" />
+							<img src={gmail} alt="gmail" />
 							<p className="gmail">
 								<a href="/#">r.s.kharche0098@gmail.com</a>
 							</p>
 						</li><li>
-							<img src={insta} alt="L" />
+							<img src={insta} alt="insta" />
 							<p className="insta">
 								<a href="">vigour_mania_134</a>
 							</p>
@@ -62,16 +63,16 @@ const Contacts = () => {
 				<form onSubmit={sendRequest} className="contact-form">
 					<h3>Fill the Form to Get in touch with Us</h3>
 					<div className="input-container">
-						<label className="fa fa-user icon" htmlFor="name" ></label>
-						<input className="input-field" type="text" autoComplete='on' placeholder="Your Name" name="name" id="name" value={data.name} onChange={handleChange} />
+						<label className="fa fa-user icon" htmlFor="name" />
+						<input className="input-field" type="text" autoComplete='off' placeholder="Your Name" name="name" id="name" value={data.name} onChange={handleChange} />
 					</div>
 					<div className="input-container">
-						<label className="fa fa-envelope icon" htmlFor="email" ></label>
-						<input className="input-field" type="email" autoComplete='on' placeholder="Email" name="email" id="email" value={data.email} onChange={handleChange} />
+						<label className="fa fa-envelope icon" htmlFor="email" />
+						<input className="input-field" type="email" autoComplete='off' placeholder="Email" name="email" id="email" value={data.email} onChange={handleChange} />
 					</div>
 					<div className="input-container">
-						<label className="fa fa-phone icon" htmlFor="mobile"></label>
-						<input className="input-field" type="tel" autoComplete='on' placeholder="Mobile Number" name="mobile" id='mobile' value={data.mobile} onChange={handleChange} />
+						<label className="fa fa-phone icon" htmlFor="mobile"/>
+						<input className="input-field" type="tel" autoComplete='off' placeholder="Mobile Number" name="mobile" id='mobile' value={data.mobile} onChange={handleChange} />
 					</div>
 					<button type="submit" className="btn">Send Request</button>
 				</form>

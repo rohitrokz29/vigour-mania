@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //styles
 import './home.css';
 //components
@@ -18,14 +18,15 @@ const Home = () => {
 					<h1>Fitness & Sports</h1>
 				</div>
 				<div className="home-3">
-					<Link to="/signup">
-					Join Us
-						</Link>
+
+					<Link  to="/signup">
+						Join Us
+					</Link>
 				</div>
 			</main>
 			<Features />
 			<Contacts />
-			<Lower/>
+			<Lower />
 		</>
 	)
 }

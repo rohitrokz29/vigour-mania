@@ -57,7 +57,7 @@ journalSchema.statics.addJournal = async function addJournal({ title, descriptio
 
 
 /*
-fetching Journals from  the database---  to be used in controller function for journalRouter
+fetching Journals from  the database---  to be used in controller fu10ction for journalRouter
 */
 journalSchema.statics.getJournals = function getJournals({ page }) {
     try {
@@ -93,7 +93,7 @@ journalSchema.statics.getJournals = function getJournals({ page }) {
          */
         return this.find({})
             .sort({  postedAt: -1 })
-            .skip((page - 1) * journalsLength)
+            .skip((page - 1) * 10)
             .limit(10)
             .select('title description likes  postedAt');
 

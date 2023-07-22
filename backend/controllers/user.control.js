@@ -54,7 +54,6 @@ const Signin = async (req, res) => {
     try {
         //*below User.signin function exists in user model
         const user = await User.signin(req.body);
-console.log({user})
         const accessToken = CreateAccessToken(user._id);
         const refreshToken = CreateRefreshToken(user._id);
         const newRefreshTokenId = await RefreshToken.newRefreshToken(refreshToken)
@@ -72,8 +71,9 @@ console.log({user})
             .json({ username: user.username, _id: user._id ,refreshTokenExpiry,authTokenExpiry});
     }
     catch (error) {
+        console.log({msg:error.message})
         //*internal server error
-        res.json({ message:error.message });
+        res.status(404).json({ message:error.message});
     }
 }
 /*

@@ -6,7 +6,7 @@ const notesSchema = new mongoose.Schema({
         {
             title: { type: String },
             description: { type: String },
-            notedAt: { type: Date, default: new Date(), immutable: true }
+            notedAt: { type: String, default:`${ new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()}`, immutable: true }
         }
     ],
 })
@@ -15,11 +15,12 @@ notesSchema.statics.getNotes = async function getNotes({ userId, pageNo }) {
     try {
         const notes = await this.findOne({ userId })
             // .select('notes ')
-            .select("notes ")
+            .select("notes")
             .sort({ "notes.notedAt": -1 })
             .slice('notes', [(pageNo - 1) * 10, (pageNo - 1) * 10 + 10])
             .lean()
             .exec()
+            console.log({notes:notes.notes})
 
         return { notes: notes.notes, hasMore: notes.notes.length === 10 }
 

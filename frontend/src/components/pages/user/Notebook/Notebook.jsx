@@ -6,18 +6,23 @@ import CompHead from '../../../cards/CompHead';
 import { useThemeContext } from '../../../hooks/useThemeContext';
 
 const Notebook = () => {
+  //using theme context
   const { theme } = useThemeContext();
-  const { notes, addNote, fetchNotes , hasMoreNotes } = useNotebookContext();
+  //using notebook context
+  const { notes, addNote, fetchNotes, hasMoreNotes } = useNotebookContext();
+  //state of the form to add note
   const [isOpen, setIsOpen] = useState(false);
+  //value of note to be added
   const [note, setNote] = useState({ title: "", description: "" });
-
+  //onchange function for input fields
   const handleChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   }
+  //submit function for adding note
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addNote(note)
-
+    await addNote(note);
+    // TODO --> update this function such that it automatically closes the add note form and resets its values on adding the note 
   }
   return (
     <>
@@ -25,8 +30,7 @@ const Notebook = () => {
       <div className={`note-container bg-${theme}er`}>
         <div className="notes">
           {
-            //TODO All notes are not mapped properly
-           notes.length>0&& notes.map(item => <Note key={item._id} noteId={item._id} notedAt={item.notedAt} title={item.title} description={item.description} />)
+            notes && notes.map(note => <Note key={note._id} noteId={note._id} notedAt={note.notedAt} title={note.title} description={note.description} />)
           }
           {
             hasMoreNotes

@@ -78,8 +78,8 @@ a {
   /* font-size: 110%; */
   align-items: center;
   text-decoration: none;
+  cursor: pointer;
 }
-
 .active {
   border-bottom: 2px solid red;
 }

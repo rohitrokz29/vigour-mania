@@ -12,13 +12,13 @@ export const useSignin = () => {
     const signin = async (data) => {
         setProgress(20)
         setIsLoading(true);
-        API.post('/api/user/signin', data)
+        API.post('/api/user/signin', data) 
             .then((response) => {
                 setProgress(50)
+                console.log(response)
                 if (response.status === 201) {
                     const user = response.data;
                     setProgress(60)
-                    console.log(response)
                     localStorage.setItem('vmuser', JSON.stringify(user));
                     setProgress(80)
                     dispatch({ type: 'signin', payload: user })
@@ -28,7 +28,7 @@ export const useSignin = () => {
                     setProgress(100)
                 }
             }).catch(err => {
-                setError(err.message);
+                setError(err.response.data.message);
                 setIsLoading(false);
                 setProgress(100);
             })

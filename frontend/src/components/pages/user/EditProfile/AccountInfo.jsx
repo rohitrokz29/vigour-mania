@@ -11,19 +11,19 @@ const AccountInfo = ({ newData, setNewData }) => {
     <>
       <EditorHeading heading="Account Info" />
       <ul className="inputs">
-        <li className="input ">
+        <li className="edit-input">
           <label htmlFor="bio">Bio:&nbsp;</label>
           <input className='input-style' autoComplete="off" type="text" value={newData.bio} onChange={handleChange} name='bio' id='bio' placeholder="User Bio" />
         </li>
-        <li className="input ">
+        <li className="edit-input">
           <label htmlFor="instagram">Instagram:&nbsp;</label>
           <input className='input-style' autoComplete="off" type="text" value={newData.bioinstagram} onChange={handleChange} name='instagram' placeholder='Instagram Username' id='instagram' />
         </li>
-        <li className="input ">
+        <li className="edit-input">
           <label htmlFor="twitter">Twitter:&nbsp;</label>
           <input className='input-style' autoComplete="off" type="text" value={newData.twitter} onChange={handleChange} name='twitter' placeholder='Twitter Username' id='twitter' />
         </li>
-        <li className="input ">
+        <li className="edit-input">
           <label htmlFor="facebook">Facebook:&nbsp;</label>
           <input className='input-style' autoComplete="off" type="text" value={newData.facebook || ""} onChange={handleChange} name='facebook' placeholder='Facebook Username' id='facebook' />
         </li>

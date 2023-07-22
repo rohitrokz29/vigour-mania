@@ -15,27 +15,27 @@ export const NotebookState = ({ children }) => {
             setProgress(40);
             API.get(`/api/notes/${notebookPage}`)
                 .then(response => {
-                    console.log(response)
+                    console.log({notes:response.data.notes})
                     if (response.status === 200) {
                         
-                        setNotes([...notes, response.data.notes]);
+                        setNotes([...notes,...response.data.notes]);
                         setProgress(90);
                         setError("");
                         setHasMoreNotes(hasMoreNotes => response.data.hasMore);
                         setNotebookPage(page => page + 1);
-                        console.log(notes)
 
                     }
                     setProgress(100);
                 })
         } catch (error) {
             setProgress(100);
+            setError(error.message);
+
         }
 
     }
     useEffect(() => {
         fetchNotes()
-
     }, [])
 
     const deleteNote = async ({ noteId }) => {
@@ -43,12 +43,14 @@ export const NotebookState = ({ children }) => {
             setProgress(40);
             API.delete(`/api/notes/${noteId}`)
                 .then(response => {
-                    if (response.status === 200 && response.data.deleted === 1) {
-                        setProgress(40);
+             console.log(response)       
+                    if (response.status === 200 && response.data.modifiedCount === 1) {
+                        setProgress(70);
                         setNotes(notes => notes.filter(note => note._id != noteId));
+                        setError("");
                     }
+                    setProgress(100);
                 })
-            setProgress(100);
         } catch (error) {
             setProgress(100);
         }
@@ -62,12 +64,14 @@ export const NotebookState = ({ children }) => {
                     if (response.status === 200) {
                         setProgress(70);
                         setNotes([response.data, ...notes])
+                        setProgress(100);
+                        setError("");
                     }
                 })
-            setProgress(100);
 
         } catch (error) {
             setProgress(100);
+            setError(error.message);
         }
     }
     return (

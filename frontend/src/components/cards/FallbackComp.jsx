@@ -6,7 +6,9 @@ const FallbackComp = () => {
     const { theme } = useThemeContext();
 
     return (
-        <div className={` main-fallback center-item`} style={{backgroundColor:theme==='dark'?'#000':'#ddd'}}>
+        <div role='fallback'
+            className={` main-fallback center-item`}
+            style={{ backgroundColor: theme === 'dark' ? '#000' : '#ddd' }}>
             <div className="outer-roll center-item ">
                 <div className="inner-roll"></div>
             </div>

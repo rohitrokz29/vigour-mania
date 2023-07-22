@@ -11,15 +11,15 @@ const BasicInfo = ({ newData, setNewData }) => {
     <>
       <EditorHeading heading="Basic Details" />
       <ul className="inputs">
-        <li className="input ">
+        <li className="edit-input">
           <label htmlFor="email">Email:&nbsp;</label>
           <input className='input-style' type="email" name='email' id='email' value={newData.email || "accibo@mail.acc"} autoComplete="off" readOnly />
         </li>
-        <li className="input ">
+        <li className="edit-input">
           <label htmlFor="name">Name:&nbsp;</label>
           <input className='input-style' type="text" name='name' value={newData.name || ""} onChange={handleChange} placeholder='Name' id='name' autoComplete="off" />
         </li>
-        <li className="input ">
+        <li className="edit-input">
           <label htmlFor="gender">Gender:&nbsp;</label>
           <select className='input-style' value={newData.gender || "m"} onChange={handleChange} name='gender' id='gender' placeholder='Gender' autoComplete="off">
             {/* <option value={""}selected>Gender</option> */}

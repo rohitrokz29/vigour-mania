@@ -95,15 +95,15 @@ const Profile = () => {
                         </li>
                         {userData.user.facebook &&
                             <li className="contact-item">
-                                <i className="fa fa-facebook light-text"></i>
+                                <i className="fa-brands fa-square-facebook light-text"></i>
                                 <Link>{userData.user.facebook}</Link>
                             </li>}
                         {userData.user.instagram && <li className="contact-item">
-                            <i className="fa fa-instagram light-text"></i>
+                            <i className="fa-brands fa-square-instagram light-text"></i>
                             <Link>{userData.user.instagram}</Link>
                         </li>}
                         {userData.user.twitter && <li className="contact-item">
-                            <i className="fa fa-twitter light-text"></i>
+                            <i className="fa-brands fa-square-twitter light-text"></i>
                             <Link>{userData.user.twitter}</Link>
                         </li>}
                     </ul>

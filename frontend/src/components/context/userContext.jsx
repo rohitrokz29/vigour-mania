@@ -24,7 +24,7 @@ export const UserState = ({ children }) => {
     const [state, dispatch] = useReducer(userReducer, { user: null })
     const [progress, setProgress] = useState(0)
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('vmuser'))
+        const user =  JSON.parse(localStorage.getItem('vmuser'))
         console.log(user)
         if (user) {
             if (user.authTokenExpiry <= Date.now()) {

@@ -59,7 +59,7 @@ journalSchema.statics.addJournal = async function addJournal({ title, descriptio
 /*
 fetching Journals from  the database---  to be used in controller fu10ction for journalRouter
 */
-journalSchema.statics.getJournals = function getJournals({ page }) {
+journalSchema.statics.getJournals = async function getJournals({ page }) {
     try {
         /*
          journalsLength=== Number of journals to fetch per page i.sent every time user scrolls
@@ -68,12 +68,12 @@ journalSchema.statics.getJournals = function getJournals({ page }) {
                 likes:-1:::::sorts items in descending  w.r.t likes:::greater------->smaller
                 and then w.r.t time posted in descending order(latest first)
             page::
-                every time we send 5 journals from the  request
+                every time we send 10 journals from the  request
                 when the page increases the next journsla are send
                 e.g;
-                page===1=>we send first 5 journals(1,2,3,4,5)
-                page===2=>we send next 5 journals(6,7,8,9,10)
-                page===3=>we send next 5 journsla(11,12,13,14,15)
+                page===1=>we send first 10 journals(1,2,3,4,5...10)
+                page===2=>we send next 10 journals(11...20)
+                page===3=>we send next 10 journsla(21,...30)
                 ...and so on
             skip::
                 to skip the previously sent journals we use skip(number of items to be skipped)
@@ -87,21 +87,53 @@ journalSchema.statics.getJournals = function getJournals({ page }) {
             process goes with-->find-->sort(likes,postedAt)-->limit->select 
              */
         /**
-         * Todo for   ->page ===1 give mainJournal with list not containing main journal as latest journal
-         *Todo          ->page>1 give only list of other journals
-         *  
+         *At page ===1 it returns the latest journal else null at place of it 
          */
-        return this.find({})
-            .sort({  postedAt: -1 })
-            .skip((page - 1) * 10)
+        let latestJournal = null;
+        if (+page === 1) {
+            latestJournal = await this.findOne({})
+                .sort({ postedAt: -1 })
+                .limit(1)
+                .select('title description likes postedAt _id')
+                .lean()
+        }
+        const journalsList = await this.find({})
+            .sort({ postedAt: -1 })
+            .skip((+page - 1) * 10)
             .limit(10)
-            .select('title description likes  postedAt');
+            .select('title description likes  postedAt _id')
+            .lean();
 
+        return { journalsList, latestJournal };
     } catch (error) {
         throw new Error("Internal Server Error", { statusCode: 500 });
     }
 }
 
+//function to fetch one journal from database
+journalSchema.statics.getOneJournal = async function getOneJournal({ journalId,userId }) {
+    try {
+        const journal = await this.findOne({ _id: journalId })
+            .select({ comments: 0 })
+            .lean()
+            console.log(journal)
+            return journal
+        // const data= {
+        //     _id: journal._id,
+        //     title: journal.title,
+        //     description: journal.description,
+        //     postedAt:journal.poetedAt,
+        //     likes: {
+        //         isLiked: journal.includes(userId),
+        //         count: journal.likes.length
+        //     }
+        // }
+        // console.log(data)
+        // return data
+    } catch (error) {
+
+    }
+}
 //adding comment to the journal
 journalSchema.statics.addComment = function addComment({ blog_id, username, comment }) {
 
@@ -110,7 +142,7 @@ journalSchema.statics.addComment = function addComment({ blog_id, username, comm
     console.log({ blog_id, username, comment });
 }
 
-journalSchema.statics.getComments=function getComments({journalId,page}){
-    
+journalSchema.statics.getComments = function getComments({ journalId, page }) {
+
 }
 module.exports = mongoose.model('journals', journalSchema);

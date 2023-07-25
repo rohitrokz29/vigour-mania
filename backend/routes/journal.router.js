@@ -14,7 +14,7 @@ journalRouter.post('/', addJournal)
 
 //get all journals route
 //if pageNo ===1 then give main journal and side else only side
-journalRouter.get('/all/:pageNo', getJournals);
+journalRouter.get('/more/:pageNo', getJournals);
 
 //get one journal
 journalRouter.get('/1/:journalId', getMainJournal);

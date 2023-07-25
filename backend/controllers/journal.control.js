@@ -15,20 +15,26 @@ const addJournal = async (req, res) => {
 const getJournals = async (req, res) => {
     try {
         const { pageNo } = req.params;
-        const data = await Journal.getJournals({ page: pageNo });
+        const { journalsList, latestJournal } = await Journal.getJournals({ page: pageNo });
         /*hasMore sends
          true -->  if more journals are present in database 
          and
          false --> if no more data is present
         */
-        res.status(200).json({ data, hasMore: data.length === 10 });
+        res.status(200).json({ latestJournal, journalsList, hasMore: journalsList.length === 10 });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 }
 //get one journal (main Journal)
 const getMainJournal = async (req, res) => {
-
+    try {
+        const { journalId } = req.params;
+        const journal = await Journal.getOneJournal({ journalId, userId: req._id });
+        res.status(200).json(journal);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 }
 const addComment = async (req, res) => {
     //Remaining to complete

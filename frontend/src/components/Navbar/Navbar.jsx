@@ -16,7 +16,7 @@ const Navbar = ({ isSignedIn, username }) => {
 	//retrieving browser path  using useLocation hook
 	const { pathname } = useLocation();
 	const { logout } = useLogout();
-	const { theme } = useThemeContext();
+	const { theme,changeTheme } = useThemeContext();
 
 	return (
 		<>
@@ -73,6 +73,13 @@ const Navbar = ({ isSignedIn, username }) => {
 										<i className="fa fa-book light-text"></i>
 										<div className='text dark-text-light'>
 											<Link to='/my-notebooks' className='dark-text-light'>Notebooks</Link>
+										</div>
+									</li>
+
+									<li className=" item-list">
+										<i className={`fa fa-${theme==='dark'?'sun':'moon'} light-text`}></i>
+										<div className='text dark-text-light'>
+											<Link  className='dark-text-light' onClick={changeTheme}>Use {theme==="dark"?"Light":"Dark"} Mode</Link>
 										</div>
 									</li>
 									<li className=" item-list">

@@ -101,9 +101,11 @@ function App() {
               <Route path='/my-notebooks' element={
                 isSignedIn ?
                   <Suspense fallback={<FallbackComp />}>
-                    <NotebookState>
-                      <Notebook />
-                    </NotebookState>
+                    <JournalState>
+                      <NotebookState>
+                        <Notebook />
+                      </NotebookState>
+                    </JournalState>
                   </Suspense>
                   : <Navigate to='/signin' replace />
               } />
@@ -128,7 +130,7 @@ function App() {
             </Route>
             <Route path="*" element={
               <Suspense fallback={<FallbackComp />} >
-                <Error/>
+                <Error />
               </Suspense>
             } />
           </Route>

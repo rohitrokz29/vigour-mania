@@ -23,7 +23,7 @@ const SideJournal = ({ title, postedAt, description, journalId }) => {
 }
 SideJournal.propTypes = {
   title: PropTypes.string,
-  postedAt: PropTypes.instanceOf(Date),
+  postedAt: PropTypes.string,
   description: PropTypes.string,
   journalId: PropTypes.string
 }

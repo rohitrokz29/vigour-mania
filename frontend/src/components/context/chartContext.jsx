@@ -14,8 +14,8 @@ export const ChartState = ({ children }) => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isAdding, setisAdding] = useState(false);
-    const {setProgress}=useUserContext();
-    const {logout}=useLogout();
+    const { setProgress } = useUserContext();
+    const { logout } = useLogout();
     useEffect(() => {
         fetchTracks()
     }, [])
@@ -33,7 +33,7 @@ export const ChartState = ({ children }) => {
                     setIsLoading(false);
                     setProgress(100);
                 }
-                
+
             })
             .catch(async (err) => {
                 setError(err);
@@ -52,7 +52,7 @@ export const ChartState = ({ children }) => {
                     setError('')
                     setIsLoading(false)
                     setProgress(70);
-                    setCharts([response.data,...charts]);
+                    setCharts([response.data, ...charts]);
                     setProgress(100);
                     return true;
                 }
@@ -66,7 +66,7 @@ export const ChartState = ({ children }) => {
             })
     }
 
-    const addChartData = async ({_id, createdAt, value, maxWeek}) => {
+    const addChartData = async ({ _id, createdAt, value, maxWeek }) => {
         setProgress(10);
         setisAdding(true)
         //calculating number of weeks from the time of creation

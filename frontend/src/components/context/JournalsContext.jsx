@@ -79,34 +79,32 @@ export const JournalState = ({ children }) => {
     const { setProgress } = useUserContext();
     const [mainJournal, setMainJournal] = useState(null);
     const [allJournals, setAllJournals] = useState([]);
-    const [journalPage, setJournalPage] = useState(1)
+    const [hasMoreJournals, setHasMoreJournals] = useState(true);
+    const [journalPage, setJournalPage] = useState(1);
     const [comments, setComments] = useState([]);
     const [commentsPage, setCommentsPage] = useState(1);
 
     const fetchJournals = async () => {
-
-        setMainJournal({title:"This is title",description:desc,postedAt:date,likes:{count:5,isLiked:true}});
-        setAllJournals([...allJournals,...journals]);
+        //TODO try to optimise it -> taking more time 
+        console.log('fetchJournals')
         try {
-            API.get(`/api/journals/all/${journalPage}`)
+            setProgress(40);
+            API.get(`/api/journals/more/${journalPage}`)
                 .then(response => {
-                    setMainJournal(response.data.mainJournal);
-                    setAllJournals([...allJournals, ...response.data.allJournals]);
+                    console.log(response)
+                    setMainJournal(response.data.latestJournal);
+                    setProgress(60);
+                    setAllJournals([...allJournals, ...response.data.journalsList]);
+                    setHasMoreJournals(response.data.hasMore);
                     setJournalPage(page => page + 1);
-
+                    setProgress(100);
                 })
         } catch (error) {
+            setProgress(100);
             console.log(error)
         }
 
     }
-    useEffect(() => {
-        return async () => {
-            setProgress(40);
-            await fetchJournals();
-            setProgress(100)
-        }
-    }, [])
 
     const changeMainJournal = async ({ journalId }) => {
         API.get(`/api/journals/1/${journalId}`)
@@ -137,14 +135,14 @@ export const JournalState = ({ children }) => {
 
         }
     }
-    const addComment=async ({comment})=>{
+    const addComment = async ({ comment }) => {
         try {
-            API.put(`/api/comments/add`,{comment })
-            .then(response=>{
-                comments.unshift(response.data)
-            })
+            API.put(`/api/comments/add`, { comment })
+                .then(response => {
+                    comments.unshift(response.data)
+                })
         } catch (error) {
-            
+
         }
     }
 
@@ -163,6 +161,7 @@ export const JournalState = ({ children }) => {
             value={{
                 mainJournal,
                 allJournals,
+                hasMoreJournals,
                 comments,
                 fetchJournals,
                 changeMainJournal,

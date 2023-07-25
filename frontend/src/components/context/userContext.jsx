@@ -25,7 +25,6 @@ export const UserState = ({ children }) => {
     const [progress, setProgress] = useState(0)
     useEffect(() => {
         const user =  JSON.parse(localStorage.getItem('vmuser'))
-        console.log(user)
         if (user) {
             if (user.authTokenExpiry <= Date.now()) {
                 API.post('/api/user/refresh')

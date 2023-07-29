@@ -8,7 +8,7 @@ const { userAuth } = require('../middlewares/user.auth');
 const commentRouter = require('express').Router()
 
 //get comments
-commentRouter.get('/:pageNo', getComments);
+commentRouter.get('/:pageNo/:journalId', getComments);
 
 //add comment
 commentRouter.put('/add', userAuth, addComment);

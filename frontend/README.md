@@ -1,2 +1,0 @@
-# vigour-mania
- 

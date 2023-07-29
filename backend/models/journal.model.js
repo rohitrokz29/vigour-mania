@@ -111,13 +111,13 @@ journalSchema.statics.getJournals = async function getJournals({ page }) {
 }
 
 //function to fetch one journal from database
-journalSchema.statics.getOneJournal = async function getOneJournal({ journalId,userId }) {
+journalSchema.statics.getOneJournal = async function getOneJournal({ journalId, userId }) {
     try {
         const journal = await this.findOne({ _id: journalId })
             .select({ comments: 0 })
             .lean()
-            console.log(journal)
-            return journal
+        console.log(journal)
+        return journal
         // const data= {
         //     _id: journal._id,
         //     title: journal.title,
@@ -135,14 +135,35 @@ journalSchema.statics.getOneJournal = async function getOneJournal({ journalId,u
     }
 }
 //adding comment to the journal
-journalSchema.statics.addComment = function addComment({ blog_id, username, comment }) {
-
-    //REMAINING TO COMPLETE
-
-    console.log({ blog_id, username, comment });
+journalSchema.statics.addComment = function addComment({ journalId, username, comment }) {
+    try {
+        const newComment = { username, comment }
+        const result = this.updateOne(
+            { _id: journalId },
+            { $push: { comments: { $each: [newComment], $position: 0 } } }
+        )
+        if(!result){
+            return null;
+        }
+        return result;
+    } catch (error) {
+        throw new Error("Internal Server Error", { statusCode: 500 });
+    }
 }
 
 journalSchema.statics.getComments = function getComments({ journalId, page }) {
-
+    try {
+        const result=this.findOne({ _id: journalId })
+            .select('comments')
+            .sort({ 'comments.date': -1 })
+            .skip((+page - 1) * 10)
+            .limit(10);
+        if(!result){
+            return null;
+        }
+        return result;
+    } catch (error) {
+        throw new Error("Internal Server Error", { statusCode: 500 });
+    }
 }
 module.exports = mongoose.model('journals', journalSchema);

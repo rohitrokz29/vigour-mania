@@ -39,16 +39,25 @@ const getMainJournal = async (req, res) => {
 const addComment = async (req, res) => {
     //Remaining to complete
     try {
-        const data = await Journal.addComment({ blog_id, username, comment } = req.body)
-        res.status(200).json({ data })
+        const data = await Journal.addComment({ blog_id, username, comment } = req.body);
+        res.status(200).json(data);
     }
     catch (error) {
-        res.json({ msg: error.message });
+        res.status(400).json({ message: error.message });
     }
 }
 
 const getComments = async (req, res) => {
-
+    try {
+        const { pageNo, journalId } = req.params;
+        const data = await Journal.getComments({ page: pageNo, journalId });
+        if (!data) {
+            res.status(404).json({ message: "No Comments" })
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 }
 
 const likeJournal = async (req, res) => {

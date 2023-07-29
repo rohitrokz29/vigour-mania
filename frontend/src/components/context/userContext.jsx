@@ -46,6 +46,9 @@ export const UserState = ({ children }) => {
                 setIsSignedIn(true)
             }
         }
+        else{
+            localStorage.clear()
+        }
     }, []);
 
     return (

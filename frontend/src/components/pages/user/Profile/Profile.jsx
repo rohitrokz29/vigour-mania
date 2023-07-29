@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
     XAxis,
@@ -28,11 +28,13 @@ import './profile.css'
 //assets
 import Image from '../../../../assets/profile.webp'
 import Null from '../../../../assets/null.png'
+import { useThemeContext } from '../../../hooks/useThemeContext';
 
 const Profile = () => {
     const [editPage, setEditPage] = useState(false)
     const { userData, isLoading, error, fetchData } = useFetchUser();
     const { isSignedIn, user, progress, setProgress } = useUserContext();
+    const { theme } = useThemeContext();
     const { username } = useParams();
 
     useEffect(() => {
@@ -63,15 +65,15 @@ const Profile = () => {
     return (
 
         !isLoading && <>
-        {editPage&&<EditProfile setEditPage={setEditPage} user={userData.user}/>}
-            <div className="profile">
-                <div className="user-details">
-                    <div className="user-data">
+            {editPage && <EditProfile setEditPage={setEditPage} user={userData.user} />}
+            <div className={`profile bg-${theme}`}>
+                <div className={`user-details bg-${theme}er dark-text-${theme}`}>
+                    <div className="user-data ">
                         <div className="profile-details">
                             <img src={Image} alt="Profile" className="user-image" />
                             <ul className="user-id">
-                                <li className="username dark-text">{userData.user.username}</li>
-                                <li className="name light-text">{userData.user.name || "Rohit Kharche"}</li>
+                                <li className="username ">{userData.user.username}</li>
+                                <li className="name ">{userData.user.name || "Rohit Kharche"}</li>
                             </ul>
                         </div>
                         <div className="user-bio dark-text">
@@ -80,7 +82,7 @@ const Profile = () => {
                         {
                             user?.username === username &&
                             <Link  >
-                                <button className="edit-profile " onClick={()=>setEditPage(editPage=>!editPage)}>
+                                <button className="edit-profile " onClick={() => setEditPage(editPage => !editPage)}>
                                     Edit Profile
                                 </button>
                             </Link>
@@ -88,28 +90,28 @@ const Profile = () => {
                         }
                     </div>
                     <ul className="conn-list">
-                        <li className="conn-head dark-text">Connections</li>
+                        <li className="conn-head ">Connections</li>
                         <li className="contact-item">
                             <i className="fa fa-envelope light-text"></i>
-                            <Link>{userData.user.email}</Link>
+                            <Link className={`dark-text-${theme}`}>{userData.user.email}</Link>
                         </li>
                         {userData.user.facebook &&
                             <li className="contact-item">
                                 <i className="fa-brands fa-square-facebook light-text"></i>
-                                <Link>{userData.user.facebook}</Link>
+                                <Link className={`dark-text-${theme}`}>{userData.user.facebook}</Link>
                             </li>}
                         {userData.user.instagram && <li className="contact-item">
                             <i className="fa-brands fa-square-instagram light-text"></i>
-                            <Link>{userData.user.instagram}</Link>
+                            <Link className={`dark-text-${theme}`}>{userData.user.instagram}</Link>
                         </li>}
                         {userData.user.twitter && <li className="contact-item">
                             <i className="fa-brands fa-square-twitter light-text"></i>
-                            <Link>{userData.user.twitter}</Link>
+                            <Link className={`dark-text-${theme}`}>{userData.user.twitter}</Link>
                         </li>}
                     </ul>
                 </div>
                 <div className="user-summary">
-                    <div className="head dark-text">Trackers Overview</div>
+                    <div className={`head dark-text-${theme}`}>Trackers Overview</div>
 
                     {
                         userData.charts[0] ?
@@ -155,10 +157,11 @@ const TrackerSummary = ({ charts, chartTypes }) => {
 
     //set colorcodes  theme  wise
     let colorCodes = ["#fc0505", "#fc7d05", "#22fc05", "#05fcc6", "#050dfc", "#7d07fa"];
+    const {theme}=useUserContext();
     return (<>
-        <div className="track">
+        <div className={`track bg-${theme} `}>
 
-            <div className="track-chart">
+            <div className="track-chart  ">
 
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart

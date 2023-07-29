@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 //assets
 import Image from '../../../assets/1.jpg'
+import Null from '../../../assets/null.png';
 import { ParentComment } from './Comments'
 import { useJournalContext } from '../../hooks/useJournalContext'
 import { useThemeContext } from '../../hooks/useThemeContext'
@@ -23,7 +24,7 @@ const MainJournal = () => {
         <>
             <div className="journal-title ">
                 <h2 className={`dark-text-${theme}`}>{mainJournal.title}</h2>
-                <span className={`posted light-text-${theme} `}>{mainJournal.postedAt.toString().slice(4, 16)}</span>
+                <span className={`posted light-text-${theme} `}>{`${(new Date(mainJournal.postedAt.toString())).getDate()}/${(new Date(mainJournal.postedAt.toString())).getMonth()}/${(new Date(mainJournal.postedAt.toString())).getFullYear()}`}</span>
             </div>
             <div className="journal-image">
                 <img src={Image} alt="" />
@@ -62,18 +63,27 @@ const MainJournal = () => {
                     <div className="add-comment">
                         <input name="comment" id="add-comment" placeholder='Comment Here' value={comment} onChange={(e) => setComment(e.target.value)}></input>
                         <button id='add-comment-button' onClick={handleAddComment} >
-                            Add
+                            <span style={{fontSize:"2rem",fontWeight:800,color:"#000"}}>+</span>
                             {/* <i className="fa fa-angle-right"></i> */}
                         </button>
                     </div>
                     {
-                        comments.map((comment, index) => <ParentComment key={index} commentId={comment._id} username={comment.username} comment={comment.comment} commentedAt={comment.commentedAt} likes={comment.likes} />)
+                        comments.length !== 0 ?
+                            comments.map((comment, index) => <ParentComment key={index} commentId={comment._id} username={comment.username} comment={comment.comment} commentedAt={comment.commentedAt} likes={comment.likes} />)
+                            :
+                            <div style={{ display: 'grid', placeItems: 'center' }}>
+                                <img src={Null} />
+                            </div>
                     }
-                    <div className="load-more">
-                        <span>
-                            <i className="fa fa-angle-down " ><span className={`dark-text-${theme}`}>Load More</span></i>
-                        </span>
-                    </div>
+                    {
+                        comments &&
+                        <div className="load-more">
+                            <span>
+                                <i className="fa fa-angle-down " ><span className={`dark-text-${theme}`}>Load More</span></i>
+                            </span>
+                        </div>
+                    }
+
                 </div>
             }
         </>

@@ -7,7 +7,7 @@ import API from '../../api/api';
 const Report = () => {
     const { user } = useUserContext();
     const { theme } = useThemeContext();
-    const [reportData, setReportData] = useState({username:user?.username,email:user?.email,issue_type:"",issue:""})
+    const [reportData, setReportData] = useState({username:user?.username,issue_type:"",issue:""})
    const [confirm, setConfirm] = useState(true);
    
     const handleChange=(e)=>{
@@ -30,10 +30,6 @@ const Report = () => {
                 <div className="report-input">
                     <label htmlFor="username" className={`mid-text dark-text-${theme}`}>Username:</label>
                     <input type="text" name='username' id='username' value={user?.username || 'rrohiut'} disabled />
-                </div>
-                <div className="report-input">
-                    <label htmlFor="email" className={`mid-text  dark-text-${theme}`}>Email:</label>
-                    <input type="email" name='email' id='email' value={user?.email || 'erjnk4,'} disabled />
                 </div>
                 <div className="report-input">
                     <label htmlFor="issue_type" className={`mid-text dark-text-${theme}`}>Issue Type:</label>

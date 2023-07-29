@@ -4,8 +4,8 @@
 }
 
 .profile {
-    margin-inline: 5px;
-    margin-block: 1rem;
+    padding-inline: 5px;
+    padding-block: 1rem;
     display: flex;
     justify-content: center;
 }
@@ -63,7 +63,7 @@
     font-size: 1rem;
     color: #390101;
     cursor: pointer;
-    background-color: #ff00001a;
+    background-color: #ddd;
     border: 2px solid #ff0000c9;
     border-radius: 8px;
     outline-offset: 2px;
@@ -71,7 +71,7 @@
 }
 
 .edit-profile:hover {
-    background-color: #ff000045;
+    background-color: #fff;
     color: #ff0000;
 }
 

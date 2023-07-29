@@ -14,7 +14,7 @@ const SideJournal = ({ title, postedAt, description, journalId }) => {
         <img src={Image} alt="" />
         <div className="journal-data" onClick={() => changeMainJournal({ journalId })}>
           <div className={`small-journal-title  bold dark-text-${theme}`}>{title}</div>
-          <div className={`journal-date light-text-${theme}`}>{postedAt.toString().slice(4, 16)}</div>
+          <div className={`journal-date light-text-${theme} `}>{`${(new Date(postedAt.toString())).getDate()}/${(new Date(postedAt.toString())).getMonth()}/${(new Date(postedAt.toString())).getFullYear()}`}</div>
           <div className={`journal-desc dark-text-${theme}`}>{description.length > 100 ? `${description.slice(0, 90)}...` : description}</div>
         </div>
       </div>

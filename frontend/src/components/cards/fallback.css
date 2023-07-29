@@ -1,12 +1,11 @@
 .center-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
 }
 
 .main-fallback {
     width: 100vw;
-    height: 90dvh;
+    height: 100dvh;
 }
 
 .outer-roll {
@@ -16,7 +15,7 @@
     border: 8px solid #fff;
     border-radius: 150px;
     border-block-color: #000;
-    animation: rotate-clock 1s   infinite ease-in-out ;
+    animation: rotate-clock 1s infinite ease-in-out;
 }
 
 .inner-roll {
@@ -27,7 +26,7 @@
     border: 8px solid #ddd;
     border-radius: 150px;
     border-inline-color: #000;
-    animation: rotate-clock 1s   infinite ease-in-out ;
+    animation: rotate-clock 1s infinite ease-in-out;
 }
 
 @keyframes rotate-clock {

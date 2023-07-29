@@ -1,5 +1,5 @@
 <h1 align="center">Vigour Mania</h1>
-<hr><p>Vigour Mania is a web app helping to track user fitness activities based on data provided by user and contains weekly journals to keep users updated in the field of health and fitness, with a service of commenting and create personalised notes.</p><h2>Technologies Used</h2>
+<hr><p>Vigour Mania is a web app helping to visualise and track user fitness activities based on data provided by user and contains weekly journals to keep users updated in the field of health and fitness, with a service of commenting and create personalised notes.</p><h2>Technologies Used</h2>
 <hr><ul>
 <li>HTML/CSS/JavaScript</li>
 </ul><ul>
@@ -42,3 +42,11 @@
 <p>The project is In Progress as, new features would be added continously after obtaining new ideas.</p><h2>Contact</h2>
 <hr>
 <p><span style="margin-right: 30px;"></span><a href="https://www.linkedin.com/in/rohit-kharche-118286235/"><img target="_blank" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" style="width: 10%;"></a><span style="margin-right: 30px;"></span><a href="https://www.github.com/rohitrokz29"><img target="_blank" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" style="width: 10%;"></a></p>
+=======
+<h1 align="center" >Vigour Mania</h1>
+
+<p align="left">
+  Fitness Data Visualizer <br/>
+Vigour Mania is a web app helping to track user fitness activities based on data provided by user and contains weekly journals to keep users updated in the field of health and fitness, with a service of commenting.The web app  shows the user web  profile and allows user to make notes for future reference.
+</p>
+>>>>>>> bd80d14365e0f5640ae24a6d6bee63e2e2bc224d

@@ -14,10 +14,10 @@ journalRouter.post('/', addJournal)
 
 //get all journals route
 //if pageNo ===1 then give main journal and side else only side
-journalRouter.get('/more/:pageNo', getJournals);
+journalRouter.get('/more/:pageNo',userAuth, getJournals);
 
 //get one journal
-journalRouter.get('/1/:journalId', getMainJournal);
+journalRouter.get('/1/:journalId', userAuth, getMainJournal);
 
 //like a journal
 journalRouter.put('/like/:journalId', userAuth, likeJournal);
@@ -25,4 +25,4 @@ journalRouter.put('/like/:journalId', userAuth, likeJournal);
 
 
 //Exporting journalRouter
-module.exports = {journalRouter}
+module.exports = { journalRouter }

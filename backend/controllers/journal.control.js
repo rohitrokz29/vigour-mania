@@ -3,7 +3,8 @@ const Journal = require('../models/journal.model');
 //controller function to add journals
 const addJournal = async (req, res) => {
     try {
-        const data = await Journal.addJournal({ title, description } = req.body);
+        const { title, description } = req.body;
+        const data = await Journal.addJournal({ title, description });
         res.status(200).json(data);
     }
     catch (error) {
@@ -30,7 +31,9 @@ const getJournals = async (req, res) => {
 const getMainJournal = async (req, res) => {
     try {
         const { journalId } = req.params;
-        const journal = await Journal.getOneJournal({ journalId, userId: req._id });
+        const userId=req._id;
+        console.log({userId,"req._id":req._id})
+        const journal = await Journal.getOneJournal({ journalId, userId});
         res.status(200).json(journal);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -39,7 +42,9 @@ const getMainJournal = async (req, res) => {
 const addComment = async (req, res) => {
     //Remaining to complete
     try {
-        const data = await Journal.addComment({ blog_id, username, comment } = req.body);
+        const { journalId } = req.params;
+        const { username, comment } = req.body;
+        const data = await Journal.addComment({ journalId, username, comment });
         res.status(200).json(data);
     }
     catch (error) {
@@ -61,7 +66,13 @@ const getComments = async (req, res) => {
 }
 
 const likeJournal = async (req, res) => {
-
+    try {
+        const { journalId } = req.params;
+        const result = Journal.likeJournal({ journalId, userId: req._id });
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 }
 
 

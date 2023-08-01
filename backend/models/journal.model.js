@@ -14,7 +14,7 @@ const journalSchema = new mongoose.Schema({
         required: true,
         minlength: 50
     },
-    likes: [{ type: mongoose.Types.ObjectId }],
+    likes: [{ type: mongoose.Types.ObjectId, unique: true }],
     postedAt: {
         type: Date,
         default: Date.now
@@ -33,7 +33,7 @@ const journalSchema = new mongoose.Schema({
                 type: Date,
                 default: Date.now
             },
-            likes: [{ type: mongoose.Types.ObjectId }]
+            likes: [{ type: mongoose.Types.ObjectId, unique: true }]
         }
     ]
 
@@ -116,8 +116,15 @@ journalSchema.statics.getOneJournal = async function getOneJournal({ journalId, 
         const journal = await this.findOne({ _id: journalId })
             .select({ comments: 0 })
             .lean()
-        console.log(journal)
-        return journal
+
+        console.log({ userId })
+        const likes = {
+            isLiked: journal.likes.toString().split(',').includes(userId.toString()),
+            count: journal.likes.length
+        }
+        journal['likes'] = likes;
+        console.log(journal);
+        return journal;
         // const data= {
         //     _id: journal._id,
         //     title: journal.title,
@@ -134,6 +141,25 @@ journalSchema.statics.getOneJournal = async function getOneJournal({ journalId, 
 
     }
 }
+
+//like a journal
+journalSchema.statics.likeJournal = async function likeJournal({ journalId, userId }) {
+    try {
+        if (!userId) {
+            throw Error("User Id missing");
+        }
+
+//TODO----->check if user already liked
+        const result = this.updateOne(
+            { _id: journalId },
+            { $push: { likes: { $each: [userId], $position: 0 } } }
+        )
+
+        return result || null;
+    } catch (error) {
+        throw Error(" Like UnsuccessFul");
+    }
+}
 //adding comment to the journal
 journalSchema.statics.addComment = function addComment({ journalId, username, comment }) {
     try {
@@ -142,7 +168,7 @@ journalSchema.statics.addComment = function addComment({ journalId, username, co
             { _id: journalId },
             { $push: { comments: { $each: [newComment], $position: 0 } } }
         )
-        if(!result){
+        if (!result) {
             return null;
         }
         return result;
@@ -153,12 +179,12 @@ journalSchema.statics.addComment = function addComment({ journalId, username, co
 
 journalSchema.statics.getComments = function getComments({ journalId, page }) {
     try {
-        const result=this.findOne({ _id: journalId })
+        const result = this.findOne({ _id: journalId })
             .select('comments')
             .sort({ 'comments.date': -1 })
             .skip((+page - 1) * 10)
             .limit(10);
-        if(!result){
+        if (!result) {
             return null;
         }
         return result;
@@ -166,4 +192,5 @@ journalSchema.statics.getComments = function getComments({ journalId, page }) {
         throw new Error("Internal Server Error", { statusCode: 500 });
     }
 }
+
 module.exports = mongoose.model('journals', journalSchema);

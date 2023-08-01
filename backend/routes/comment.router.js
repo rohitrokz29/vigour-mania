@@ -11,9 +11,9 @@ const commentRouter = require('express').Router()
 commentRouter.get('/:pageNo/:journalId', getComments);
 
 //add comment
-commentRouter.put('/add', userAuth, addComment);
+commentRouter.put('/add/:journalId', userAuth, addComment);
 
 //like comment
-commentRouter.put('/like/:commentId', likeComment);
+commentRouter.put('/like/:commentId',userAuth,likeComment);
 
 module.exports = {commentRouter};

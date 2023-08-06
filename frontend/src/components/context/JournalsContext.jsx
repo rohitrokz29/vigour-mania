@@ -6,7 +6,7 @@ export const JournalContext = createContext();
 
 
 export const JournalState = ({ children }) => {
-
+   const {user}=useUserContext();
     const { setProgress } = useUserContext();
     const [mainJournal, setMainJournal] = useState(null);
     const [allJournals, setAllJournals] = useState([]);
@@ -60,19 +60,24 @@ export const JournalState = ({ children }) => {
             API.get(`/api/comments/${commentsPage}/${journalId}`)
                 .then(response => {
                     console.log(response)
-                    setComments([...comments, ...response.data]);
+
+                    setComments([...comments, ...response.data.comments]);
                 })
         }
         catch (error) {
 
         }
     }
-    const addComment = async ({ comment }) => {
+    const addComment = async ({ comment,journalId }) => {
         try {
-            API.put(`/api/comments/add`, { comment })
+            API.put(`/api/comments/add/${journalId}`, { comment,username:user.username })
                 .then(response => {
-                    comments.unshift(response.data)
-                })
+                    console.log(response.data)
+                    comments.unshift(response.data);
+                        // setComments([...response.data,...comments])
+                console.log({comments})
+                    })
+
         } catch (error) {
             console.log(error);
         }

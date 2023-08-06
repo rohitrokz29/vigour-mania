@@ -59,6 +59,7 @@ const getComments = async (req, res) => {
         if (!data) {
             res.status(404).json({ message: "No Comments" })
         }
+        console.log(data)
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ message: error.message });

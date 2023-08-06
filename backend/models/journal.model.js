@@ -171,7 +171,7 @@ journalSchema.statics.addComment = function addComment({ journalId, username, co
         if (!result) {
             return null;
         }
-        return result;
+        return {username,comment,commentedAt:new Date()};
     } catch (error) {
         throw new Error("Internal Server Error", { statusCode: 500 });
     }

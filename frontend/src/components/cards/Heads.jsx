@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useThemeContext } from '../hooks/useThemeContext';
 //heading coponent
-const Heads = ({ heading, id }) => {
+const Heads = ({ heading, id }) => { 
 	const { theme } = useThemeContext();
 	return (
 		<div className="head" id={id} >

@@ -18,7 +18,7 @@ const MainJournal = () => {
         setIsCommentBoxOpen(isCommentBoxOpen => !isCommentBoxOpen);
     }
     const handleAddComment = async () => {
-        await addComment({ comment })
+        await addComment({ comment,journalId:mainJournal._id })
     }
     return (
         <>

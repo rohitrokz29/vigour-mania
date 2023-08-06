@@ -238,19 +238,20 @@ a {
 .dot-light {
   border: 2px solid #000000;
 }
+
 .heading-light{
   background: linear-gradient(#090808 40%, #f50303 67%);
 }
 .heading-dark{
   background: linear-gradient(#f0f0f0 40%, #f50303 67%);
 }
+
 .heading {
   font-size: -webkit-xxx-large;
   font-variant-caps: all-petite-caps;
   font-style: oblique;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
 }
 
 

@@ -12,7 +12,7 @@ export const useLogout = () => {
         API. post('api/user/logout')
         .then((res)=>{
             if(res.status===200){
-                localStorage.removeItem('vmuser');
+                localStorage.clear();
                 setProgress(50);
                 dispatch({ type: 'logout' });
                 setIsSignedIn(false); 

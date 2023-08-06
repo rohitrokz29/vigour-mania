@@ -27,6 +27,10 @@ export const NotebookState = ({ children }) => {
                     }
                     setProgress(100);
                 })
+                .catch((error)=>{
+                    setProgress(100);
+                    setError(error.message);
+                })
         } catch (error) {
             setProgress(100);
             setError(error.message);

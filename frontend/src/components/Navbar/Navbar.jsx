@@ -20,7 +20,7 @@ const Navbar = ({ isSignedIn, username }) => {
 
 	return (
 		<>
-			<nav className={`navbar nav-bg-${theme}`} role="navigation">
+			<nav className={`navbar nav-bg-${theme?theme:''}`} role="navigation">
 				{pathname === "/" ?
 					<ScrollLink className="brand"
 						activeClass="br-active"

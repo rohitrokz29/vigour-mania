@@ -18,7 +18,7 @@
 .nav-bg-dark{
 	background-color: #000;
 }
-.nav-bg-light{
+.nav-bg-light, .nav-bg-{
 	background-color: #fff;
 }
 .brand {

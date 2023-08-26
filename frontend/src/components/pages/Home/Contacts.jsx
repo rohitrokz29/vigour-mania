@@ -60,7 +60,7 @@ const Contacts = () => {
 						</li>
 					</ul>
 				</div>
-				<form onSubmit={sendRequest} className="contact-form">
+				<form onSubmit={sendRequest} className="home-form">
 					<h3>Fill the Form to Get in touch with Us</h3>
 					<div className="input-container">
 						<label className="fa fa-user icon" htmlFor="name" />

@@ -11,7 +11,7 @@ export const Spots = ({ title, description, path, index, icon }) => {
   const { isSignedIn } = useUserContext();
   const {theme}=useThemeContext()
   return (<>
-    <div className={`spot bg-${index % 3}`} >
+    <div className={`spot bg-${index % 3}`} data-testid='spots' >
       <div className="spot-info" >
         <div className="spot-title  ">{title}</div>
         <div className="spot-desc ">{description}</div>
@@ -40,7 +40,7 @@ export const Evolve = ({ title, description, index, icon, path }) => {
   const {theme}=useThemeContext();
   return (
     <>
-      <div className='evolve'>
+      <div className='evolve' data-testid='evolve'>
         <div className={`evolve-info bg-${(index%3)}`}  >
           <div className="evolve-title spot-title ">{title}</div>
           <div className="evolve-desc">{description}</div>

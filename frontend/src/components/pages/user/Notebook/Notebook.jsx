@@ -4,6 +4,7 @@ import './notebook.css';
 import Note from './Note';
 import CompHead from '../../../cards/CompHead';
 import { useThemeContext } from '../../../hooks/useThemeContext';
+import jsPDF from 'jspdf';
 
 const Notebook = () => {
   //using theme context
@@ -11,10 +12,13 @@ const Notebook = () => {
   //using notebook context
   const { notes, addNote, fetchNotes, hasMoreNotes } = useNotebookContext();
   //state of the form to add note
+
   const [isOpen, setIsOpen] = useState(false);
   //value of note to be added
+  
   const [note, setNote] = useState({ title: "", description: "" });
   //onchange function for input fields
+  
   const handleChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   }
@@ -24,6 +28,29 @@ const Notebook = () => {
     await addNote(note);
     // TODO --> update this function such that it automatically closes the add note form and resets its values on adding the note 
   }
+
+
+  // download pdf of notes
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    const textWidth = doc.getTextWidth("Your Current Notes");
+    const pageWidth = doc.internal.pageSize.getWidth();
+    
+    doc.text("Your Current Notes", (pageWidth-textWidth)/2, 10);
+
+    // Need to style the pdf
+    notes.forEach((item, index) => {
+      const yPosition = 20 + index * 10;
+      doc.text(`Title: ${item.title}, Date: ${item.notedAt}`, 10, yPosition * (index + 1));
+      doc.text(`Description: ${item.description}`, 10, yPosition * (index + 1) + 10);
+    });
+
+    // Save the PDF as a file
+    doc.save('data.pdf');
+  }
+
+
+
   return (
     <>
       <CompHead heading="Your Notes" isOpen={isOpen} setIsOpen={setIsOpen} />

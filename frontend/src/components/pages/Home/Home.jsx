@@ -19,7 +19,7 @@ const Home = () => {
 				</div>
 				<div className="home-3">
 
-					<Link  to="/signup">
+					<Link  to="/signup" role='joinus-button'>
 						Join Us
 					</Link>
 				</div>

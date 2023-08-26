@@ -97,7 +97,7 @@ const Explore = () => {
 					<h1 className={`dark-text-${theme}`}>Vigour Mania</h1><br />
 					<span className={`light-text-${theme} first-span`}>Explore the world of Fitness and Sports</span>
 				</div>
-				<div className="spotlight">
+				<div className="spotlight" role='spotlight'>
 					<Head title="SpotLight" url="/spotlight" />
 					<div className="spot-area">
 						{
@@ -109,7 +109,7 @@ const Explore = () => {
 						}
 					</div>
 				</div>
-				<div className="exp-evolved">
+				<div className="exp-evolved" role='get-evolved' >
 					<Head title="Get Evolved" url='/get-evolved' />
 					<div className="evo-area">
 						{

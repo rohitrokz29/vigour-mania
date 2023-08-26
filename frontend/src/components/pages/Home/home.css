@@ -195,7 +195,7 @@
 	margin-block: 2%;
 }
 
-.contact-form {
+.home-form {
 	padding: 1%;
 	margin: 10%;
 	border-radius: 10px;
@@ -206,11 +206,11 @@
 	justify-content: center;
 }
 
-.contact-form h3 {
+.home-form h3 {
 	margin-block: 5%;
 }
 
-.contact-form .btn {
+.home-form .btn {
 	min-width: 8rem;
 }
 

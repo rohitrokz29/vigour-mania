@@ -11,7 +11,7 @@ const Accounts = () => {
 	const { pathname } = useLocation();
 	return (
 		<>
-			<div className="accounts">
+			<div className="accounts" role='account-forms'>
 				<div className="signin-box " id='flipper'>
 					{
 						pathname === "/signin" ? <Signin /> : <Signup />

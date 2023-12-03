@@ -26,7 +26,7 @@ const Signin = () => {
 					<label className="fa fa-key icon" htmlFor="password"></label>
 					<input className="input-field" autoComplete='on' type="password" placeholder="Password" name="password" id='password' value={data.password} onChange={handleChange} />
 				</div>
-				<button type="submit" disabled={isLoading} className="btn">Signin</button>
+				<button type="submit" disabled={isLoading} data-testid='signin' role='signin-button'  className="btn">Signin</button>
 				<div className="input-container">
 					{error &&
 						<div className="error error-text">

@@ -28,7 +28,7 @@ export const useSignin = () => {
                     setProgress(100)
                 }
             }).catch(err => {
-                setError(err.response.data.message);
+                setError(err.response.data);
                 setIsLoading(false);
                 setProgress(100);
             })

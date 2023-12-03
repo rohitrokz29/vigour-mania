@@ -4,21 +4,20 @@ import './notebook.css';
 import Note from './Note';
 import CompHead from '../../../cards/CompHead';
 import { useThemeContext } from '../../../hooks/useThemeContext';
-import jsPDF from 'jspdf';
 
 const Notebook = () => {
   //using theme context
   const { theme } = useThemeContext();
   //using notebook context
-  const { notes, addNote, fetchNotes, hasMoreNotes } = useNotebookContext();
+  const { notes, addNote, fetchNotes, fetchAllNotes, hasMoreNotes } = useNotebookContext();
   //state of the form to add note
 
   const [isOpen, setIsOpen] = useState(false);
   //value of note to be added
-  
+
   const [note, setNote] = useState({ title: "", description: "" });
   //onchange function for input fields
-  
+
   const handleChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   }
@@ -31,22 +30,39 @@ const Notebook = () => {
 
 
   // download pdf of notes
-  const downloadPDF = () => {
-    const doc = new jsPDF();
-    const textWidth = doc.getTextWidth("Your Current Notes");
-    const pageWidth = doc.internal.pageSize.getWidth();
-    
-    doc.text("Your Current Notes", (pageWidth-textWidth)/2, 10);
-
-    // Need to style the pdf
-    notes.forEach((item, index) => {
-      const yPosition = 20 + index * 10;
-      doc.text(`Title: ${item.title}, Date: ${item.notedAt}`, 10, yPosition * (index + 1));
-      doc.text(`Description: ${item.description}`, 10, yPosition * (index + 1) + 10);
-    });
-
-    // Save the PDF as a file
-    doc.save('data.pdf');
+  const downloadPDF = async () => {
+    // if (hasMoreNotes) {
+    //   await fetchAllNotes();
+    // }
+    const expNotes=[
+      {
+        title:"schjbewkjbec je",
+        notedAt:"10/10/10",
+        description:" encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"        
+      },
+      {
+        title:"schjbewkjbec je",
+        notedAt:"10/10/10",
+        description:"wjdk3jkje"        
+      },{
+        title:"schjbewkjbec je",
+        notedAt:"10/10/10",
+        description:"wjdk3jkje"        
+      },{
+        title:"schjbewkjbec je",
+        notedAt:"10/10/10",
+        description:"wjdk3jkje"        
+      },{
+        title:"schjbewkjbec je",
+        notedAt:"10/10/10",
+        description:"ure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in w"        
+      },{
+        title:"schjbewkjbec je",
+        notedAt:"10/10/10",
+        description:"wjdk3jkje"        
+      }
+    ]
+ 
   }
 
 
@@ -56,6 +72,9 @@ const Notebook = () => {
       <CompHead heading="Your Notes" isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className={`note-container bg-${theme}er`}>
         <div className="notes">
+          <div className="download-notes">
+            <button onClick={() => downloadPDF()} >Download All Notes</button>
+          </div>
           {
             notes && notes.map(note => <Note key={note._id} noteId={note._id} notedAt={note.notedAt} title={note.title} description={note.description} />)
           }

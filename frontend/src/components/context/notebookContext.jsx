@@ -15,10 +15,10 @@ export const NotebookState = ({ children }) => {
             setProgress(40);
             API.get(`/api/notes/${notebookPage}`)
                 .then(response => {
-                    console.log({notes:response.data.notes})
+                    console.log({ notes: response.data.notes })
                     if (response.status === 200) {
-                        
-                        setNotes([...notes,...response.data.notes]);
+
+                        setNotes([...notes, ...response.data.notes]);
                         setProgress(90);
                         setError("");
                         setHasMoreNotes(hasMoreNotes => response.data.hasMore);
@@ -27,7 +27,7 @@ export const NotebookState = ({ children }) => {
                     }
                     setProgress(100);
                 })
-                .catch((error)=>{
+                .catch((error) => {
                     setProgress(100);
                     setError(error.message);
                 })
@@ -47,7 +47,7 @@ export const NotebookState = ({ children }) => {
             setProgress(40);
             API.delete(`/api/notes/${noteId}`)
                 .then(response => {
-             console.log(response)       
+                    console.log(response)
                     if (response.status === 200 && response.data.modifiedCount === 1) {
                         setProgress(70);
                         setNotes(notes => notes.filter(note => note._id != noteId));
@@ -78,6 +78,10 @@ export const NotebookState = ({ children }) => {
             setError(error.message);
         }
     }
+    const fetchAllNotes = async () => {
+       setNotebookPage(notebookPage=>-1);
+       await fetchNotes();
+    }
     return (
         <NotebookContext.Provider
             value={{
@@ -85,6 +89,7 @@ export const NotebookState = ({ children }) => {
                 error,
                 fetchNotes,
                 deleteNote,
+                fetchAllNotes,
                 addNote,
                 hasMoreNotes
             }}

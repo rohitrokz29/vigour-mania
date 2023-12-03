@@ -6,7 +6,7 @@ import axios from "axios";
  *      --content type  tells the axios to send data in which format
  */
 export default axios.create({
-    baseURL: "http://localhost:3006",
+    baseURL: "http://localhost:5000",
     // timeout: 2000,
     
     withCredentials: true,

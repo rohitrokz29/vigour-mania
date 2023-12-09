@@ -53,7 +53,6 @@ const userSchema = new mongoose.Schema({
 userSchema.statics.signup = async function signup({ email, password, username }) {
     //validating email,password and username
 
-console.log({email,password,username})
     try {
         if (!validator.isEmail(email)) {
             throw new Error("Invalid Email", { statusCode: 406 });
@@ -192,7 +191,6 @@ userSchema.statics.addChart = async function addChart({ body, _id }) {
 /* Retrieving user charts */
 userSchema.statics.getCharts = async function getCharts({ _id }) {
     try {
-        console.log(_id)
         return await this
             .findOne({ _id, 'charts.0': { $exists: true } })
             .select('-_id charts.chartType charts.createdAt charts.data.week  charts.data.value charts._id  charts.minValue charts.maxValue')

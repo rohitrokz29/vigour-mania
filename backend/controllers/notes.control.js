@@ -11,7 +11,6 @@ const GetNotes = async (req, res) => {
 
 const AddNote = async (req, res) => {
     try {
-
         const result = await Notes.addNote({ userId: req._id, body: req.body })
         return res.status(200).json(result);
     } catch (error) {

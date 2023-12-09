@@ -63,7 +63,6 @@ const Signin = async (req, res) => {
 
         //*user found -302
         //*sending auth token and refresh token in the cookies
-        console.log({accessToken})
           res
             .cookie('accessToken', accessToken, cookieOptions)
             .cookie('refreshTokenId', newRefreshTokenId, cookieOptions)
@@ -71,7 +70,6 @@ const Signin = async (req, res) => {
             .json({ username: user.username, _id: user._id ,refreshTokenExpiry,authTokenExpiry});
     }
     catch (error) {
-        console.log({msg:error.message})
         //*internal server error
         res.status(404).json({ message:error.message});
     }
@@ -82,7 +80,6 @@ const Signin = async (req, res) => {
 const LogOut = async (req, res) => {
     try {
         const result = await RefreshToken.deleteToken(req.cookies.refreshTokenId);
-        console.log(result)
 
         //*checking if refresh token is deleted or not 
         if (result.acknowledged=== true) {

@@ -117,13 +117,11 @@ journalSchema.statics.getOneJournal = async function getOneJournal({ journalId, 
             .select({ comments: 0 })
             .lean()
 
-        console.log({ userId })
         const likes = {
             isLiked: journal.likes.toString().split(',').includes(userId.toString()),
             count: journal.likes.length
         }
         journal['likes'] = likes;
-        console.log(journal);
         return journal;
         // const data= {
         //     _id: journal._id,
@@ -135,8 +133,6 @@ journalSchema.statics.getOneJournal = async function getOneJournal({ journalId, 
         //         count: journal.likes.length
         //     }
         // }
-        // console.log(data)
-        // return data
     } catch (error) {
 
     }

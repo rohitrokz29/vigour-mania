@@ -4,7 +4,6 @@ const AddChart = async (req, res) => {
     // adding first time chart to a user account
     try {
         const chartRes = await User.addChart({ body: req.body, _id: req._id });
-        console.log(chartRes)
         res.status(200).json(chartRes)
     } catch (error) {
         res.status(500).json(error)

@@ -30,7 +30,6 @@ refreshTokenSchema.statics.newRefreshToken = async function newRefreshToken(toke
  */
 refreshTokenSchema.statics.deleteToken = async function deleteToken(_id) {
     try {
-        console.log(_id)
         const result = await this.deleteOne({ _id });
         return result;
     } catch (error) {
@@ -46,7 +45,6 @@ refreshTokenSchema.statics.newAuthToken = async function newAuthToken(refreshTok
     if (!refreshTokenId) {
         return null;
     }
-    console.log({refreshTokenId})
     try {
 
         /*
@@ -56,7 +54,6 @@ refreshTokenSchema.statics.newAuthToken = async function newAuthToken(refreshTok
         *} 
          */
         const refreshToken = await this.findOne({ _id: refreshTokenId });
-        console.log({refreshToken})
         if(refreshToken){
             return await jwt.verify(refreshToken.refreshToken, process.env.REFRESH_JWT_SECRET, async (err, result) => {
 

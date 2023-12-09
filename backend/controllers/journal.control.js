@@ -32,7 +32,6 @@ const getMainJournal = async (req, res) => {
     try {
         const { journalId } = req.params;
         const userId=req._id;
-        console.log({userId,"req._id":req._id})
         const journal = await Journal.getOneJournal({ journalId, userId});
         res.status(200).json(journal);
     } catch (error) {
@@ -59,7 +58,6 @@ const getComments = async (req, res) => {
         if (!data) {
             res.status(404).json({ message: "No Comments" })
         }
-        console.log(data)
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ message: error.message });

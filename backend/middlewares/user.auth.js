@@ -6,7 +6,6 @@ const userAuth = async (req, res, next) => {
 
     const accessToken = req.cookies.accessToken;
     //reading jwt token
-    console.log({ accessToken })
 
     if (!accessToken) {
         return res.status(401).json({ message: "Token not found" });
@@ -15,11 +14,9 @@ const userAuth = async (req, res, next) => {
         //finding if id obtained form token verification exists or not
 
         const result=jwt.verify(accessToken,process.env.ACCESS_JWT_SECRET)
-        console.log({result})
         if (result) {
 
             const isExists = await User.findOne({ _id: result._id }).select('_id');
-            console.log({isExists})
 
             if (isExists) {
                 req._id=isExists._id

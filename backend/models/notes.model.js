@@ -20,31 +20,30 @@ notesSchema.statics.getNotes = async function getNotes({ userId, pageNo }) {
             .slice('notes', [(pageNo - 1) * 10, (pageNo - 1) * 10 + 10])
             .lean()
             .exec()
-            console.log({notes:notes.notes})
 
         return { notes: notes.notes, hasMore: notes.notes.length === 10 }
 
     } catch (error) {
-
+        return null;
     }
 }
 
 notesSchema.statics.addNote = async function addNote({ userId, body }) {
     try {
-        const result = await this.updateOne({ userId }, {
+        const result = await this.findOneAndUpdate({ userId }, {
             $push: {
                 notes: { $each: [body], $position: 0 }
             }
         }, { new: true })
             .lean()
             .exec()
-        const {notes} = await this.findOne({ userId })
+            const {notes} = await this.findOne({ userId })
             .select({ notes: { $slice: [0, 1] } })
             .exec()
         return notes[0];
 
     } catch (error) {
-
+        return null;
     }
 }
 notesSchema.statics.deleteNote = async function ({ userId, noteId }) {
@@ -59,7 +58,7 @@ notesSchema.statics.deleteNote = async function ({ userId, noteId }) {
 
         return result;
     } catch (error) {
-
+        return null;
     }
 }
 module.exports = mongoose.model('notes', notesSchema);

@@ -24,12 +24,12 @@ import FallbackComp from './components/cards/FallbackComp';
 
 function App() {
   /**
-   * isSignedIn--> tells the state of user if signed in or not
+   * user--> tells the state of user if signed in or not
    * user--> current user state data
    * progress and setProgress --> to use and top loading bar progress 
    * 
    */
-  const { isSignedIn, user, progress, setProgress } = useUserContext();
+  const {  user, progress, setProgress } = useUserContext();
   return (
     <>
       {/* top loading bar */}
@@ -46,7 +46,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" >
-            <Route element={isSignedIn ? <Navigate to="/explore" replace /> :
+            <Route element={user ? <Navigate to="/explore" replace /> :
               <Suspense fallback={<FallbackComp />}>
                 <Navbar />
               </Suspense>} >
@@ -70,7 +70,7 @@ function App() {
             <Route element={
               <Suspense fallback={<FallbackComp />}>
                 <Navbar
-                  isSignedIn={isSignedIn}
+                  user={user}
                   username={user ? user.username : null} />
               </Suspense>
             }
@@ -88,7 +88,7 @@ function App() {
 
 
               <Route path='/my-trackers' element={
-                isSignedIn ?
+                user ?
                   <Suspense fallback={<FallbackComp />}>
                     <ChartState>
                       <Tracks />
@@ -99,7 +99,7 @@ function App() {
 
 
               <Route path='/my-notebooks' element={
-                isSignedIn ?
+                user ?
                   <Suspense fallback={<FallbackComp />}>
                     <JournalState>
                       <NotebookState>
@@ -112,7 +112,7 @@ function App() {
 
 
               <Route exact path='/journals' element={
-                isSignedIn ?
+                user ?
                   <JournalState>
                     <Suspense fallback={<FallbackComp />}>
                       <Journals />

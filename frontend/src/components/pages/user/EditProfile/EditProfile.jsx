@@ -14,17 +14,15 @@ const EditProfile = ({ setEditPage, user }) => {
   const [newData, setNewData] = useState({ email, gender, name, bio, instagram, twitter, facebook, visiblity })
 
   const SubmitData = async () => {
-    console.log(newData)
     //TODO Move this request to user context
     const result = await API.put('/api/user/edit/details', newData)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response)
           // setNewData(response.data);
         }
       })
       .catch((error) => {
-        console.log(error)
+        return null;
       })
   }
 

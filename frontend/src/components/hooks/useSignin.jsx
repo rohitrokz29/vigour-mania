@@ -15,7 +15,6 @@ export const useSignin = () => {
         API.post('/api/user/signin', data) 
             .then((response) => {
                 setProgress(50)
-                console.log(response)
                 if (response.status === 201) {
                     const user = response.data;
                     setProgress(60)

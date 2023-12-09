@@ -4,14 +4,14 @@ import './notebook.css';
 import Note from './Note';
 import CompHead from '../../../cards/CompHead';
 import { useThemeContext } from '../../../hooks/useThemeContext';
-
+import jsPDF from 'jspdf'
 const Notebook = () => {
   //using theme context
   const { theme } = useThemeContext();
   //using notebook context
   const { notes, addNote, fetchNotes, fetchAllNotes, hasMoreNotes } = useNotebookContext();
   //state of the form to add note
-
+  const [error,setError]=useState("");
   const [isOpen, setIsOpen] = useState(false);
   //value of note to be added
 
@@ -24,45 +24,39 @@ const Notebook = () => {
   //submit function for adding note
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addNote(note);
-    // TODO --> update this function such that it automatically closes the add note form and resets its values on adding the note 
+    const res=await addNote({note,setNote,setIsOpen});
   }
 
 
   // download pdf of notes
   const downloadPDF = async () => {
-    // if (hasMoreNotes) {
-    //   await fetchAllNotes();
-    // }
-    const expNotes=[
-      {
-        title:"schjbewkjbec je",
-        notedAt:"10/10/10",
-        description:" encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"        
-      },
-      {
-        title:"schjbewkjbec je",
-        notedAt:"10/10/10",
-        description:"wjdk3jkje"        
-      },{
-        title:"schjbewkjbec je",
-        notedAt:"10/10/10",
-        description:"wjdk3jkje"        
-      },{
-        title:"schjbewkjbec je",
-        notedAt:"10/10/10",
-        description:"wjdk3jkje"        
-      },{
-        title:"schjbewkjbec je",
-        notedAt:"10/10/10",
-        description:"ure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in w"        
-      },{
-        title:"schjbewkjbec je",
-        notedAt:"10/10/10",
-        description:"wjdk3jkje"        
+    if (hasMoreNotes) {
+      await fetchAllNotes();
+    }
+
+    let doc=new jsPDF();
+    let pdfjs = document.querySelector('#notes');
+    var pageWidth = doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
+    doc.text('NOTES', pageWidth/2, 10,);
+    let page=1;
+    let x=10,y=100;
+    notes.forEach(async (item,index)=>{
+      y=20+35*index;
+      doc.text(`Title:${item.title}`,x,y);
+      doc.text(`Date:${item.notedAt}`,x,y+10);
+      doc.text(`Description:${item.description}`,x,y+20)
+      doc.setLineWidth(1);
+      doc.line(15, y+25, pageWidth-10, y+25);
+      if(index!==0 &&index%10==0 ){
+        y=100;
+        doc.addPage();
+        doc.setPage(page+1);
+        page=page+1;
       }
-    ]
- 
+    })
+
+    // Save the PDF as a file
+  doc.save("data.pdf")
   }
 
 
@@ -104,6 +98,9 @@ const Notebook = () => {
               <textarea name="description" className='input' id="description" placeholder='Description' value={note.description} onChange={handleChange} ></textarea>
             </li>
           </ul>
+          <div className="error">
+          {error}
+          </div>
           <div className="note-buttons">
 
             <button type='submit' className="add-button  add-note-button" >Add Note</button>

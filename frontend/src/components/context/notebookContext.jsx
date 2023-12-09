@@ -15,7 +15,6 @@ export const NotebookState = ({ children }) => {
             setProgress(40);
             API.get(`/api/notes/${notebookPage}`)
                 .then(response => {
-                    console.log({ notes: response.data.notes })
                     if (response.status === 200) {
 
                         setNotes([...notes, ...response.data.notes]);
@@ -47,7 +46,6 @@ export const NotebookState = ({ children }) => {
             setProgress(40);
             API.delete(`/api/notes/${noteId}`)
                 .then(response => {
-                    console.log(response)
                     if (response.status === 200 && response.data.modifiedCount === 1) {
                         setProgress(70);
                         setNotes(notes => notes.filter(note => note._id != noteId));
@@ -59,20 +57,22 @@ export const NotebookState = ({ children }) => {
             setProgress(100);
         }
     }
-    const addNote = async ({ title, description }) => {
+    const addNote = async ({ note, setNote,setIsOpen }) => {
 
         try {
             setProgress(40);
-            API.put('/api/notes/', { title, description })
+            API.patch('/api/notes/', note)
                 .then(response => {
                     if (response.status === 200) {
                         setProgress(70);
                         setNotes([response.data, ...notes])
                         setProgress(100);
                         setError("");
+                        setNote({title:"",description:""});
+                        setIsOpen(false);
                     }
+                    setProgress(100);
                 })
-
         } catch (error) {
             setProgress(100);
             setError(error.message);

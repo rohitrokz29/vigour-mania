@@ -5,7 +5,6 @@ import { useThemeContext } from '../../../hooks/useThemeContext';
 const Note = ({ title, description, notedAt, noteId }) => {
     const { theme } = useThemeContext();
     const [display, setDisplay] = useState("none")
-// console.log({notedAt})
     // const date = new Date();
     const { deleteNote } = useNotebookContext();
     const handleOpen = () => {
@@ -18,7 +17,7 @@ const Note = ({ title, description, notedAt, noteId }) => {
                     <div className={`title dark-text-${theme}`}>
                         {title} &nbsp;&nbsp;
                         <span style={{ fontSize: "80%", fontStyle: "itallic" }}>
-                            {notedAt || `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}
+                            {notedAt }
                         </span>
                     </div>
                     <div className="icons">

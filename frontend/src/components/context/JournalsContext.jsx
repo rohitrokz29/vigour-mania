@@ -14,14 +14,12 @@ export const JournalState = ({ children }) => {
     const [journalPage, setJournalPage] = useState(1);
     const [comments, setComments] = useState([]);
     const [commentsPage, setCommentsPage] = useState(1);
-
+    const [hasMoreComments,setHasMoreComments]=useState(true);
     const fetchJournals = async () => {
-        console.log('fetchJournals')
         try {
             setProgress(40);
             API.get(`/api/journals/more/${journalPage}`)
                 .then(response => {
-                    console.log(response)
                     if (response.data.latestJournal) {
                         setMainJournal(response.data.latestJournal);
                     }
@@ -33,7 +31,6 @@ export const JournalState = ({ children }) => {
                 })
         } catch (error) {
             setProgress(100);
-            console.log(error)
         }
 
     }
@@ -52,35 +49,34 @@ export const JournalState = ({ children }) => {
     const likeJournal = async ({ journalId }) => {
         API.put(`/api/journals/like/${journalId}`)
             .then(response => {
-
+                setMainJournal({...mainJournal, isLiked  :true})
             })
     }
     const fetchComments = async ({ journalId }) => {
         try {
             API.get(`/api/comments/${commentsPage}/${journalId}`)
                 .then(response => {
-                    console.log(response)
-
                     setComments([...comments, ...response.data.comments]);
+                })
+                .catch(err=>{
+                    setHasMoreComments(false);
                 })
         }
         catch (error) {
-
+            return null;
         }
     }
     const addComment = async ({ comment,journalId }) => {
         try {
             API.put(`/api/comments/add/${journalId}`, { comment,username:user.username })
                 .then(response => {
-                    console.log(response.data)
-                    comments.unshift(response.data);
-                        // setComments([...response.data,...comments])
-                console.log({comments})
+                        setComments([...response.data,...comments])
                     })
 
         } catch (error) {
-            console.log(error);
+            return null;
         }
+        
     }
 
     const fetchReplies = async ({ commentId, repliesPage }) => {

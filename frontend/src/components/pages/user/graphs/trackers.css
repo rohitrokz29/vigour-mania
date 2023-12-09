@@ -55,15 +55,11 @@
 .chartType {
     font-size: 110%;
 
-    &>a i {
-        align-items: center;
-        padding-inline: 0.5rem;
-        font-weight: bolder;
-    }
+    
 }
 
-.chartType a:hover {
-    color: #f42b42;
+.chartType div:hover {
+    color: #bb0a1e;
 }
 
 .chartAction {

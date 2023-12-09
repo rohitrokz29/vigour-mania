@@ -26,7 +26,6 @@ export const ChartState = ({ children }) => {
         //!HERE SOME PROBLEM WITH AUTH
         API.get('/api/charts/get')
             .then(async (response) => {
-                console.log(response)
                 if (response.status === 200) {
                     setProgress(70);
                     setCharts(response.data.charts);
@@ -59,7 +58,6 @@ export const ChartState = ({ children }) => {
             })
             .catch(err => {
                 setError(error);
-                console.log(error)
                 setIsLoading(false)
                 setProgress(100);
                 return false
@@ -101,7 +99,6 @@ export const ChartState = ({ children }) => {
     }
     const deleteChart = async (_id) => {
         setProgress(30);
-        console.log(charts)
         API.delete(`/api/charts/${_id}`)
             .then(res => {
                 setProgress(60);

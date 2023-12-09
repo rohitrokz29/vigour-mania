@@ -16,11 +16,10 @@ const Signup = () => {
 	}
 	const { SignUp, error, isLoading } = useSignup();
 
-	const handleSubmit = (e) => {
+	const handleSubmit =async (e) => {
 		e.preventDefault();
-		console.log(data)
-		SignUp(data);
-
+		await SignUp(data);
+		
 	}
 
 	return (

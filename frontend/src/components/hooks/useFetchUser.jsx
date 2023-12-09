@@ -14,7 +14,6 @@ export const useFetchUser = () => {
             .then((response) => {
                 setProgress(70)
                 if (response.status === 200) {
-                    console.log(response.data)
                     setUserData(response.data);
                     setProgress(100)
                     setIsLoading(false);

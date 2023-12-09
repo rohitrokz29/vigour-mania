@@ -29,14 +29,13 @@ export const UserState = ({ children }) => {
             if (user.authTokenExpiry <= Date.now()) {
                 API.post('/api/user/refresh')
                     .then((result) => {
-                        console.log(result)
                         user.authTokenExpiry = result.authTokenExpiry
                         localStorage.setItem('vmuser', user)
                         dispatch({ type: 'signin', payload: user })
                         setIsSignedIn(true);
                     })
                     .catch((error) => {
-                        dispatch({ type: 'logout', payload: user })
+                        dispatch({ type: 'logout' })
                         localStorage.clear();
                         setIsSignedIn(false)
                     })
@@ -47,7 +46,9 @@ export const UserState = ({ children }) => {
             }
         }
         else{
-            localStorage.clear()
+            dispatch({type:'logout'});
+            localStorage.clear();
+            setIsSignedIn(false);
         }
     }, []);
 

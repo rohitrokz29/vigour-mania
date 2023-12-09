@@ -10,6 +10,7 @@
     padding-inline: 1rem;
     overflow-x: hidden;
     overflow-y: auto;
+    margin-block-end: 1rem;
 }
 
 
@@ -134,4 +135,12 @@
         grid-template-columns: 1fr;
     }
 
+}
+.load-more{
+    width: 100%;
+    text-align: center;
+    line-height: 2rem;
+    margin-block: 1rem;
+    background-color: #ddd;
+    cursor: pointer;
 }

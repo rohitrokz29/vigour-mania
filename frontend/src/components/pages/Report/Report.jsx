@@ -15,7 +15,6 @@ const Report = () => {
    }
     const handleReport = (e) => {
         e.preventDefault();
-        console.log({reportData,confirm});
 
         API.post('/api/report')
     }

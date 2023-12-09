@@ -74,10 +74,9 @@ const TrackerGraph = ({ graph }) => {
             <div className="tracker">
                 <div className="chartAction dark-text">
                     <div className="chartType">
-                        <Link to={chartType} className={`dark-text-${theme}`}>
+                        <div to={chartType} className={`dark-text-${theme}`}>
                             {chartType}
-                            <i className="fa fa-angle-right"></i>
-                        </Link>
+                        </div>
                     </div>
                     <div className="buttons">
                         <button className='add-data ' onClick={addData}>

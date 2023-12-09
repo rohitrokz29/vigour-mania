@@ -10,14 +10,14 @@ import Profile from '../../assets/profile.webp'
 //custom hooks
 import { useLogout } from '../hooks/useLogout'
 import { useThemeContext } from '../hooks/useThemeContext';
+import {useUserContext} from '../hooks/useUserContext';
 
-
-const Navbar = ({ isSignedIn, username }) => {
+const Navbar = () => {
 	//retrieving browser path  using useLocation hook
 	const { pathname } = useLocation();
 	const { logout } = useLogout();
 	const { theme,changeTheme } = useThemeContext();
-
+	const {isSignedIn,user}=useUserContext();
 	return (
 		<>
 			<nav className={`navbar nav-bg-${theme?theme:''}`} role="navigation">
@@ -38,14 +38,14 @@ const Navbar = ({ isSignedIn, username }) => {
 				}
 				<ul className="nav-list ">
 
-					{!isSignedIn &&
+					{!user &&
 						<li className="list-item ">
 							<NavLink to="/" className={` dark-text-${theme}`}>Home</NavLink>
 						</li>}
 					<li className="list-item">
 						<NavLink to="/explore" className={` dark-text-${theme}`}>Explore</NavLink>
 					</li>
-					{isSignedIn ?
+					{user ?
 						<>
 							<li className="list-item">
 								<NavLink to="/my-trackers" className={` dark-text-${theme}`}>Trackers</NavLink>
@@ -64,8 +64,8 @@ const Navbar = ({ isSignedIn, username }) => {
 									<li className=" item-list">
 										<i className="fa fa-user dark-text-light"></i>
 										<div className='text '>
-											<Link to={`/user/${username}`} className='dark-text-light username' >
-												<span>{username?username:"rohit"}</span>
+											<Link to={`/user/${user?.username}`} className='dark-text-light username' >
+												<span>{user?user.username:null}</span>
 											</Link>
 										</div>
 									</li>

@@ -53,38 +53,33 @@ const Explore = () => {
 		{
 			title: "Starters Zone",
 			description: "Get Started in  the Journey of Vigour Mania",
-			icon: "play"
+			icon: "play",
+			path:"/journals"
 		},
 		{
 			title: "Track  Your Progress",
 			description: "See the Progress live",
-			icon: "play"
+			icon: "play",
+			path:"/my-trackers"
 
-		}, {
-			title: "Share Your Progress",
-			description: "Showcase your progress with others",
-			icon: "play"
-		},
+		}, 
 		{
 			title: "Journal",
 			description: "Read the Routinely Health, Fitness and Sports Journal",
-			icon: "play"
-
+			icon: "play",
+			path:"/journals"
 		},
 		{
 			title: "Health Guidence",
 			description: "Take a look at lates and Scientific Health Recommendations"
-			, icon: "play"
-		},
-		{
-			title: " Nutritional Programs",
-			description: "Explore the Nutritional Programs from Research and Experiences "
-			, icon: "play"
+			, icon: "play",
+			path:"/diet"
 		},
 		{
 			title: "Save Your Notes",
 			description: "Save your thoughts as notes to get help in future "
-			, icon: "play"
+			, icon: "play",
+			path:"/my-notebooks"
 		}
 
 	]

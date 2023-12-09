@@ -7,7 +7,7 @@ import { ParentComment } from './Comments'
 import { useJournalContext } from '../../hooks/useJournalContext'
 import { useThemeContext } from '../../hooks/useThemeContext'
 const MainJournal = () => {
-    const { mainJournal, fetchComments, comments, likeJournal, addComment } = useJournalContext();
+    const { mainJournal, fetchComments, comments, likeJournal, addComment,hasMoreComments } = useJournalContext();
     const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false)
     const [comment, setComment] = useState("");
     const { theme } = useThemeContext();
@@ -76,7 +76,7 @@ const MainJournal = () => {
                             </div>
                     }
                     {
-                        comments &&
+                        hasMoreComments &&
                         <div className="load-more">
                             <span>
                                 <i className="fa fa-angle-down " ><span className={`dark-text-${theme}`}>Load More</span></i>

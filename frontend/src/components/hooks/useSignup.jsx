@@ -27,7 +27,6 @@ export const useSignup = () => {
                     setProgress(100);
                 }
             }).catch(error => {
-                console.log((error))
                 setError(error.response.data.message);
                 setIsLoading(false);
                 setProgress(100)
